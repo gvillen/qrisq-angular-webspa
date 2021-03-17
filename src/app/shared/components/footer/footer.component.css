@@ -1,0 +1,29 @@
+nz-footer {
+  background-color: #595959;
+  max-height: 120px;
+  min-height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.menu-container > a {
+  color: #fff;
+  text-align: left;
+  font-family: Rubik, Arial, Helvetica, sans-serif;
+}
+
+.contact-container > a {
+  color: #fff;
+  text-align: left;
+  font-family: Rubik, Arial, Helvetica, sans-serif;
+}
+
+.logo-container {
+}

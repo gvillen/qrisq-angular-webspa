@@ -1,0 +1,204 @@
+<div class="main-container">
+  <!-- <nz-card>
+    <div class="inner-container">
+      <h2>Location-Specific Hurricane and Wind Storm Surge Data</h2>
+      <p>
+        Q-risq Analytics forecasts Hurricane and Wind & Storm Surge risk at
+        specific locations - days before the the storm makes landfall - to help
+        you prepare in advance.
+      </p>
+      <button nz-button nzGhost nzSize="large" (click)="OnSignUp()">
+        Sign Up
+      </button>
+    </div>
+  </nz-card> -->
+
+  <qrisq-banner
+    [imageUrl]="
+      '/assets/images/main-banner1-2_626d64c0aef3be22948fc57dd1d1fa07.jpg'
+    "
+  >
+    <h2>Location-Specific Hurricane and Wind Storm Surge Data</h2>
+    <p>
+      Q-risq Analytics forecasts Hurricane and Wind & Storm Surge risk at
+      specific locations - days before the the storm makes landfall - to help
+      you prepare in advance.
+    </p>
+    <button nz-button nzGhost nzSize="large" (click)="OnSignUp()">
+      Sign Up
+    </button>
+  </qrisq-banner>
+
+  <div nz-row class="bg-image">
+    <div nz-col nzSpan="15">
+      <p class="text">
+        Q-risq Analyticps patented process equips you with site specific pre-
+        and post-storm analysis, so you know what could happen, how to assess
+        damage, and how to recover faster.
+      </p>
+    </div>
+  </div>
+
+  <div nz-row class="service-section">
+    <div nz-col nzSpan="12" class="section-desc">
+      <button class="section-button" nz-button nzSize="large">FORECAST</button>
+      <h4>Prior to landfall</h4>
+      <p>
+        Days before landfall, the Q-risq Analytics team is working at full
+        capacity, cont inuously monitoring the storm’s track and intensity to
+        provide location specific wind and surge forecast data.
+      </p>
+      <button
+        class="section-button-link"
+        nz-button
+        nzType="link"
+        nzSize="large"
+      >
+        LEARN MORE
+      </button>
+    </div>
+
+    <div nz-col nzSpan="12" class="service-section-image">
+      <img nz-image nzSrc="../../../assets/images/forcast.jpg" alt="" />
+    </div>
+  </div>
+
+  <div nz-row class="service-section">
+    <div nz-col nzSpan="12" class="section-desc">
+      <button class="section-button" nz-button nzSize="large">HINDCAST</button>
+      <h4>Post-Event Analysis</h4>
+      <p>
+        Once the storm has made landfall, Q-risq Analytics focuses on creating a
+        report of the storm’s impact. Maximum sustained winds, storm surge, and
+        accumulated rainfall are displayed for each address.
+      </p>
+      <button
+        class="section-button-link"
+        nz-button
+        nzType="link"
+        nzSize="large"
+      >
+        LEARN MORE
+      </button>
+    </div>
+
+    <div nz-col nzSpan="12" class="service-section-image">
+      <img
+        nz-image
+        nzSrc="../../../assets/images/post-event-980x568.jpg"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <nz-divider></nz-divider>
+
+  <div nz-row [nzGutter]="8">
+    <div nz-col nzSpan="8">
+      <h5>Our Services</h5>
+      <img nz-image nzSrc="../../../assets/images/ourServices.jpg" alt="" />
+      <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
+        Learn More About Our Services
+      </button>
+    </div>
+
+    <div nz-col nzSpan="8">
+      <h5>Track Storm Activity</h5>
+      <img nz-image nzSrc="../../../assets/images/track-storm.jpg" alt="" />
+      <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
+        Learn More About Our Services
+      </button>
+    </div>
+
+    <div nz-col nzSpan="8">
+      <h5>Send us a message</h5>
+      <div class="contact-form">
+        <form nz-form [nzLayout]="'vertical'">
+          <nz-form-item>
+            <nz-form-control>
+              <input
+                nz-input
+                formControlName="name"
+                placeholder="Name (Required)"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <input
+                nz-input
+                formControlName="email"
+                placeholder="Email (Required)"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <textarea
+                rows="4"
+                nz-input
+                formControlName="message"
+                placeholder="Message (Required)"
+              ></textarea>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <button
+                nz-button
+                nzBlock
+                nzType="primary"
+                nzDanger
+                nzSize="large"
+              >
+                Submit
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div nz-row nz-align="middle">
+    
+  </div> -->
+
+  <!-- <nz-card>
+    <div class="title">
+      <h1>
+        Enter your address to see if
+        <span class="green">Hurricane Storm Surge</span> and
+        <span class="green">Wind</span> data is available for your property
+      </h1>
+    </div>
+
+    <div class="search-container">
+      <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+        <input
+          nz-input
+          ngx-google-places-autocomplete
+          #placesRef="ngx-places"
+          nzSize="large"
+          placeholder="Enter your address"
+          (onAddressChange)="onChange($event)"
+        />
+      </nz-input-group>
+
+      <ng-template #suffixButton>
+        <button
+          (click)="OnSearch()"
+          nz-button
+          nzType="primary"
+          nzSize="large"
+          nzSearch
+        >
+          Search
+        </button>
+      </ng-template>
+    </div>
+  </nz-card> -->
+</div>

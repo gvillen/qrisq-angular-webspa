@@ -1,0 +1,11 @@
+.main-layout {
+  min-height: 100vh;
+}
+
+title > span {
+  margin: 5px 0px;
+}
+
+nz-content {
+  flex: 1;
+}

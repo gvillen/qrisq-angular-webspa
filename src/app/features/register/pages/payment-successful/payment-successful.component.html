@@ -1,0 +1,80 @@
+<div class="main-container">
+  <nz-card class="banner">
+    <h2>Payment Successful!</h2>
+  </nz-card>
+
+  <p>Select <strong>"Continue"</strong> to finalize registration.</p>
+  <button nz-button nzType="primary" nzDanger nzSize="large">Continue</button>
+  <div class="form-section">
+    <nz-divider></nz-divider>
+
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="8">
+        <h5>Our Services</h5>
+        <img nz-image nzSrc="../../../assets/images/ourServices.jpg" alt="" />
+        <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
+          Learn More About Our Services
+        </button>
+      </div>
+
+      <div nz-col nzSpan="8">
+        <h5>Track Storm Activity</h5>
+        <img nz-image nzSrc="../../../assets/images/track-storm.jpg" alt="" />
+        <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
+          Learn More About Our Services
+        </button>
+      </div>
+
+      <div nz-col nzSpan="8">
+        <h5>Send us a message</h5>
+        <div class="contact-form">
+          <form nz-form [nzLayout]="'vertical'">
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="name"
+                  placeholder="Name (Required)"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="email"
+                  placeholder="Email (Required)"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control>
+                <textarea
+                  rows="4"
+                  nz-input
+                  formControlName="message"
+                  placeholder="Message (Required)"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control>
+                <button
+                  nz-button
+                  nzBlock
+                  nzType="primary"
+                  nzDanger
+                  nzSize="large"
+                >
+                  Submit
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

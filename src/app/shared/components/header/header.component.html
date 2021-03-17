@@ -1,0 +1,70 @@
+<nz-header>
+  <div class="logo-container">
+    <img
+      nz-image
+      height="60px"
+      nzSrc="../../../assets/images/qrisq-logo-3d.png"
+      alt="Qrisq"
+    />
+  </div>
+
+  <div class="button-container">
+    <button nz-button nzShape="round" nzGhost>Hurricane Viewer</button>
+  </div>
+
+  <div class="menu-container">
+    <ul nz-menu nzMode="horizontal">
+      <li nz-submenu nzTitle="Storm Data">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['forecast-prior-to-landfall']">Forecast</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['hindcast-post-event-analysis']">Hindcast</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['#']">Historical</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['#']">FAQ</a>
+          </li>
+        </ul>
+      </li>
+
+      <li nz-submenu nzTitle="Services">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['homeowners-3']">Homeowners</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['government-4']">Government</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['insurance-industry']">Insurance</a>
+          </li>
+        </ul>
+      </li>
+
+      <li nz-submenu nzTitle="Login">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['#']">Account</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['#']">Register</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['contact-us']">Contact Us</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nz-header>

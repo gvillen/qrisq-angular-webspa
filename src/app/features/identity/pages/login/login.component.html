@@ -1,0 +1,137 @@
+<div class="main-container">
+  <nz-card class="banner">
+    <h2>Welcome to Q-risq</h2>
+    <p>Please login.</p>
+  </nz-card>
+
+  <div class="form-section">
+    <div nz-row nzJustify="center">
+      <div nz-col>
+        <p>Q-risq Login</p>
+      </div>
+    </div>
+
+    <div nz-row nzJustify="center">
+      <div nz-col>
+        <nz-card class="form" nzBorderless>
+          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+            <!-- username-->
+            <nz-form-item>
+              <nz-form-control
+                nzErrorTip="Please enter your username or email!"
+              >
+                <input
+                  nz-input
+                  type="text "
+                  formControlName="username"
+                  id="username"
+                  placeholder="Username or Email"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <!-- password -->
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please enter your password!">
+                <input
+                  nz-input
+                  type="password"
+                  formControlName="password"
+                  id="password3"
+                  placeholder="Password"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <!-- submit -->
+            <nz-form-item>
+              <nz-form-control>
+                <button
+                  class="submit-button"
+                  nz-button
+                  nzType="primary"
+                  nzDanger
+                  nzSize="large"
+                  nzBlock
+                >
+                  Login
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </nz-card>
+      </div>
+    </div>
+
+    <nz-divider></nz-divider>
+
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="8">
+        <h5>Our Services</h5>
+        <img nz-image nzSrc="../../../assets/images/ourServices.jpg" alt="" />
+        <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
+          Learn More About Our Services
+        </button>
+      </div>
+
+      <div nz-col nzSpan="8">
+        <h5>Track Storm Activity</h5>
+        <img nz-image nzSrc="../../../assets/images/track-storm.jpg" alt="" />
+        <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
+          Learn More About Our Services
+        </button>
+      </div>
+
+      <div nz-col nzSpan="8">
+        <h5>Send us a message</h5>
+        <div class="contact-form">
+          <form nz-form [nzLayout]="'vertical'">
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="name"
+                  placeholder="Name (Required)"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="email"
+                  placeholder="Email (Required)"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control>
+                <textarea
+                  rows="4"
+                  nz-input
+                  formControlName="message"
+                  placeholder="Message (Required)"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control>
+                <button
+                  nz-button
+                  nzBlock
+                  nzType="primary"
+                  nzDanger
+                  nzSize="large"
+                >
+                  Submit
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

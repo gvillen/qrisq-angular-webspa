@@ -1,0 +1,51 @@
+// angular
+import { NgModule } from '@angular/core';
+
+// components
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { IconDefinition } from '@ant-design/icons-angular';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+
+import { CreditCardOutline } from '@ant-design/icons-angular/icons';
+
+const icons: IconDefinition[] = [CreditCardOutline];
+
+// providers
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+
+// constants
+import { en_US } from 'ng-zorro-antd/i18n';
+
+@NgModule({
+  exports: [
+    NzLayoutModule,
+    NzButtonModule,
+    NzImageModule,
+    NzMenuModule,
+    NzIconModule,
+    NzCarouselModule,
+    NzCardModule,
+    NzGridModule,
+    NzDividerModule,
+    NzFormModule,
+    NzInputModule,
+    NzRadioModule,
+    NzTypographyModule,
+    NzAlertModule,
+  ],
+  imports: [NzIconModule.forRoot(icons)],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
+})
+export class DesignModule {}

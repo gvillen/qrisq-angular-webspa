@@ -1,0 +1,139 @@
+<div class="main-container">
+  <nz-card class="banner">
+    <div class="inner-container">
+      <h2>Q-risq Service Area</h2>
+      <p>
+        Q-risq Analytics forecasts Hurricane and Wind & Storm Surge risk at
+        specific locations - days before the the storm makes landfall - to help
+        you prepare in advance.
+      </p>
+    </div>
+  </nz-card>
+
+  <div nz-row [nzGutter]="16">
+    <div nz-col nzSpan="10">
+      <p>
+        Please enter your address of interest below to see if it's in our
+        service area.
+      </p>
+
+      <nz-card class="form" nzBorderless>
+        <nz-input-group nzSearch nzSize="large">
+          <input
+            nz-input
+            ngx-google-places-autocomplete
+            #placesRef="ngx-places"
+            nzSize="large"
+            placeholder="Enter your address"
+            (onAddressChange)="onChange($event)"
+          />
+        </nz-input-group>
+
+        <nz-input-group nzSearch nzSize="large">
+          <button
+            (click)="OnSearch()"
+            nz-button
+            nzType="primary"
+            nzSize="large"
+            nzSearch
+            nzDanger
+            nzBlock
+          >
+            Search
+          </button>
+        </nz-input-group>
+      </nz-card>
+    </div>
+
+    <div nz-col nzSpan="14" class="service-area-container">
+      <div class="legend-container">
+        <p><span class="text-blue">Blue</span> - Hurricane Wind Service Area</p>
+
+        <p>
+          <span class="text-red">Red</span> - Hurricane Storm Surge and Wind
+          Service
+        </p>
+      </div>
+
+      <div class="map-container">
+        <img
+          nz-image
+          nzSrc="../../../../assets/images/service-area-map.png"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+
+  <nz-divider></nz-divider>
+
+  <div nz-row [nzGutter]="8">
+    <div nz-col nzSpan="8">
+      <h5>Our Services</h5>
+      <img nz-image nzSrc="../../../assets/images/ourServices.jpg" alt="" />
+      <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
+        Learn More About Our Services
+      </button>
+    </div>
+
+    <div nz-col nzSpan="8">
+      <h5>Track Storm Activity</h5>
+      <img nz-image nzSrc="../../../assets/images/track-storm.jpg" alt="" />
+      <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
+        Learn More About Our Services
+      </button>
+    </div>
+
+    <div nz-col nzSpan="8">
+      <h5>Send us a message</h5>
+      <div class="contact-form">
+        <form nz-form [nzLayout]="'vertical'">
+          <nz-form-item>
+            <nz-form-control>
+              <input
+                nz-input
+                formControlName="name"
+                placeholder="Name (Required)"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <input
+                nz-input
+                formControlName="email"
+                placeholder="Email (Required)"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <textarea
+                rows="4"
+                nz-input
+                formControlName="message"
+                placeholder="Message (Required)"
+              ></textarea>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <button
+                nz-button
+                nzBlock
+                nzType="primary"
+                nzDanger
+                nzSize="large"
+              >
+                Submit
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

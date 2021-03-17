@@ -1,0 +1,121 @@
+<div class="main-container">
+  <nz-card class="banner">
+    <div class="inner-container">
+      <h2>Success!</h2>
+      <div *ngIf="onlyWind; then thenBlock; else elseBlock"></div>
+      <ng-template #thenBlock
+        ><p>
+          We can provide hurricane wind information for the address you
+          provided.
+        </p></ng-template
+      >
+      <ng-template #elseBlock
+        ><p>
+          We can provide hurricane wind and storm surge information for the
+          address you provided.
+        </p></ng-template
+      >
+
+      <p>Please register below to get started.</p>
+    </div>
+  </nz-card>
+
+  <nz-card class="pricing" nzBorderless>
+    <div nz-row [nzGutter]="8">
+      <div nz-col nzSpan="12">
+        <div class="price-section">
+          <h3>$5</h3>
+          <h4>Monthly*</h4>
+        </div>
+
+        <button nz-button nzBlock nzType="primary" nzDanger nzSize="large">
+          Register**
+        </button>
+      </div>
+
+      <div nz-col nzSpan="12">
+        <div class="price-section">
+          <h3>$25</h3>
+          <h4>Seasonlly*</h4>
+        </div>
+
+        <button nz-button nzBlock nzType="primary" nzDanger nzSize="large">
+          Register**
+        </button>
+      </div>
+    </div>
+  </nz-card>
+  <p class="bottom-text">* Hurricane services are provided Jun 1 - Nov 30</p>
+  <p class="bottom-text">** Auto-renews monthly. Cancel anytime.</p>
+  <nz-divider></nz-divider>
+
+  <div nz-row [nzGutter]="8">
+    <div nz-col nzSpan="8">
+      <h5>Our Services</h5>
+      <img nz-image nzSrc="../../../assets/images/ourServices.jpg" alt="" />
+      <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
+        Learn More About Our Services
+      </button>
+    </div>
+
+    <div nz-col nzSpan="8">
+      <h5>Track Storm Activity</h5>
+      <img nz-image nzSrc="../../../assets/images/track-storm.jpg" alt="" />
+      <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
+        Learn More About Our Services
+      </button>
+    </div>
+
+    <div nz-col nzSpan="8">
+      <h5>Send us a message</h5>
+      <div class="contact-form">
+        <form nz-form [nzLayout]="'vertical'">
+          <nz-form-item>
+            <nz-form-control>
+              <input
+                nz-input
+                formControlName="name"
+                placeholder="Name (Required)"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <input
+                nz-input
+                formControlName="email"
+                placeholder="Email (Required)"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <textarea
+                rows="4"
+                nz-input
+                formControlName="message"
+                placeholder="Message (Required)"
+              ></textarea>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <button
+                nz-button
+                nzBlock
+                nzType="primary"
+                nzDanger
+                nzSize="large"
+              >
+                Submit
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
