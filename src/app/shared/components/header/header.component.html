@@ -12,9 +12,24 @@
     <button nz-button nzShape="round" nzGhost>Hurricane Viewer</button>
   </div>
 
+  <ng-template #submenuTitleStormDataTpl>
+    Storm Data
+    <i nz-icon nzType="down"></i>
+  </ng-template>
+
+  <ng-template #submenuTitleServicesTpl>
+    Services
+    <i nz-icon nzType="down"></i>
+  </ng-template>
+
+  <ng-template #submenuTitleLoginTpl>
+    Login
+    <i nz-icon nzType="down"></i>
+  </ng-template>
+
   <div class="menu-container">
     <ul nz-menu nzMode="horizontal">
-      <li nz-submenu nzTitle="Storm Data">
+      <li nz-submenu [nzTitle]="submenuTitleStormDataTpl">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a [routerLink]="['forecast-prior-to-landfall']">Forecast</a>
@@ -34,7 +49,7 @@
         </ul>
       </li>
 
-      <li nz-submenu nzTitle="Services">
+      <li nz-submenu [nzTitle]="submenuTitleServicesTpl">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a [routerLink]="['homeowners-3']">Homeowners</a>
@@ -50,7 +65,7 @@
         </ul>
       </li>
 
-      <li nz-submenu nzTitle="Login">
+      <li nz-submenu [nzTitle]="submenuTitleLoginTpl">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a [routerLink]="['#']">Account</a>
