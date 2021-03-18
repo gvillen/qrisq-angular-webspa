@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'qrisq-onboarding-success-page',
@@ -9,9 +10,49 @@ import { ActivatedRoute } from '@angular/router';
 export class OnboardingSuccessPageComponent implements OnInit {
   onlyWind = false;
 
-  constructor(private route: ActivatedRoute) {}
+  lat = '';
+
+  lng = '';
+
+  formattedAddress = '';
+
+  response: any;
+
+  subscriptionPlans = [];
+
+  loading = false;
+
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.onlyWind = this.route.snapshot.paramMap.get('onlyWind') === 'true';
+    this.lat = this.route.snapshot.paramMap.get('lat');
+    this.lng = this.route.snapshot.paramMap.get('lng');
+    this.formattedAddress = this.route.snapshot.paramMap.get(
+      'formattedAddress'
+    );
+    this.loading = true;
+
+    const getSubscriptionPlansApiUrl =
+      'http://3.210.78.109/api/subscription-plans';
+    axios
+      .get(getSubscriptionPlansApiUrl)
+      .then((response) => {
+        const { data } = response;
+        console.log(response);
+        console.log(data);
+        this.loading = false;
+        this.subscriptionPlans = data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  public onRegister(planId) {
+    const lat = this.lat;
+    const lng = this.lng;
+    const formattedAddress = this.formattedAddress;
+    this.router.navigate(['/register', { lat, lng, formattedAddress, planId }]);
   }
 }

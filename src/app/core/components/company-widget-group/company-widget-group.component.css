@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  width: 920px;
+  margin-bottom: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+h5 {
+  font-family: Rubik, Arial, Helvetica, sans-serif;
+  font-size: 1.3rem;
+  color: #2f5597 !important;
+  font-weight: 600;
+}
+
+.service-card {
+  flex: 1;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.service-card p {
+  margin-top: 10px;
+  font-family: Rubik, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  text-align: justify;
+  text-justify: auto;
+  padding: 1px;
+}
+
+.contact-card {
+  flex: 1;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.contact-card button {
+  align-self: baseline;
+}

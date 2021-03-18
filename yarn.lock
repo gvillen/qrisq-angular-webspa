@@ -5895,6 +5895,13 @@ ngx-google-places-autocomplete@^2.0.5:
   resolved "https://registry.yarnpkg.com/ngx-google-places-autocomplete/-/ngx-google-places-autocomplete-2.0.5.tgz#1e26b3fb236a0df22c1c65c05b601ca1d960b5d4"
   integrity sha512-TApaE+X/eaZBDduXvmOMsMC5FTWv3CmgbZ+Iv7NsnrBWJeonPF2SYMGs3vaydM3CY3Rch14/K94ecU0mfyRVWw==
 
+ngx-paypal@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-paypal/-/ngx-paypal-7.0.0.tgz#8e95a738269c1da5f02a7cd2a5f943e98f15f25d"
+  integrity sha512-5kiqJbqZh7ETZy5xGTkbbgey/Oj0oViLZZgpWLPT1H23SoKK5ph+cgAj8orIdZLhHmlOpN60qpuP4lpF+OGx6g==
+  dependencies:
+    tslib "^2.0.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

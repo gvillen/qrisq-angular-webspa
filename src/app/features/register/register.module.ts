@@ -7,6 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // design
 import { DesignModule } from '@design/design.module';
 
+// core
+import { CoreModule } from '@app/core/core.module';
+
 // routing
 import { RegisterRoutingModule } from './register-routing.module';
 
@@ -21,7 +24,8 @@ import { RegisterPaymentPageComponent } from './pages/payment/payment.component'
 import { RegisterPaymentSuccessfulPageComponent } from './pages/payment-successful/payment-successful.component';
 import { RegisterAccountCreatedPageComponent } from './pages/account-created/account-created.component';
 
-// maps
+// paypal
+import { NgxPayPalModule } from 'ngx-paypal';
 
 @NgModule({
   declarations: [
@@ -35,10 +39,13 @@ import { RegisterAccountCreatedPageComponent } from './pages/account-created/acc
   ],
   imports: [
     CommonModule,
+    BrowserModule,
     DesignModule,
+    CoreModule,
     RegisterRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPayPalModule,
   ],
   exports: [RegisterComponent],
 })

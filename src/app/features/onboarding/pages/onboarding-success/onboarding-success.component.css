@@ -11,24 +11,24 @@ nz-card.banner {
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 100%
     ),
-    url('../../../../../assets/images/hurricane-bg.jpg');
+    url('/assets/images/hurricane-bg.jpg');
   background-image: -moz-linear-gradient(
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 100%
     ),
-    url('../../../../../assets/images/hurricane-bg.jpg');
+    url('/assets/images/hurricane-bg.jpg');
   background-image: -o-linear-gradient(
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 100%
     ),
-    url('../../../../../assets/images/hurricane-bg.jpg');
+    url('/assets/images/hurricane-bg.jpg');
   background-image: -ms-linear-gradient(
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 100%
     ),
-    url('../../../../../assets/images/hurricane-bg.jpg');
+    url('/assets/images/hurricane-bg.jpg');
   background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%),
-    url('../../../../../assets/images/hurricane-bg.jpg');
+    url('/assets/images/hurricane-bg.jpg');
 
   background-repeat: no-repeat;
   background-size: cover;
@@ -101,7 +101,7 @@ nz-card p {
 }
 
 nz-card.pricing {
-  background-image: url('../../../../../assets/images/bg-graph.png');
+  background-image: url('/assets/images/bg-graph.png');
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 400px;
@@ -114,13 +114,6 @@ nz-card.pricing {
   margin-bottom: 32px;
 }
 
-.pricing nz-row {
-  max-width: 500px;
-  width: 500px;
-  padding: 0px 16px;
-  margin: 16px 0px;
-}
-
 .pricing nz-col {
   padding: 0px 35px;
 }
@@ -128,13 +121,6 @@ nz-card.pricing {
 .bottom-text {
   font-weight: 500;
   margin: 0;
-}
-
-[nz-row] {
-  max-width: 920px;
-  width: 920px;
-  padding: 0px 16px;
-  margin: 16px 0px;
 }
 
 [nz-col] > p {
@@ -190,13 +176,6 @@ nz-input-group {
   height: auto;
   margin-top: auto;
   margin-bottom: auto;
-}
-
-[nz-row] {
-  max-width: 880px;
-  width: 880px;
-  padding: 0px 16px;
-  margin: 16px 0px;
 }
 
 [nz-row].service-section {

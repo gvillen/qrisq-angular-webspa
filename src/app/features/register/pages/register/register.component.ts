@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'qrisq-register-page',
@@ -16,10 +17,38 @@ import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 export class RegisterPageComponent implements OnInit {
   validateForm!: FormGroup;
 
+  lat = '';
+
+  lng = '';
+
+  formattedAddress = '';
+
+  planId = '';
+
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
+    }
+    if (this.validateForm.status === 'VALID') {
+      const params = {
+        lat: this.lat,
+        lng: this.lng,
+        formattedAddress: this.formattedAddress,
+        planId: this.planId,
+        firstName: this.validateForm.get('firstName').value,
+        lastName: this.validateForm.get('lastName').value,
+        email: this.validateForm.get('email').value,
+        password: this.validateForm.get('password').value,
+        phoneNumber: this.validateForm.get('phoneNumber').value,
+      };
+      this.router.navigate(['/register/payment', params]);
     }
   }
 
@@ -39,9 +68,14 @@ export class RegisterPageComponent implements OnInit {
     return {};
   };
 
-  constructor(private fb: FormBuilder) {}
-
   ngOnInit(): void {
+    this.lat = this.route.snapshot.paramMap.get('lat');
+    this.lng = this.route.snapshot.paramMap.get('lng');
+    this.formattedAddress = this.route.snapshot.paramMap.get(
+      'formattedAddress'
+    );
+    this.planId = this.route.snapshot.paramMap.get('planId');
+
     this.validateForm = this.fb.group({
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
@@ -49,6 +83,10 @@ export class RegisterPageComponent implements OnInit {
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
       phoneNumber: [null, [Validators.required]],
+      serviceAddress: [
+        { value: this.formattedAddress, disabled: true },
+        [Validators.required],
+      ],
     });
   }
 }

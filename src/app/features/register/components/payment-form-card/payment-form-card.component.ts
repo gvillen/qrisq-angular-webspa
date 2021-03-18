@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -13,6 +13,8 @@ import {
 })
 export class PaymentFormCardComponent implements OnInit {
   validateForm!: FormGroup;
+
+  @Output() submit = new EventEmitter();
 
   constructor(private fb: FormBuilder) {}
 
@@ -34,6 +36,9 @@ export class PaymentFormCardComponent implements OnInit {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
+    }
+    if (this.validateForm.status === 'VALID') {
+      this.submit.emit(this.validateForm.value);
     }
   }
 }

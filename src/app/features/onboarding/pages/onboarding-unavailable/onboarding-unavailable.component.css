@@ -11,24 +11,24 @@ nz-card.banner {
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 100%
     ),
-    url('../../../../../assets/images/hurricane-bg.jpg');
+    url('/assets/images/hurricane-bg.jpg');
   background-image: -moz-linear-gradient(
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 100%
     ),
-    url('../../../../../assets/images/hurricane-bg.jpg');
+    url('/assets/images/hurricane-bg.jpg');
   background-image: -o-linear-gradient(
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 100%
     ),
-    url('../../../../../assets/images/hurricane-bg.jpg');
+    url('/assets/images/hurricane-bg.jpg');
   background-image: -ms-linear-gradient(
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 1) 100%
     ),
-    url('../../../../../assets/images/hurricane-bg.jpg');
+    url('/assets/images/hurricane-bg.jpg');
   background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%),
-    url('../../../../../assets/images/hurricane-bg.jpg');
+    url('/assets/images/hurricane-bg.jpg');
 
   background-repeat: no-repeat;
   background-size: cover;
@@ -101,7 +101,7 @@ nz-card p {
 }
 
 nz-card.pricing {
-  background-image: url('../../../../../assets/images/bg-graph.png');
+  background-image: url('/assets/images/bg-graph.png');
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 400px;

@@ -21,6 +21,10 @@ export class OnboardingPageComponent implements OnInit {
 
   lat: number;
 
+  formattedAddress: string;
+
+  addressSelected = false;
+
   constructor(private router: Router) {}
 
   ngOnInit() {}
@@ -34,7 +38,8 @@ export class OnboardingPageComponent implements OnInit {
     // let x = this.getComponentByType(address,"street_number");
     this.lng = address.geometry.location.lng();
     this.lat = address.geometry.location.lat();
-
+    this.formattedAddress = address.formatted_address;
+    this.addressSelected = true;
     // console.log(address.geometry.location.lng());
     // console.log(address.geometry.location.lat());
     // console.log(address.geometry.location.toJSON());
@@ -58,10 +63,16 @@ export class OnboardingPageComponent implements OnInit {
         const wind = services.includes('wind');
         const surge = services.includes('surge');
         const onlyWind = !(wind && surge);
+        const lng = this.lng;
+        const lat = this.lat;
+        const formattedAddress = this.formattedAddress;
         console.log(services);
 
         if (available) {
-          this.router.navigate(['/onboarding/success', { onlyWind }]);
+          this.router.navigate([
+            '/onboarding/success',
+            { onlyWind, lng, lat, formattedAddress },
+          ]);
         } else {
           this.router.navigate(['/onboarding/unavailable']);
         }

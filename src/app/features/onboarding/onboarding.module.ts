@@ -2,9 +2,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 // design
 import { DesignModule } from '@design/design.module';
+
+// core
+import { CoreModule } from '@core/core.module';
 
 // maps
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
@@ -31,9 +35,11 @@ import { OnboardingUnavailablePageComponent } from './pages/onboarding-unavailab
   ],
   imports: [
     CommonModule,
+    CoreModule,
     DesignModule,
     OnboardingRoutingModule,
     GooglePlaceModule,
+    HttpClientModule,
   ],
   exports: [OnboardingComponent],
 })

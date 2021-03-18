@@ -1,19 +1,9 @@
 <nz-card class="form" nzBorderless>
   <p>
-    Please select "Continue" to be taken to PayPal to complete payment
-    processing. <br />
+    Please click below to be taken to PayPal to complete payment processing.
+    <br />
     Thank you.
   </p>
 
-  <button
-    class="submit-button"
-    nz-button
-    nzType="primary"
-    nzDanger
-    nzSize="large"
-    nzBlock
-    (click)="onContinue()"
-  >
-    Continue
-  </button>
+  <ng-content></ng-content>
 </nz-card>

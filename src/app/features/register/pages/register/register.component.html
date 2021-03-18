@@ -63,7 +63,7 @@
               <nz-form-control nzErrorTip="Please input your password!">
                 <input
                   nz-input
-                  type="password "
+                  type="password"
                   formControlName="password"
                   id="password"
                   placeholder="Password"
@@ -77,7 +77,7 @@
               <nz-form-control [nzErrorTip]="errorTpl">
                 <input
                   nz-input
-                  type="password "
+                  type="password"
                   formControlName="checkPassword"
                   id="checkPassword"
                   placeholder="Confirm Password"
@@ -105,92 +105,28 @@
               </nz-form-control>
             </nz-form-item>
 
-            <!-- <h3>Service Address</h3> -->
+            <h3>Service Address</h3>
 
-            <!-- phone number -->
-            <!-- <nz-form-item>
-            <nz-form-control nzErrorTip="Please input your phone number!">
-              <input
-                nz-input
-                formControlName="phoneNumber"
-                id="phoneNumber"
-                placeholder="Phone Number"
-              />
-            </nz-form-control>
-          </nz-form-item> -->
+            <!-- street address -->
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input your service address!">
+                <input
+                  nz-input
+                  formControlName="serviceAddress"
+                  id="serviceAddress"
+                  placeholder="Service Address"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <button nz-button nzType="primary" nzSize="large" nzDanger nzBlock>
+              Continue
+            </button>
           </form>
         </nz-card>
       </div>
     </div>
   </div>
   <nz-divider></nz-divider>
-
-  <div nz-row [nzGutter]="8">
-    <div nz-col nzSpan="8">
-      <h5>Our Services</h5>
-      <img nz-image nzSrc="../../../assets/images/ourServices.jpg" alt="" />
-      <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
-        Learn More About Our Services
-      </button>
-    </div>
-
-    <div nz-col nzSpan="8">
-      <h5>Track Storm Activity</h5>
-      <img nz-image nzSrc="../../../assets/images/track-storm.jpg" alt="" />
-      <button nz-button nzBlock nzSize="large" nzDanger nzType="primary">
-        Learn More About Our Services
-      </button>
-    </div>
-
-    <div nz-col nzSpan="8">
-      <h5>Send us a message</h5>
-      <div class="contact-form">
-        <form nz-form [nzLayout]="'vertical'">
-          <nz-form-item>
-            <nz-form-control>
-              <input
-                nz-input
-                formControlName="name"
-                placeholder="Name (Required)"
-              />
-            </nz-form-control>
-          </nz-form-item>
-
-          <nz-form-item>
-            <nz-form-control>
-              <input
-                nz-input
-                formControlName="email"
-                placeholder="Email (Required)"
-              />
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-control>
-              <textarea
-                rows="4"
-                nz-input
-                formControlName="message"
-                placeholder="Message (Required)"
-              ></textarea>
-            </nz-form-control>
-          </nz-form-item>
-
-          <nz-form-item>
-            <nz-form-control>
-              <button
-                nz-button
-                nzBlock
-                nzType="primary"
-                nzDanger
-                nzSize="large"
-              >
-                Submit
-              </button>
-            </nz-form-control>
-          </nz-form-item>
-        </form>
-      </div>
-    </div>
-  </div>
+  <qrisq-company-widget-group></qrisq-company-widget-group>
 </div>
