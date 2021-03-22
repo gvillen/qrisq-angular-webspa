@@ -7,12 +7,11 @@ import { OnboardingComponent } from '@features/onboarding/onboarding.component';
 import { HomeComponent } from '@features/home/home.component';
 import { RegisterComponent } from '@features/register/register.component';
 import { IdentityComponent } from '@features/identity/identity.component';
-
+import { StormDataComponent } from '@features/storm-data/storm-data.component';
 // guard
 import { NoAuthGuard } from '@core/guard/no-auth.guard';
 
 // pages
-import { ForecastPageComponent } from '@features/storm-data/pages/forecast/forecast.component';
 
 const routes: Routes = [
   {
@@ -39,12 +38,7 @@ const routes: Routes = [
 
   {
     path: 'storm-data',
-    children: [
-      {
-        path: 'forecast',
-        component: ForecastPageComponent,
-      },
-    ],
+    component: StormDataComponent,
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' },

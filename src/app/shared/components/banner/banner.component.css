@@ -11,18 +11,14 @@ nz-card {
   min-height: 661px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   border: none;
   width: 100%;
   margin-bottom: 32px;
-  padding-right: 40%;
-  padding-left: 4%;
+  /* padding-right: 40%;
+  padding-left: 4%; */
 }
 
-h2 {
-  color: #fff;
-  font-size: 3em;
-  font-family: Rubik, Arial, Helvetica, sans-serif;
-  font-weight: 600;
+.content {
+  padding-left: 30px;
 }

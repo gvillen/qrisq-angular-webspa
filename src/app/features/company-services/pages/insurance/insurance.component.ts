@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-insurance',
+  selector: 'qrisq-services-insurance-page',
   templateUrl: './insurance.component.html',
-  styleUrls: ['./insurance.component.css']
+  styleUrls: ['./insurance.component.css'],
 })
-export class InsuranceComponent implements OnInit {
+export class CompanyServicesInsuranceComponentPage implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

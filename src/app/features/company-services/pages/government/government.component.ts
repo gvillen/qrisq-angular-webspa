@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-government',
+  selector: 'qrisq-services-government-page',
   templateUrl: './government.component.html',
-  styleUrls: ['./government.component.css']
+  styleUrls: ['./government.component.css'],
 })
-export class GovernmentComponent implements OnInit {
+export class CompanyServicesGovernmentComponentPage implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

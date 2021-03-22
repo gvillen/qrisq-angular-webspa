@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-homeowners',
+  selector: 'qrisq-services-homeowners-page',
   templateUrl: './homeowners.component.html',
-  styleUrls: ['./homeowners.component.css']
+  styleUrls: ['./homeowners.component.css'],
 })
-export class HomeownersComponent implements OnInit {
+export class CompanyServicesHomeownersComponentPage implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
