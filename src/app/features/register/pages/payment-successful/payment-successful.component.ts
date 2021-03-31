@@ -41,35 +41,36 @@ export class RegisterPaymentSuccessfulPageComponent implements OnInit {
   }
 
   onRegisterSubmit() {
-    const signUpApiUrl = 'http://3.210.78.109/api/auth/signup';
-    const data = {
-      email: this.registerData.email,
-      password: this.registerData.password,
-      confirm_password: this.registerData.password,
-      first_name: this.registerData.firstName,
-      last_name: this.registerData.lastName,
-      phone_number: this.registerData.phoneNumber,
-      address: {
-        lat: this.registerData.lat,
-        lng: this.registerData.lng,
-        displayText: this.registerData.formattedAddress,
-      },
-      street_number: '123',
-      city: 'city',
-      state: 'state',
-      zip_code: '99999',
-      subscription_plan_id: this.registerData.planId,
-      payment_id: this.registerData.paymentId,
-    };
-    axios
-      .post(signUpApiUrl, data)
-      .then((response) => {
-        console.log(response);
-        console.log(response.data);
-        this.router.navigate(['/register/account-created']);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    this.router.navigate(['/register/geolocation', this.registerData]);
+    // const signUpApiUrl = 'http://3.210.78.109/api/auth/signup';
+    // const data = {
+    //   email: this.registerData.email,
+    //   password: this.registerData.password,
+    //   confirm_password: this.registerData.password,
+    //   first_name: this.registerData.firstName,
+    //   last_name: this.registerData.lastName,
+    //   phone_number: this.registerData.phoneNumber,
+    //   address: {
+    //     lat: this.registerData.lat,
+    //     lng: this.registerData.lng,
+    //     displayText: this.registerData.formattedAddress,
+    //   },
+    //   street_number: '123',
+    //   city: 'city',
+    //   state: 'state',
+    //   zip_code: '99999',
+    //   subscription_plan_id: this.registerData.planId,
+    //   payment_id: this.registerData.paymentId,
+    // };
+    // axios
+    //   .post(signUpApiUrl, data)
+    //   .then((response) => {
+    //     console.log(response);
+    //     console.log(response.data);
+    //     this.router.navigate(['/register/geolocation', this.registerData]);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   }
 }

@@ -12,6 +12,6 @@ export class RegisterAccountCreatedPageComponent implements OnInit {
   ngOnInit() {}
 
   toLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/identity/login']);
   }
 }

@@ -29,6 +29,10 @@ qrisq-banner .button-container {
   text-align: right;
 }
 
+qrisq-banner button {
+  width: 160px;
+}
+
 .page-content {
   display: flex;
   flex-direction: column;

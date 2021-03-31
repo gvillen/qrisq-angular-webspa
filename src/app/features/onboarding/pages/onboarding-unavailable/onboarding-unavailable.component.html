@@ -1,14 +1,96 @@
 <div class="main-container">
-  <nz-card class="banner">
-    <div class="inner-container">
-      <h2>Out of Service Area</h2>
+  <!--  -->
+  <!-- qrisq-banner -->
+
+  <qrisq-banner
+    [imageUrl]="
+      '/assets/images/main-banner1-2_626d64c0aef3be22948fc57dd1d1fa07.jpg'
+    "
+  >
+    <div class="banner-content">
+      <h1>Out of Service Area</h1>
       <p>
         The address provided is out of the Q-risq service area. You can still
         use our free app by clicking on the Hurricane Viewer button above.
       </p>
     </div>
-  </nz-card>
+  </qrisq-banner>
 
-  <nz-divider></nz-divider>
-  <qrisq-company-widget-group></qrisq-company-widget-group>
+  <!--  -->
+  <!-- page-content -->
+
+  <div class="page-content">
+    <!--  -->
+    <!-- divider -->
+    <nz-divider></nz-divider>
+    <!--  -->
+    <!-- footer -->
+    <div nz-row class="section-footer">
+      <div nz-col nzSpan="8" class="section-footer-ourservices">
+        <h3><strong>Our Services</strong></h3>
+        <img nz-image nzSrc="/assets/images/ourServices.jpg" alt="" />
+        <p>
+          Knowledge is power. Know what to expect before a storm makes landfall;
+          afterward, understand the impact of winds and storm surge with data
+          from Q-risq Analytics.
+        </p>
+        <button nz-button nzType="primary" nzSize="large" nzDanger nzBlock>
+          Learn More About Our Services
+        </button>
+      </div>
+      <div nz-col nzSpan="8" class="section-footer-trackstorm">
+        <h3><strong>Track Storm Activities</strong></h3>
+        <img nz-image nzSrc="/assets/images/track-storm.jpg" alt="" />
+        <p>
+          Stay current on storm activity with the National Hurricane Center’s
+          up-to-date weather information for tropical storms and hurricanes.
+        </p>
+        <button nz-button nzType="primary" nzSize="large" nzDanger nzBlock>
+          Visit the National Hurricane Center
+        </button>
+      </div>
+      <div nz-col nzSpan="8" class="section-footer-messageform">
+        <h3><strong>Send us a message</strong></h3>
+        <div class="form-container">
+          <form nz-form [nzLayout]="'vertical'">
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="name"
+                  placeholder="Name (Required)"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="email"
+                  placeholder="Email (Required)"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control>
+                <textarea
+                  rows="10"
+                  nz-input
+                  formControlName="message"
+                  placeholder="Message (Required)"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+            <button nz-button nzBlock nzType="primary" nzDanger nzSize="large">
+              Submit
+            </button>
+            <p>
+              *Please excuse slower than normal response time during a storm
+              event.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

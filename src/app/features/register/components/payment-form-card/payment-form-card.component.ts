@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { CreditCardValidators } from 'angular-cc-library';
+
 @Component({
   selector: 'qrisq-payment-form-card',
   templateUrl: './payment-form-card.component.html',
@@ -22,9 +24,12 @@ export class PaymentFormCardComponent implements OnInit {
     this.validateForm = this.fb.group({
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
-      cardNumber: [null, [Validators.required]],
-      expirationDate: [null, [Validators.required]],
-      cvc: [null, [Validators.required]],
+      cardNumber: [null, [CreditCardValidators.validateCCNumber]],
+      expirationDate: [null, [CreditCardValidators.validateExpDate]],
+      cvc: [
+        null,
+        [Validators.required, Validators.minLength(3), Validators.maxLength(4)],
+      ],
       billingAddress: [null, [Validators.required]],
       city: [null, [Validators.required]],
       state: [null, [Validators.required]],

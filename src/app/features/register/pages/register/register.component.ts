@@ -80,7 +80,7 @@ export class RegisterPageComponent implements OnInit {
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.minLength(8)]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
       phoneNumber: [null, [Validators.required]],
       serviceAddress: [

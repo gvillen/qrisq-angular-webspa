@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
-// design
-import { DesignModule } from '@design/design.module';
-
-// core
+// core, design & shared
 import { CoreModule } from '@core/core.module';
+import { DesignModule } from '@design/design.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 // maps
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
@@ -37,6 +36,7 @@ import { OnboardingUnavailablePageComponent } from './pages/onboarding-unavailab
     CommonModule,
     CoreModule,
     DesignModule,
+    SharedModule,
     OnboardingRoutingModule,
     GooglePlaceModule,
     HttpClientModule,

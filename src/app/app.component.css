@@ -9,3 +9,9 @@ title > span {
 nz-content {
   flex: 1;
 }
+
+qrisq-header {
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}

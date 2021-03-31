@@ -7,6 +7,7 @@ import { RegisterPageComponent } from './pages/register/register.component';
 import { RegisterPaymentPageComponent } from './pages/payment/payment.component';
 import { RegisterPaymentSuccessfulPageComponent } from './pages/payment-successful/payment-successful.component';
 import { RegisterAccountCreatedPageComponent } from './pages/account-created/account-created.component';
+import { RegisterGeolocationPageComponent } from './pages/geolocation/geolocation.component';
 
 export const routes: Routes = [
   {
@@ -22,13 +23,21 @@ export const routes: Routes = [
     component: RegisterPaymentSuccessfulPageComponent,
   },
   {
+    path: 'register/geolocation',
+    component: RegisterGeolocationPageComponent,
+  },
+  {
     component: RegisterAccountCreatedPageComponent,
     path: 'register/account-created',
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class RegisterRoutingModule {}

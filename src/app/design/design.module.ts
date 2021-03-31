@@ -17,10 +17,15 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 import { CreditCardOutline } from '@ant-design/icons-angular/icons';
+import { InfoCircleOutline } from '@ant-design/icons-angular/icons';
 
-const icons: IconDefinition[] = [CreditCardOutline];
+const icons: IconDefinition[] = [CreditCardOutline, InfoCircleOutline];
 
 // providers
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -44,6 +49,10 @@ import { en_US } from 'ng-zorro-antd/i18n';
     NzRadioModule,
     NzTypographyModule,
     NzAlertModule,
+    NzToolTipModule,
+    NzPopconfirmModule,
+    NzPopoverModule,
+    NzModalModule,
   ],
   imports: [NzIconModule.forRoot(icons)],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

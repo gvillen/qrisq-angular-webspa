@@ -1,20 +1,101 @@
 <div class="main-container">
-  <nz-card class="banner">
-    <h2>Payment Successful!</h2>
-  </nz-card>
+  <!--  -->
+  <!-- qrisq-banner  -->
 
-  <p>Select <strong>"Continue"</strong> to finalize registration.</p>
-  <button
-    nz-button
-    nzType="primary"
-    nzDanger
-    nzSize="large"
-    (click)="onRegisterSubmit()"
-  >
-    Continue
-  </button>
-  <div class="form-section">
+  <qrisq-banner [imageUrl]="'/assets/images/main-banner-forcast.jpg'">
+    <h1>Payment Successful!</h1>
+  </qrisq-banner>
+
+  <!--  -->
+  <!-- page-content -->
+  <div class="page-content">
+    <!--  -->
+    <!-- section-content-1 -->
+    <div nz-row nzJustify="center" class="section-content-1">
+      <!--  -->
+      <!-- col-1 -->
+      <div nz-col class="col-1" nzSpan="6">
+        <div class="inner-container">
+          <img nz-image nzSrc="/assets/images/icon-triangle-green.png" alt="" />
+          <div class="button-wrapper">
+            <p><strong>Select "Continue" to finalize registration.</strong></p>
+            <button
+              nz-button
+              nzType="primary"
+              nzBlock
+              nzDanger
+              nzSize="large"
+              (click)="onRegisterSubmit()"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <nz-divider></nz-divider>
-    <qrisq-company-widget-group></qrisq-company-widget-group>
+
+    <!-- footer -->
+    <div nz-row class="section-footer">
+      <div nz-col nzSpan="16" class="section-footer-trackstorm">
+        <h3><strong>Track Storm Activities</strong></h3>
+        <img nz-image nzSrc="/assets/images/ourservice-botton.jpg" alt="" />
+        <p>
+          Stay current on storm activity with the National Hurricane Center’s
+          up-to-date weather information for tropical storms and hurricanes.
+        </p>
+        <button nz-button nzType="primary" nzSize="large" nzDanger nzBlock>
+          Visit the National Hurricane Center
+        </button>
+      </div>
+
+      <div nz-col nzSpan="8" class="section-footer-messageform">
+        <h3><strong>Send us a message</strong></h3>
+        <div class="form-container">
+          <form nz-form [nzLayout]="'vertical'">
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="name"
+                  placeholder="Name (Required)"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="email"
+                  placeholder="Email (Required)"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control>
+                <textarea
+                  rows="10"
+                  nz-input
+                  formControlName="message"
+                  placeholder="Message (Required)"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+
+            <button nz-button nzBlock nzType="primary" nzDanger nzSize="large">
+              Submit
+            </button>
+
+            <p>
+              *Please excuse slower than normal response time during a storm
+              event.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

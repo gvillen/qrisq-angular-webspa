@@ -4,172 +4,179 @@
   justify-content: center;
   align-items: center;
   background-color: #fff;
-}
-
-nz-card.banner {
-  /* background-image: -webkit-linear-gradient(
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 100%
-    ),
-    url('../../../assets/images/main-banner1-2_626d64c0aef3be22948fc57dd1d1fa07.jpg');
-  background-image: -moz-linear-gradient(
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 100%
-    ),
-    url('../../../assets/images/main-banner1-2_626d64c0aef3be22948fc57dd1d1fa07.jpg');
-  background-image: -o-linear-gradient(
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 100%
-    ),
-    url('../../../assets/images/main-banner1-2_626d64c0aef3be22948fc57dd1d1fa07.jpg');
-  background-image: -ms-linear-gradient(
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 100%
-    ),
-    url('../../../assets/images/main-banner1-2_626d64c0aef3be22948fc57dd1d1fa07.jpg');
-  background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%),
-    url('../../../assets/images/main-banner1-2_626d64c0aef3be22948fc57dd1d1fa07.jpg'); */
-
-  background-image: url('/assets/images/main-banner-onboarding.jpg');
-  background-color: rgba(6, 9, 10, 0.74);
+  background-size: contain;
+  background-image: url('/assets/images/bg-graph.png') !important;
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  min-height: 661px;
+  background-position: left center;
+}
+
+.page-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  border: none;
+  align-items: center;
   width: 100%;
-  margin-bottom: 32px;
+  max-width: 92%;
+  margin: auto;
+  padding-bottom: 5%;
 }
 
-nz-card h2 {
+qrisq-banner .banner-content {
+  padding-right: 60%;
+}
+
+qrisq-banner h1 {
   color: #fff;
-  font-size: 3em;
-  font-family: Rubik, Arial, Helvetica, sans-serif;
-  font-weight: 600;
+  font-size: 3.4rem;
+  font-family: Oswald, Arial, Helvetica, sans-serif;
+  font-weight: 520;
+  line-height: 1em;
 }
 
-nz-card p {
+qrisq-banner p {
   color: #fff;
-  font-size: 2.1m;
+  font-size: 1.4rem;
   font-family: Rubik, Arial, Helvetica, sans-serif;
+  line-height: 1.5em;
 }
 
-.inner-container p {
-  padding-right: 40%;
+qrisq-banner .button-container {
+  width: 100%;
+  text-align: right;
 }
 
-[nz-row] {
-  max-width: 920px;
-  width: 920px;
-  padding: 0px 16px;
-  margin: 16px 0px;
+.section-content-1 {
+  margin-bottom: 30px;
 }
 
-[nz-col] > p {
-  font-family: Rubik, Arial, Helvetica, sans-serif;
+.section-content-1 .col-1 .container {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-content-1 .col-1 .container .text-wrapper {
+  display: flex;
+  padding-top: 20px;
+}
+
+.section-content-1 .col-1 .container .text-wrapper p {
   font-size: 1.2rem;
-  color: #595959;
+  line-height: 1.4em;
 }
 
-nz-card.form {
+.section-content-1 .col-1 .container .text-wrapper img {
+  max-width: 100%;
+  height: auto;
+  max-height: 30px;
+  margin-top: 5px;
+  margin-bottom: auto;
+  margin-right: 10px;
+}
+
+.section-content-1 .col-1 .container .text-wrapper .image-container {
+  margin-left: 20px;
+}
+
+.section-content-1 .col-1 .container .form-wrapper {
+  padding: 0px 20px;
+}
+
+.section-content-1 .col-1 .container .form-wrapper .form {
   background-color: #ebebeb;
 }
 
-nz-input-group {
+.section-content-1 .col-1 .container .form-wrapper .form input {
   margin-bottom: 10px;
+  height: 50px;
 }
 
-.form-container {
-  background-color: #ebebeb;
+.section-content-1 .col-1 .container .form-wrapper .form button {
+  height: 50px;
 }
 
-.legend-container {
+.section-content-1 .col-2 {
+  padding: 20px 0px;
+}
+
+.section-content-1 .col-2 .legend-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 1.4rem;
+  line-height: 1rem;
+  font-weight: bold;
 }
 
-.legend-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.legend-container p {
-  font-family: Rubik, Arial, Helvetica, sans-serif;
-  font-size: 1, 2rem;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.legend-container .text-blue {
+.section-content-1 .col-2 .legend-wrapper .text-blue {
   color: #0050b3;
 }
 
-.legend-container .text-red {
+.section-content-1 .col-2 .legend-wrapper .text-red {
   color: #cf1322;
 }
 
-.map-container > img {
+.section-content-1 .col-2 .map-wrapper img {
   max-width: 100%;
   height: auto;
   margin-top: auto;
   margin-bottom: auto;
 }
 
-[nz-row] {
-  max-width: 880px;
-  width: 880px;
-  padding: 0px 16px;
-  margin: 16px 0px;
+/* footer */
+
+.section-footer {
+  width: 100%;
+  padding-top: 65px;
+  margin-top: -24px;
 }
 
-[nz-row].service-section {
-  background-color: #ebebeb;
-  max-height: 370px;
+.section-footer-ourservices h3,
+.section-footer-trackstorm h3,
+.section-footer-messageform h3 {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  color: #2f5597;
+  font-weight: 500;
+  font-size: 24px;
 }
 
-[nz-col].service-section-image {
-  max-height: 370px;
-  display: flex;
-  flex-direction: column;
-}
-
-[nz-col].service-section-image > img {
+.section-footer-ourservices img,
+.section-footer-trackstorm img {
   max-width: 100%;
   height: auto;
   margin-top: auto;
   margin-bottom: auto;
 }
 
-[nz-col] > img {
-  max-width: 100%;
-  height: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-h4 {
-  font-family: Rubik, Arial, Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-h5 {
-  font-family: Rubik, Arial, Helvetica, sans-serif;
+.section-footer-ourservices p,
+.section-footer-trackstorm p {
+  margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 1.3rem;
-  color: #2f5597 !important;
-  font-weight: 600;
+  font-weight: 450;
 }
 
-[nzDanger] {
-  margin-top: 10px;
+.section-footer-ourservices button,
+.section-footer-trackstorm button,
+.section-footer-messageform button {
+  font-weight: 500;
+}
+
+.section-footer-ourservices,
+.section-footer-trackstorm,
+.section-footer-messageform {
+  padding: 0px 24px;
+}
+
+.section-footer-messageform .form-container {
+  background-color: #ebebeb;
+  padding: 1.5em;
+}
+
+.section-footer-messageform .form-container button {
+  margin-bottom: 20px;
+}
+
+nz-divider {
+  border-top: 2px solid #000;
 }

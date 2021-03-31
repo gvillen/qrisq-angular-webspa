@@ -7,13 +7,17 @@ import { IdentityLoginPageComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   {
-    path: 'login',
+    path: 'identity/login',
     component: IdentityLoginPageComponent,
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class IdentityRoutingModule {}

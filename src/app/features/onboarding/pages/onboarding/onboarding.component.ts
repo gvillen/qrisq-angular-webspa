@@ -10,6 +10,12 @@ import { Address } from '../../objects/address';
 
 // axios
 import axios from 'axios';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'qrisq-onboarding-page',
@@ -25,25 +31,21 @@ export class OnboardingPageComponent implements OnInit {
 
   addressSelected = false;
 
-  constructor(private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {}
 
   @ViewChild('placesRef') placesRef: GooglePlaceDirective;
 
-  public onChange(address: Address) {
-    // if(address.photos && address.photos.length > 0){
-    //     console.dir(address.photos[0].getUrl({maxHeight:500,maxWidth:500}));
-    // }
-    // let x = this.getComponentByType(address,"street_number");
+  public onAddressChange(address: Address) {
     this.lng = address.geometry.location.lng();
     this.lat = address.geometry.location.lat();
     this.formattedAddress = address.formatted_address;
     this.addressSelected = true;
-    // console.log(address.geometry.location.lng());
-    // console.log(address.geometry.location.lat());
-    // console.log(address.geometry.location.toJSON());
-    // console.log(address.geometry.viewport.getNorthEast());
+  }
+
+  onInputChange(event) {
+    console.log(event);
   }
 
   public OnSearch() {

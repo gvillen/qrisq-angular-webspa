@@ -36,11 +36,20 @@
         <input
           nzSize="large"
           nz-input
-          type="number"
           formControlName="cardNumber"
-          id="cardNumber"
           placeholder="Card Number"
+          id="cc-number"
+          type="tel"
+          autocomplete="cc-number"
+          ccNumber
         />
+        <!-- <input
+          id="cc-number"
+          formControlName="cardNumber"
+          type="tel"
+          autocomplete="cc-number"
+          ccNumber
+        /> -->
       </nz-form-control>
     </nz-form-item>
 
@@ -50,10 +59,12 @@
         <input
           nzSize="large"
           nz-input
-          type="number"
           formControlName="expirationDate"
-          id="expirationDate"
           placeholder="Expiration Date"
+          id="cc-exp-date"
+          type="tel"
+          autocomplete="cc-exp"
+          ccExp
         />
       </nz-form-control>
     </nz-form-item>
@@ -64,11 +75,12 @@
         <input
           nzSize="large"
           nz-input
-          type="number"
           formControlName="cvc"
-          id="cvc"
           placeholder="CVC"
-          e
+          id="cc-cvc"
+          type="tel"
+          autocomplete="off"
+          ccCVC
         />
       </nz-form-control>
     </nz-form-item>

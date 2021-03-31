@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'qrisq-company-services',
-  templateUrl: './services.component.html',
+  templateUrl: './company-services.component.html',
 })
 export class CompanyServicesComponent implements OnInit {
   constructor() {}

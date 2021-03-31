@@ -1,11 +1,8 @@
 <nz-header>
   <div class="logo-container">
-    <img
-      nz-image
-      height="60px"
-      nzSrc="../../../assets/images/qrisq-logo-3d.png"
-      alt="Qrisq"
-    />
+    <a href="/home">
+      <img height="60px" src="/assets/images/qrisq-logo-3d.png" alt="Qrisq" />
+    </a>
   </div>
 
   <div class="button-container">
@@ -52,21 +49,24 @@
       <li nz-submenu [nzTitle]="submenuTitleServicesTpl">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['homeowners-3']">Homeowners</a>
+            <a [routerLink]="['services/homeowners']">Homeowners</a>
           </li>
 
           <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['government-4']">Government</a>
+            <a [routerLink]="['services/government']">Government</a>
           </li>
 
           <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['insurance-industry']">Insurance</a>
+            <a [routerLink]="['services/insurance']">Insurance</a>
           </li>
         </ul>
       </li>
 
       <li nz-submenu [nzTitle]="submenuTitleLoginTpl">
         <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['identity/login']">Login</a>
+          </li>
           <li nz-menu-item nzMatchRouter>
             <a [routerLink]="['#']">Account</a>
           </li>

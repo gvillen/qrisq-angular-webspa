@@ -6,8 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IdentityComponent } from './identity.component';
 
-// design
+// core, design & shared
+import { CoreModule } from '@core/core.module';
 import { DesignModule } from '@design/design.module';
+import { SharedModule } from '@shared/shared.module';
 
 // routing
 import { IdentityRoutingModule } from './identity-routing.module';
@@ -18,11 +20,19 @@ import { IdentityLoginPageComponent } from './pages/login/login.component';
 @NgModule({
   declarations: [IdentityComponent, IdentityLoginPageComponent],
   imports: [
+    // angular
     CommonModule,
-    DesignModule,
-    IdentityRoutingModule,
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+
+    // core, design & shared
+    CoreModule,
+    DesignModule,
+    SharedModule,
+
+    // routing
+    IdentityRoutingModule,
   ],
 })
 export class IdentityModule {}
