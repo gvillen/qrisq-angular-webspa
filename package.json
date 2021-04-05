@@ -29,6 +29,7 @@
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "guid-typescript": "^1.0.9",
     "ng-zorro-antd": "^11.1.0",
     "ngx-google-map": "^1.0.0",
     "ngx-google-map-helper": "^1.0.0",

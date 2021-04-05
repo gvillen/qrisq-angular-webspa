@@ -1,3 +1,4 @@
+// angular
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -6,7 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
+// paypal
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+
+// guid
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'qrisq-register-payment-page',
@@ -54,7 +60,7 @@ export class RegisterPaymentPageComponent implements OnInit {
 
   onCreditCardPaymentSubmit(creditCardInfo) {
     console.log(creditCardInfo);
-    this.registerData.paymentId = '1234567890';
+    this.registerData.paymentId = Guid.create().toString().substring(0, 8);
     this.router.navigate(['/register/payment-successful', this.registerData]);
   }
 

@@ -1,5 +1,5 @@
 import { AgmGeocoder, MapsAPILoader } from '@agm/core';
-import { isPlatformBrowser } from '@angular/common';
+import axios from 'axios';
 import {
   Component,
   ElementRef,
@@ -9,14 +9,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  LatLang,
-  OverLayOption,
-  MarkerOption,
-  Shape,
-  Marker,
-  Circle,
-} from 'ngx-google-map-helper';
+
+import { environment } from '@env';
+
+const { API_URL } = environment;
 
 @Component({
   selector: 'qrisq-register-geolocation-page',
@@ -111,6 +107,36 @@ export class RegisterGeolocationPageComponent implements OnInit {
   }
 
   onSubmit(event) {
-    this.router.navigate(['/register/account-created']);
+    const signUpApiUrl = API_URL + '/auth/signup';
+
+    const data = {
+      email: this.registerData.email,
+      password: this.registerData.password,
+      confirm_password: this.registerData.password,
+      first_name: this.registerData.firstName,
+      last_name: this.registerData.lastName,
+      phone_number: this.registerData.phoneNumber,
+      address: {
+        lat: this.registerData.lat,
+        lng: this.registerData.lng,
+        displayText: this.registerData.formattedAddress,
+      },
+      street_number: '123',
+      city: 'city',
+      state: 'state',
+      zip_code: '99999',
+      subscription_plan_id: this.registerData.planId,
+      payment_id: this.registerData.paymentId,
+    };
+    axios
+      .post(signUpApiUrl, data)
+      .then((response) => {
+        console.log(response);
+        console.log(response.data);
+        this.router.navigate(['/register/account-created']);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 }

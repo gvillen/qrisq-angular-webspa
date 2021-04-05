@@ -20,8 +20,11 @@
       "@app/*": [
         "src/app/*"
       ],
+      "@env": [
+        "src/environments/environment"
+      ],
       "@assets/*": [
-        "assets/*"
+        "src/assets/*"
       ],
       "@core/*": [
         "src/app/core/*"
@@ -30,10 +33,12 @@
         "src/app/design/*"
       ],
       "@features/*": [
-        "src/app/features/*"],
+        "src/app/features/*"
+      ],
       "@shared/*": [
-          "src/app/shared/*"
-        ],
+        "src/app/shared/*"
+      ],
+      
         
     }
   },

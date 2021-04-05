@@ -11,6 +11,10 @@ import { Router } from '@angular/router';
 
 import axios from 'axios';
 
+import { environment } from '@env';
+
+const { API_URL } = environment;
+
 @Component({
   selector: 'qrisq-identity-login-page',
   templateUrl: './login.component.html',
@@ -34,7 +38,7 @@ export class IdentityLoginPageComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-      const loginApiUrl = 'http://3.210.78.109/api/auth/login';
+      const loginApiUrl = API_URL + '/auth/login';
       const data = {
         email: this.validateForm.get('username').value,
         password: this.validateForm.get('password').value,
