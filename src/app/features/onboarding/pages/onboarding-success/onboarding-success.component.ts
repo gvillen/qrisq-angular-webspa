@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import axios from 'axios';
+import { environment } from '@env';
+
+const { API_URL } = environment;
 
 @Component({
   selector: 'qrisq-onboarding-success-page',
@@ -33,8 +36,7 @@ export class OnboardingSuccessPageComponent implements OnInit {
     );
     this.loading = true;
 
-    const getSubscriptionPlansApiUrl =
-      'http://3.210.78.109/api/subscription-plans';
+    const getSubscriptionPlansApiUrl = API_URL + '/subscription-plans';
     axios
       .get(getSubscriptionPlansApiUrl)
       .then((response) => {

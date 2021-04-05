@@ -93,6 +93,7 @@ export class RegisterGeolocationPageComponent implements OnInit {
 
     this.agmGeocoder.geocode({ location: latlng }).subscribe((result) => {
       if (result.length > 0) {
+        // console.log(result[0].address_components);
         this.formattedAddress = result[0].formatted_address;
       } else {
         this.formattedAddress = 'Reverse Geocoding Failed! Try again!';

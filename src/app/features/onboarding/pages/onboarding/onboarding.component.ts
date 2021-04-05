@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 // google
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 
+// environment
+import { environment } from '@env';
+
 // objects
 import { Address } from '../../objects/address';
 
@@ -16,6 +19,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+
+const { API_URL } = environment;
 
 @Component({
   selector: 'qrisq-onboarding-page',
@@ -41,6 +46,7 @@ export class OnboardingPageComponent implements OnInit {
     this.lng = address.geometry.location.lng();
     this.lat = address.geometry.location.lat();
     this.formattedAddress = address.formatted_address;
+
     this.addressSelected = true;
   }
 
@@ -51,7 +57,7 @@ export class OnboardingPageComponent implements OnInit {
   public OnSearch() {
     console.log('OnSearch');
 
-    const checkServiceAreaApiUrl = 'http://3.210.78.109/api/check-service-area';
+    const checkServiceAreaApiUrl = API_URL + '/check-service-area';
 
     axios
       .post(checkServiceAreaApiUrl, {
