@@ -66,26 +66,24 @@ export class OnboardingPageComponent implements OnInit {
       })
       .then((response) => {
         const { data } = response;
-        const { available, services } = data;
+        const { available } = data;
 
-        const wind = services.includes('wind');
-        const surge = services.includes('surge');
-        const onlyWind = !(wind && surge);
-        const lng = this.lng;
-        const lat = this.lat;
-        const formattedAddress = this.formattedAddress;
-        console.log(services);
-
-        if (available) {
-          this.router.navigate([
-            '/onboarding/success',
-            { onlyWind, lng, lat, formattedAddress },
-          ]);
-        } else {
+        if (!available) {
           this.router.navigate(['/onboarding/unavailable']);
+          return;
         }
-        console.log(response);
-        console.log(response.data);
+
+        this.router.navigate([
+          '/onboarding/success',
+          {
+            services: {
+              wind: data.services.includes('wind'),
+              surge: data.services.includes('surge'),
+            },
+            lng: this.lng,
+            lat: this.lat,
+          },
+        ]);
       })
       .catch(function (error) {
         console.log(error);
