@@ -18,7 +18,7 @@ const { API_URL } = environment;
 @Component({
   selector: 'qrisq-identity-login-page',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
 })
 export class IdentityLoginPageComponent implements OnInit {
   validateForm!: FormGroup;

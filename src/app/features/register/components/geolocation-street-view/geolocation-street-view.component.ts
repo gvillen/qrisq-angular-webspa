@@ -14,7 +14,7 @@ import {
 @Component({
   selector: 'qrisq-geolocation-street-view',
   templateUrl: './geolocation-street-view.component.html',
-  styleUrls: ['./geolocation-street-view.component.css'],
+  styleUrls: ['./geolocation-street-view.component.scss'],
 })
 export class GeolocationStreetViewComponent implements OnChanges {
   @ViewChild('streetviewMap', { static: true }) streetviewMap: ElementRef;

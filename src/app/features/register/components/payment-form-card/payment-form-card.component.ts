@@ -11,7 +11,7 @@ import { CreditCardValidators } from 'angular-cc-library';
 @Component({
   selector: 'qrisq-payment-form-card',
   templateUrl: './payment-form-card.component.html',
-  styleUrls: ['./payment-form-card.component.css'],
+  styleUrls: ['./payment-form-card.component.scss'],
 })
 export class PaymentFormCardComponent implements OnInit {
   validateForm!: FormGroup;

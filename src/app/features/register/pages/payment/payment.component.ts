@@ -17,7 +17,7 @@ import { Guid } from 'guid-typescript';
 @Component({
   selector: 'qrisq-register-payment-page',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css'],
+  styleUrls: ['./payment.component.scss'],
 })
 export class RegisterPaymentPageComponent implements OnInit {
   paymentMethod = 'card';

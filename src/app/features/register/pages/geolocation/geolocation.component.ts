@@ -17,7 +17,7 @@ const { API_URL } = environment;
 @Component({
   selector: 'qrisq-register-geolocation-page',
   templateUrl: './geolocation.component.html',
-  styleUrls: ['./geolocation.component.css'],
+  styleUrls: ['./geolocation.component.scss'],
 })
 export class RegisterGeolocationPageComponent implements OnInit {
   @ViewChild('mapMarker') googleMapMarker: ElementRef;

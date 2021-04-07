@@ -5,7 +5,7 @@ import axios from 'axios';
 @Component({
   selector: 'qrisq-payment-successful',
   templateUrl: './payment-successful.component.html',
-  styleUrls: ['./payment-successful.component.css'],
+  styleUrls: ['./payment-successful.component.scss'],
 })
 export class RegisterPaymentSuccessfulPageComponent implements OnInit {
   registerData = {

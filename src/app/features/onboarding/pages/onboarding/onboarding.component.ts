@@ -25,7 +25,7 @@ const { API_URL } = environment;
 @Component({
   selector: 'qrisq-onboarding-page',
   templateUrl: './onboarding.component.html',
-  styleUrls: ['./onboarding.component.css'],
+  styleUrls: ['./onboarding.component.scss'],
 })
 export class OnboardingPageComponent implements OnInit {
   lng: number;

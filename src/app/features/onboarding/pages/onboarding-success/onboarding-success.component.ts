@@ -8,7 +8,7 @@ const { API_URL } = environment;
 @Component({
   selector: 'qrisq-onboarding-success-page',
   templateUrl: './onboarding-success.component.html',
-  styleUrls: ['./onboarding-success.component.css'],
+  styleUrls: ['./onboarding-success.component.scss'],
 })
 export class OnboardingSuccessPageComponent implements OnInit {
   onlyWind = false;
