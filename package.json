@@ -27,6 +27,7 @@
     "aws-lambda-invoke": "^3.0.0",
     "aws-sdk": "^2.848.0",
     "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "guid-typescript": "^1.0.9",
