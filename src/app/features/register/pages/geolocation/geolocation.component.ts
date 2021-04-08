@@ -25,7 +25,6 @@ export class RegisterGeolocationPageComponent implements OnInit {
   registerData = {
     lat: '',
     lng: '',
-    formattedAddress: '',
     planId: '',
     firstName: '',
     lastName: '',
@@ -33,6 +32,11 @@ export class RegisterGeolocationPageComponent implements OnInit {
     password: '',
     phoneNumber: '',
     paymentId: '',
+    displayText: '',
+    streetNumber: '',
+    city: '',
+    state: '',
+    zip: '',
   };
 
   lat: Number;
@@ -55,9 +59,6 @@ export class RegisterGeolocationPageComponent implements OnInit {
   ngOnInit() {
     this.registerData.lat = this.route.snapshot.paramMap.get('lat');
     this.registerData.lng = this.route.snapshot.paramMap.get('lng');
-    this.registerData.formattedAddress = this.route.snapshot.paramMap.get(
-      'formattedAddress'
-    );
     this.registerData.planId = this.route.snapshot.paramMap.get('planId');
     this.registerData.firstName = this.route.snapshot.paramMap.get('firstName');
     this.registerData.lastName = this.route.snapshot.paramMap.get('lastName');
@@ -66,11 +67,20 @@ export class RegisterGeolocationPageComponent implements OnInit {
     this.registerData.phoneNumber = this.route.snapshot.paramMap.get(
       'phoneNumber'
     );
+    this.registerData.displayText = this.route.snapshot.paramMap.get(
+      'displayText'
+    );
+    this.registerData.streetNumber = this.route.snapshot.paramMap.get(
+      'streetNumber'
+    );
+    this.registerData.city = this.route.snapshot.paramMap.get('city');
+    this.registerData.state = this.route.snapshot.paramMap.get('state');
+    this.registerData.zip = this.route.snapshot.paramMap.get('zip');
     this.registerData.paymentId = this.route.snapshot.paramMap.get('paymentId');
 
     this.lat = Number(this.registerData.lat);
     this.lng = Number(this.registerData.lng);
-    this.formattedAddress = this.registerData.formattedAddress;
+
     this.zoom = 20;
     this.pinMoveAttempts = 1;
     this.infoPopoverVisible = false;
@@ -120,12 +130,12 @@ export class RegisterGeolocationPageComponent implements OnInit {
       address: {
         lat: this.registerData.lat,
         lng: this.registerData.lng,
-        displayText: this.registerData.formattedAddress,
+        displayText: this.registerData.displayText,
       },
-      street_number: '123',
-      city: 'city',
-      state: 'state',
-      zip_code: '99999',
+      street_number: this.registerData.streetNumber,
+      city: this.registerData.city,
+      state: this.registerData.state,
+      zip_code: this.registerData.zip,
       subscription_plan_id: this.registerData.planId,
       payment_id: this.registerData.paymentId,
     };

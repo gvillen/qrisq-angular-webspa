@@ -76,12 +76,9 @@ export class OnboardingPageComponent implements OnInit {
         this.router.navigate([
           '/onboarding/success',
           {
-            services: {
-              wind: data.services.includes('wind'),
-              surge: data.services.includes('surge'),
-            },
             lng: this.lng,
             lat: this.lat,
+            onlyWind: !data.services.includes('surge'),
           },
         ]);
       })

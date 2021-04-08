@@ -27,7 +27,6 @@ export class RegisterPaymentPageComponent implements OnInit {
   registerData = {
     lat: '',
     lng: '',
-    formattedAddress: '',
     planId: '',
     firstName: '',
     lastName: '',
@@ -35,6 +34,11 @@ export class RegisterPaymentPageComponent implements OnInit {
     password: '',
     phoneNumber: '',
     paymentId: '',
+    displayText: '',
+    streetNumber: '',
+    city: '',
+    state: '',
+    zip: '',
   };
 
   public payPalConfig?: IPayPalConfig;
@@ -44,9 +48,6 @@ export class RegisterPaymentPageComponent implements OnInit {
   ngOnInit(): void {
     this.registerData.lat = this.route.snapshot.paramMap.get('lat');
     this.registerData.lng = this.route.snapshot.paramMap.get('lng');
-    this.registerData.formattedAddress = this.route.snapshot.paramMap.get(
-      'formattedAddress'
-    );
     this.registerData.planId = this.route.snapshot.paramMap.get('planId');
     this.registerData.firstName = this.route.snapshot.paramMap.get('firstName');
     this.registerData.lastName = this.route.snapshot.paramMap.get('lastName');
@@ -55,6 +56,16 @@ export class RegisterPaymentPageComponent implements OnInit {
     this.registerData.phoneNumber = this.route.snapshot.paramMap.get(
       'phoneNumber'
     );
+    this.registerData.displayText = this.route.snapshot.paramMap.get(
+      'displayText'
+    );
+    this.registerData.streetNumber = this.route.snapshot.paramMap.get(
+      'streetNumber'
+    );
+    this.registerData.city = this.route.snapshot.paramMap.get('city');
+    this.registerData.state = this.route.snapshot.paramMap.get('state');
+    this.registerData.zip = this.route.snapshot.paramMap.get('zip');
+    console.log(this.registerData);
     this.initConfig();
   }
 
@@ -119,6 +130,7 @@ export class RegisterPaymentPageComponent implements OnInit {
             details
           );
         });
+        this.registerData.paymentId = Guid.create().toString().substring(0, 8);
         this.router.navigate([
           '/register/payment-successful',
           this.registerData,

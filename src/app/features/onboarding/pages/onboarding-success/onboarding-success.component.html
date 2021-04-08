@@ -2,7 +2,9 @@
   <nz-card class="banner">
     <div class="inner-container">
       <h2>Success!</h2>
-      <div *ngIf="onlyWind; then thenBlock; else elseBlock"></div>
+      <div
+        *ngIf="services.wind && !services.surge; then thenBlock; else elseBlock"
+      ></div>
       <ng-template #thenBlock
         ><p>
           We can provide hurricane wind information for the address you

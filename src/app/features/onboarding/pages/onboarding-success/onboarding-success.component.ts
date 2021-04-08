@@ -11,13 +11,14 @@ const { API_URL } = environment;
   styleUrls: ['./onboarding-success.component.css'],
 })
 export class OnboardingSuccessPageComponent implements OnInit {
-  onlyWind = false;
+  services = {
+    wind: false,
+    surge: false,
+  };
 
   lat = '';
 
   lng = '';
-
-  formattedAddress = '';
 
   response: any;
 
@@ -28,12 +29,10 @@ export class OnboardingSuccessPageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.onlyWind = this.route.snapshot.paramMap.get('onlyWind') === 'true';
+    this.services.wind = this.route.snapshot.paramMap.get('wind') == 'true';
+    this.services.surge = this.route.snapshot.paramMap.get('wind') == 'true';
     this.lat = this.route.snapshot.paramMap.get('lat');
     this.lng = this.route.snapshot.paramMap.get('lng');
-    this.formattedAddress = this.route.snapshot.paramMap.get(
-      'formattedAddress'
-    );
     this.loading = true;
 
     const getSubscriptionPlansApiUrl = API_URL + '/subscription-plans';
@@ -54,7 +53,6 @@ export class OnboardingSuccessPageComponent implements OnInit {
   public onRegister(planId) {
     const lat = this.lat;
     const lng = this.lng;
-    const formattedAddress = this.formattedAddress;
-    this.router.navigate(['/register', { lat, lng, formattedAddress, planId }]);
+    this.router.navigate(['/register', { lat, lng, planId }]);
   }
 }
