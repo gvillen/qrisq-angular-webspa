@@ -85,6 +85,21 @@ export class RegisterGeolocationPageComponent implements OnInit {
     this.pinMoveAttempts = 1;
     this.infoPopoverVisible = false;
     this.pinAttemptsModalVisible = false;
+
+    const latlng = new google.maps.LatLng(
+      this.lat.valueOf(),
+      this.lng.valueOf()
+    );
+
+    this.agmGeocoder.geocode({ location: latlng }).subscribe((result) => {
+      if (result.length > 0) {
+        // console.log(result[0].address_components);
+        this.formattedAddress = result[0].formatted_address;
+      } else {
+        this.formattedAddress = 'Reverse Geocoding Failed! Try again!';
+        console.log('Reverse Geocoding Failed!');
+      }
+    });
   }
 
   onDragEnd(event: google.maps.MouseEvent) {
