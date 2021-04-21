@@ -9,11 +9,9 @@ import {
 
 import { Router } from '@angular/router';
 
-import axios from 'axios';
-
 import { environment } from '@env';
-
-const { API_URL } = environment;
+import { IdentityService } from '@app/features/identity/services/IdentityService.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'qrisq-identity-login-page',
@@ -23,7 +21,12 @@ const { API_URL } = environment;
 export class IdentityLoginPageComponent implements OnInit {
   validateForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private identityService: IdentityService,
+    private notification: NzNotificationService
+  ) {}
 
   ngOnInit() {
     this.validateForm = this.fb.group({
@@ -38,22 +41,52 @@ export class IdentityLoginPageComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-      const loginApiUrl = API_URL + '/auth/login';
       const data = {
-        email: this.validateForm.get('username').value,
+        username: this.validateForm.get('username').value,
         password: this.validateForm.get('password').value,
       };
 
-      axios
-        .post(loginApiUrl, data)
-        .then((response) => {
-          console.log(response);
-          console.log(response.data);
-          this.router.navigate(['/home']);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      this.identityService
+        .authenticateUser(data.username, data.password)
+        .subscribe(
+          (response) => {
+            this.router.navigate(['/hurricane-viewer/wind-risk']);
+            this.notification.create('success', 'Login Success', '', {
+              nzPlacement: 'bottomRight',
+            });
+          },
+          (error) => {
+            console.log('error');
+            switch (error.status) {
+              case 401:
+                this.notification.create(
+                  'error',
+                  'Login Failed',
+                  'Username or password invalid',
+                  {
+                    nzPlacement: 'bottomRight',
+                  }
+                );
+                break;
+
+              default:
+                break;
+            }
+          }
+        );
+
+      // const loginApiUrl = API_URL + '/auth/login';
+
+      // axios
+      //   .post(loginApiUrl, data)
+      //   .then((response) => {
+      //     console.log(response);
+      //     console.log(response.data);
+
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
     }
   }
 }

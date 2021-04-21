@@ -24,6 +24,11 @@
     <i nz-icon nzType="down"></i>
   </ng-template>
 
+  <ng-template #submenuTitleUserTpl>
+    Hi, {{ userText }}
+    <i nz-icon nzType="down"></i>
+  </ng-template>
+
   <div class="menu-container">
     <ul nz-menu nzMode="horizontal">
       <li nz-submenu [nzTitle]="submenuTitleStormDataTpl">
@@ -62,24 +67,41 @@
         </ul>
       </li>
 
-      <li nz-submenu [nzTitle]="submenuTitleLoginTpl">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['identity/login']">Login</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['#']">Account</a>
-          </li>
+      <div *ngIf="isUserLogin; then userMenuItem; else loginMenuItem"></div>
+      <ng-template #loginMenuItem
+        ><li nz-submenu [nzTitle]="submenuTitleLoginTpl">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['identity/login']">Login</a>
+            </li>
 
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['#']">Register</a>
-          </li>
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['onboarding']">Register</a>
+            </li>
 
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['contact-us']">Contact Us</a>
-          </li>
-        </ul>
-      </li>
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['contact-us']">Contact Us</a>
+            </li>
+          </ul>
+        </li></ng-template
+      >
+      <ng-template #userMenuItem
+        ><li nz-submenu [nzTitle]="submenuTitleLoginTpl">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['identity/login']">Login</a>
+            </li>
+
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['onboarding']">Register</a>
+            </li>
+
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['contact-us']">Contact Us</a>
+            </li>
+          </ul>
+        </li></ng-template
+      >
     </ul>
   </div>
 </nz-header>

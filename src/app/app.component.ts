@@ -1,3 +1,4 @@
+import { IdentityService } from '@features/identity/services/IdentityService.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Qrisq';
+
+  isUserLogin: boolean;
+
+  userFirstName: string;
+
+  constructor(private identityService: IdentityService) {}
+
+  ngOnInit() {
+    this.isUserLogin = this.identityService.isAuthenticated();
+    this.userFirstName = this.identityService.getUser().firstName;
+  }
 }
