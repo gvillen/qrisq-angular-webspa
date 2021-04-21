@@ -49,14 +49,18 @@ export class IdentityLoginPageComponent implements OnInit {
       this.identityService
         .authenticateUser(data.username, data.password)
         .subscribe(
-          (response) => {
+          (user) => {
             this.router.navigate(['/hurricane-viewer/wind-risk']);
-            this.notification.create('success', 'Login Success', '', {
-              nzPlacement: 'bottomRight',
-            });
+            this.notification.create(
+              'success',
+              'Login Success',
+              'Welcome back ' + user.first_name,
+              {
+                nzPlacement: 'bottomRight',
+              }
+            );
           },
           (error) => {
-            console.log('error');
             switch (error.status) {
               case 401:
                 this.notification.create(

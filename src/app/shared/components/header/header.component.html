@@ -25,7 +25,7 @@
   </ng-template>
 
   <ng-template #submenuTitleUserTpl>
-    Hi, {{ userText }}
+    Hi, {{ userFirstName }}
     <i nz-icon nzType="down"></i>
   </ng-template>
 
@@ -72,7 +72,7 @@
         ><li nz-submenu [nzTitle]="submenuTitleLoginTpl">
           <ul>
             <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['identity/login']">Login</a>
+              <a [routerLink]="['identity/login']">Account Login</a>
             </li>
 
             <li nz-menu-item nzMatchRouter>
@@ -86,18 +86,30 @@
         </li></ng-template
       >
       <ng-template #userMenuItem
-        ><li nz-submenu [nzTitle]="submenuTitleLoginTpl">
+        ><li nz-submenu [nzTitle]="submenuTitleUserTpl">
           <ul>
             <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['identity/login']">Login</a>
+              <a [routerLink]="['hurricane-viewer/wind-risk']">Billing Info</a>
             </li>
 
             <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['onboarding']">Register</a>
+              <a [routerLink]="['hurricane-viewer/wind-risk']"
+                >Contact Information</a
+              >
             </li>
 
             <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['contact-us']">Contact Us</a>
+              <a [routerLink]="['hurricane-viewer/wind-risk']">Contact Us</a>
+            </li>
+
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['hurricane-viewer/wind-risk']"
+                >Cancel Subscription</a
+              >
+            </li>
+
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['hurricane-viewer/wind-risk']">Logout</a>
             </li>
           </ul>
         </li></ng-template

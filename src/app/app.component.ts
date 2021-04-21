@@ -16,7 +16,17 @@ export class AppComponent {
   constructor(private identityService: IdentityService) {}
 
   ngOnInit() {
-    this.isUserLogin = this.identityService.isAuthenticated();
-    this.userFirstName = this.identityService.getUser().firstName;
+    // this.identityService.isAuthenticated();
+    // this.isUserLogin = this.identityService.isAuthenticated();
+    this.identityService.getUser().subscribe((user) => {
+      this.userFirstName = user.first_name;
+      console.log(user);
+      console.log(user.first_name);
+    });
+
+    this.identityService.isUserLogin().subscribe((isUserLogin) => {
+      this.isUserLogin = isUserLogin;
+      console.log(this.isUserLogin);
+    });
   }
 }

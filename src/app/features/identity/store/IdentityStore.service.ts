@@ -12,9 +12,9 @@ export class IdentityStore {
   private _initialState = {
     user: {
       email: '',
-      firstName: '',
+      first_name: '',
       id: 0,
-      lastName: '',
+      last_name: '',
       profile: {
         address: {
           displayText: '',
@@ -22,11 +22,11 @@ export class IdentityStore {
           lng: '',
         } as UserAddress,
         city: '',
-        isPreprocessed: false,
-        phoneNumber: '',
+        is_preprocessed: false,
+        phone_number: '',
         state: '',
-        streetNumber: '',
-        zipCode: '',
+        street_number: '',
+        zip_code: '',
       } as UserProfile,
     } as User,
     accessToken: '',
@@ -34,16 +34,28 @@ export class IdentityStore {
     isAuthenticated: false,
   };
 
-  private _user: User = this._initialState.user;
+  private _user: BehaviorSubject<User> = new BehaviorSubject(
+    this._initialState.user
+  );
+
+  private _isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(
+    this._initialState.isAuthenticated
+  );
+
   private _accessToken: string = this._initialState.accessToken;
   private _refreshToken: string = this._initialState.refreshToken;
-  private _isAuthenticated: boolean = this._initialState.isAuthenticated;
 
-  public get user(): User {
-    return this._user;
+  public get user(): Observable<User> {
+    return new Observable((fn) => this._user.subscribe(fn));
   }
-  public set user(user: User) {
-    this._user = user;
+
+  setUser(user: User) {
+    this._user.next(user);
+    this._isAuthenticated.next(true);
+  }
+
+  public get isAuthenticated(): Observable<boolean> {
+    return new Observable((fn) => this._isAuthenticated.subscribe(fn));
   }
 
   public get accessToken(): string {
@@ -58,12 +70,5 @@ export class IdentityStore {
   }
   public set refreshToken(refreshToken: string) {
     this._refreshToken = refreshToken;
-  }
-
-  public get isAuthenticated(): boolean {
-    return this._isAuthenticated;
-  }
-  public set isAuthenticated(v: boolean) {
-    this._isAuthenticated = v;
   }
 }

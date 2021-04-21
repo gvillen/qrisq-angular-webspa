@@ -1,5 +1,6 @@
 // angular
 import { Component, OnInit } from '@angular/core';
+import { IdentityService } from '@app/features/identity/services/IdentityService.service';
 
 // gzip
 import pako from 'pako';
@@ -19,13 +20,18 @@ export class WindRiskPageComponent implements OnInit {
   lat: number;
   lng: number;
   zoom = 3;
-  windGeoJSON: Object;
-  lineGeoJSON: Object;
-  pointsGeoJSON: Object;
-  polygonGeoJSON: Object;
-  isDataLoaded: Boolean;
+  windGeoJSON: any;
+  lineGeoJSON: any;
+  pointsGeoJSON: any;
+  polygonGeoJSON: any;
+  stormName: string;
+  displayAddress: string;
+  isDataLoaded: boolean;
 
-  constructor(private windService: HurricaneWindService) {}
+  constructor(
+    private windService: HurricaneWindService,
+    private identityService: IdentityService
+  ) {}
 
   ngOnInit() {
     this.lat = Number('42.4113405');
@@ -35,64 +41,20 @@ export class WindRiskPageComponent implements OnInit {
     let line = this.windService.getLineGeoJSON();
     let points = this.windService.getPointsGeoJSON();
     let polygon = this.windService.getPolygonGeoJSON();
-
-    // wind.subscribe((geoJSON) => {
-    //   this.windGeoJSON = geoJSON;
-    //   this.isDataLoaded = true;
-    // });
-
-    forkJoin([wind, line, points, polygon]).subscribe((results) => {
+    let user = forkJoin([wind, line, points, polygon]).subscribe((results) => {
       this.windGeoJSON = results[0];
-      // this.lineGeoJSON = results[1];
-      // this.pointsGeoJSON = results[2];
-      // this.polygonGeoJSON = results[3];
-      this.isDataLoaded = true;
+      this.lineGeoJSON = results[1];
+      this.pointsGeoJSON = results[2];
+      this.polygonGeoJSON = results[3];
+
+      this.stormName = this.pointsGeoJSON.features[0].properties.STORMNAME;
+
+      this.identityService.getUser().subscribe((user) => {
+        console.log(user);
+        this.displayAddress = user.profile.address.displayText;
+        this.isDataLoaded = true;
+      });
     });
-
-    // this.getGeoJSONGzip(windUrl);
-    // this.getGeoJSONGzip(lineUrl);
-    // this.getGeoJSONGzip(pointsUrl);
-    // this.getGeoJSONGzip(polygonUrl);
-
-    // this.getGeoJSON(lineUrl).subscribe({
-    //   next: (geoJSON) => (this.lineGeoJSON = geoJSON),
-    // });
-    // this.getGeoJSON(pointsUrl).subscribe({
-    //   next: (geoJSON) => {
-    //     console.log(geoJSON);
-    //     this.pointsGeoJSON = geoJSON;
-    //   },
-    // });
-    // this.getGeoJSON(polygonUrl).subscribe({
-    //   next: (geoJSON) => (this.polygonGeoJSON = geoJSON),
-    // });
-  }
-
-  getGeoJSON(url) {
-    const geoJSON = new Observable((observer) => {
-      fetch(url)
-        .then(function (response) {
-          return response.blob();
-        })
-        .then((blob) => {
-          var arrayBuffer;
-          var fileReader = new FileReader();
-          var res = {};
-          fileReader.onload = (e) => {
-            arrayBuffer = e.target.result;
-            try {
-              let result: any = pako.inflate(new Uint8Array(arrayBuffer), {
-                to: 'string',
-              });
-              observer.next(JSON.parse(result));
-            } catch (err) {
-              console.log('Error ' + err);
-            }
-          };
-          fileReader.readAsArrayBuffer(blob);
-        });
-    });
-    return geoJSON;
   }
 
   styleFunc(feature) {

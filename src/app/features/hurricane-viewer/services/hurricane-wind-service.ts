@@ -43,7 +43,7 @@ export class HurricaneWindService {
   }
 
   getLineGeoJSON() {
-    const observable = new Observable((observer) => {
+    return new Observable((observer) => {
       this.fetchGeoJSON(HURRICANE_WIND_LINE_URL).subscribe((response) => {
         const data = response.body.arrayBuffer().then((arrayBuffer) => {
           let result: any = pako.inflate(new Uint8Array(arrayBuffer), {
@@ -54,11 +54,10 @@ export class HurricaneWindService {
         });
       });
     });
-    return observable;
   }
 
   getPointsGeoJSON() {
-    const observable = new Observable((observer) => {
+    return new Observable((observer) => {
       this.fetchGeoJSON(HURRICANE_WIND_POINTS_URL).subscribe((response) => {
         response.body.arrayBuffer().then((arrayBuffer) => {
           let result: any = pako.inflate(new Uint8Array(arrayBuffer), {
@@ -74,13 +73,11 @@ export class HurricaneWindService {
             feature.properties.icon = circle;
             return feature;
           });
-          console.log(geoJSON);
           observer.next(geoJSON);
           observer.complete();
         });
       });
     });
-    return observable;
   }
 
   getPolygonGeoJSON() {

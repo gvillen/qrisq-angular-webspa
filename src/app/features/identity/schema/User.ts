@@ -7,17 +7,23 @@ export interface UserAddress {
 export interface UserProfile {
   address: UserAddress;
   city: string;
-  isPreprocessed: boolean;
-  phoneNumber: string;
+  is_preprocessed: boolean;
+  phone_number: string;
   state: string;
-  streetNumber: string;
-  zipCode: string;
+  street_number: string;
+  zip_code: string;
 }
 
 export interface User {
   id: number;
   email: string;
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   profile: UserProfile;
+}
+
+export interface HttpResponseUser {
+  access: string;
+  refresh: string;
+  user_info: User;
 }

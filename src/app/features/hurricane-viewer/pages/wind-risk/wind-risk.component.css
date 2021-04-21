@@ -46,17 +46,21 @@ qrisq-banner p {
   background-position: left top;
 }
 
-/* section-content-1 */
+/* section-storm-data */
 
-.section-content-1 {
+.section-storm {
   width: 100%;
   padding-top: 1%;
   padding-bottom: 4%;
 }
 
-/* col-1 */
-.section-content-1 .col-1 {
+.section-storm .col-1 {
   width: 100%;
+}
+
+.section-storm .col-1 h1,
+.section-storm .col-1 h3 {
+  text-align: center;
 }
 
 /* footer */
