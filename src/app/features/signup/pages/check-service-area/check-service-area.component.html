@@ -28,29 +28,31 @@
           </div>
           <div class="form-wrapper">
             <nz-card class="form" nzBorderless>
-              <input
-                nz-input
-                ngx-google-places-autocomplete
-                #placesRef="ngx-places"
-                nzSize="large"
-                placeholder="Enter your address"
-                (onAddressChange)="onAddressChange($event)"
-                autocomplete="false"
-                (onchange)="onInputChange($event)"
-              />
-              <button
-                (click)="OnSearch()"
-                nz-button
-                nzType="primary"
-                nzSize="large"
-                nzSearch
-                nzDanger
-                nzBlock
-                nzDisable
-                [disabled]="!addressSelected"
-              >
-                Search
-              </button>
+              <form nz-form>
+                <input
+                  nz-input
+                  ngx-google-places-autocomplete
+                  #placesRef="ngx-places"
+                  nzSize="large"
+                  placeholder="Enter your address"
+                  (onAddressChange)="onAddressChange($event)"
+                  autocomplete="false"
+                  (onchange)="onInputChange($event)"
+                />
+                <button
+                  (click)="OnSearch()"
+                  nz-button
+                  nzType="primary"
+                  nzSize="large"
+                  nzSearch
+                  nzDanger
+                  nzBlock
+                  nzDisable
+                  [disabled]="!addressSelected"
+                >
+                  Search
+                </button>
+              </form>
             </nz-card>
           </div>
         </div>
@@ -76,7 +78,7 @@
     </div>
     <!-- divider -->
     <nz-divider></nz-divider>
-    
+
     <!-- footer -->
     <div nz-row class="section-footer">
       <div nz-col nzSpan="8" class="section-footer-ourservices">
@@ -108,20 +110,12 @@
           <form nz-form [nzLayout]="'vertical'">
             <nz-form-item>
               <nz-form-control>
-                <input
-                  nz-input
-                  formControlName="name"
-                  placeholder="Name (Required)"
-                />
+                <input nz-input placeholder="Name (Required)" />
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
               <nz-form-control>
-                <input
-                  nz-input
-                  formControlName="email"
-                  placeholder="Email (Required)"
-                />
+                <input nz-input placeholder="Email (Required)" />
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
@@ -129,7 +123,6 @@
                 <textarea
                   rows="10"
                   nz-input
-                  formControlName="message"
                   placeholder="Message (Required)"
                 ></textarea>
               </nz-form-control>

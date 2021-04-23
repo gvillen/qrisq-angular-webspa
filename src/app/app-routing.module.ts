@@ -3,9 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // components
-import { OnboardingComponent } from '@features/onboarding/onboarding.component';
 import { HomeComponent } from '@features/home/home.component';
-import { RegisterComponent } from '@features/register/register.component';
+import { SignUpComponent } from '@app/features/signup/sign-up.component';
 import { IdentityComponent } from '@features/identity/identity.component';
 import { StormDataComponent } from '@features/storm-data/storm-data.component';
 import { CompanyServicesComponent } from './features/company-services/company-services.component';
@@ -25,12 +24,8 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'onboarding',
-    component: OnboardingComponent,
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
+    path: 'sign-up',
+    component: SignUpComponent,
   },
   {
     path: 'login',

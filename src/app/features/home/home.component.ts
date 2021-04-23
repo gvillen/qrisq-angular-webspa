@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {}
 
   OnSignUp() {
-    console.log('asdasd');
-    this.router.navigate(['/onboarding']);
+    this.router.navigate(['/sign-up']);
   }
 }

@@ -49,8 +49,7 @@ export class WindRiskPageComponent implements OnInit {
 
       this.stormName = this.pointsGeoJSON.features[0].properties.STORMNAME;
 
-      this.identityService.getUser().subscribe((user) => {
-        console.log(user);
+      this.identityService.getUser().subscribe((user) => {        
         this.displayAddress = user.profile.address.displayText;
         this.isDataLoaded = true;
       });
