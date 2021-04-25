@@ -5,6 +5,7 @@ export interface NewUserSubscriptionPlan {
 }
 
 export interface NewUserAddress {
+  formattedAddress?: string;
   displayText?: string;
   streetName?: string;
   streetNumber?: string;

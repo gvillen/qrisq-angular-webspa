@@ -22,8 +22,8 @@
 
   <nz-card class="pricing" nzBorderless>
     <div nz-row [nzGutter]="32">
-      <div nz-col *ngFor="let subscriptionPlan of subscriptionPlans">
-        <ng-container *ngIf="subscriptionPlan.name !== 'Test Plan'">
+      <ng-container *ngIf="subscriptionPlans$ | async as subscriptionPlans">
+        <div nz-col *ngFor="let subscriptionPlan of subscriptionPlans">
           <div class="price-section">
             <h3>${{ subscriptionPlan.price }}</h3>
             <h4>{{ subscriptionPlan.name }}</h4>
@@ -38,8 +38,8 @@
           >
             Register**
           </button>
-        </ng-container>
-      </div>
+        </div>
+      </ng-container>
     </div>
   </nz-card>
   <p class="bottom-text">* Hurricane services are provided Jun 1 - Nov 30</p>
@@ -77,20 +77,12 @@
         <form nz-form [nzLayout]="'vertical'">
           <nz-form-item>
             <nz-form-control>
-              <input
-                nz-input
-                formControlName="name"
-                placeholder="Name (Required)"
-              />
+              <input nz-input placeholder="Name (Required)" />
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
             <nz-form-control>
-              <input
-                nz-input
-                formControlName="email"
-                placeholder="Email (Required)"
-              />
+              <input nz-input placeholder="Email (Required)" />
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
@@ -98,7 +90,6 @@
               <textarea
                 rows="10"
                 nz-input
-                formControlName="message"
                 placeholder="Message (Required)"
               ></textarea>
             </nz-form-control>

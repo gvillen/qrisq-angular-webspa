@@ -12,6 +12,12 @@ import { AgmGeocoder } from '@agm/core';
 import { SignUpService } from '../../service/SignUpService.service';
 import { NewUser } from '../../schema/models';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { SignUp } from '../../store/signup.models';
+import { selectSignUp } from '../../store/signup.selectors';
+import { actionRegisterFormSubmit } from '../../store/signup.actions';
 
 @Component({
   selector: 'qrisq-sign-up-register-page',
@@ -21,17 +27,20 @@ import { Subscription } from 'rxjs';
 export class SignUpRegisterPageComponent implements OnInit {
   validateForm!: FormGroup;
   newUser: NewUser;
-  subscriptions: Subscription[] = [];
+
+  signUp$: Observable<SignUp>;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-
-    private signUpService: SignUpService
+    private signUpService: SignUpService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
+    this.signUp$ = this.store.pipe(select(selectSignUp));
+
     this.validateForm = this.fb.group({
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
@@ -39,32 +48,7 @@ export class SignUpRegisterPageComponent implements OnInit {
       password: [null, [Validators.required, Validators.minLength(8)]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
       phoneNumber: [null, [Validators.required]],
-      streetAddress: [{ value: null, disabled: true }],
-      city: [{ value: null, disabled: true }],
-      state: [{ value: null, disabled: true }],
-      zip: [{ value: null, disabled: true }],
     });
-
-    this.signUpService.getNewUser().subscribe((newUser) => {
-      this.newUser = newUser;
-      const sub$ = this.signUpService
-        .geocodeLocation(this.newUser.lat, this.newUser.lng)
-        .subscribe((address) => {
-          this.validateForm.controls['streetAddress'].setValue(
-            address.streetNumber + ' ' + address.streetName
-          );
-          this.validateForm.controls['city'].setValue(address.city);
-          this.validateForm.controls['state'].setValue(address.state);
-          this.validateForm.controls['zip'].setValue(address.zip);
-          this.newUser.address = address;
-          this.signUpService.setNewUser(this.newUser);
-        });
-      this.subscriptions.push(sub$);
-    });
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach((s) => s.unsubscribe());
   }
 
   submitForm(): void {
@@ -73,13 +57,14 @@ export class SignUpRegisterPageComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.status === 'VALID') {
-      this.newUser.firstName = this.validateForm.get('firstName').value;
-      this.newUser.lastName = this.validateForm.get('lastName').value;
-      this.newUser.email = this.validateForm.get('email').value;
-      this.newUser.password = this.validateForm.get('password').value;
-      this.newUser.phoneNumber = this.validateForm.get('phoneNumber').value;
-      this.signUpService.setNewUser(this.newUser);
-      this.router.navigate(['/sign-up/payment']);
+      const data = {
+        firstName: this.validateForm.get('firstName').value,
+        lastName: this.validateForm.get('lastName').value,
+        email: this.validateForm.get('email').value,
+        password: this.validateForm.get('password').value,
+        phoneNumber: this.validateForm.get('phoneNumber').value,
+      };
+      this.store.dispatch(actionRegisterFormSubmit(data));
     }
   }
 

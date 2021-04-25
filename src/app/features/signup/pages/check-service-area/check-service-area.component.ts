@@ -1,3 +1,4 @@
+import { actionCheckServiceAreaRequest } from './../../store/signup.actions';
 // angular
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,6 +15,9 @@ import { Address } from '../../schema/address';
 import { FormBuilder } from '@angular/forms';
 import { SignUpService } from '../../service/SignUpService.service';
 import { NewUser } from '../../schema/models';
+import { take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { SignUpCheckServiceAreaRequestAction } from '../../store/signup.actions';
 
 const { API_URL } = environment;
 
@@ -25,14 +29,13 @@ const { API_URL } = environment;
 export class SignUpCheckServiceAreaPageComponent implements OnInit {
   lng: number;
   lat: number;
-  formattedAddress: string;
-
   addressSelected = false;
 
   constructor(
     private signUpService: SignUpService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   @ViewChild('placesRef') placesRef: GooglePlaceDirective;
@@ -44,27 +47,30 @@ export class SignUpCheckServiceAreaPageComponent implements OnInit {
   public onAddressChange(address: Address) {
     this.lng = address.geometry.location.lng();
     this.lat = address.geometry.location.lat();
-    this.formattedAddress = address.formatted_address;
     this.addressSelected = true;
   }
 
-  onInputChange(event) {
-    console.log(event);
-  }
-
   public OnSearch() {
-    this.signUpService
-      .checkServiceArea(this.lat, this.lng)
-      .subscribe((response) => {
-        if (response.available) {
-          const newUser: NewUser = {
-            lat: this.lat,
-            lng: this.lng,
-            windServiceOnly: !response.services.includes('surge'),
-          };
-          this.signUpService.setNewUser(newUser);
-          this.router.navigate(['/sign-up/service-area-available']);
-        }
-      });
+    this.store.dispatch(
+      actionCheckServiceAreaRequest({
+        lattitude: this.lat,
+        longitude: this.lng,
+      })
+    );
+
+    // this.signUpService
+    //   .checkServiceArea(this.lat, this.lng)
+    //   .pipe(take(1))
+    //   .subscribe((response) => {
+    //     if (response.available) {
+    //       const newUser: NewUser = {
+    //         lat: this.lat,
+    //         lng: this.lng,
+    //         windServiceOnly: !response.services.includes('surge'),
+    //       };
+    //       this.signUpService.setNewUser(newUser);
+    //       this.router.navigate(['/sign-up/service-area-available']);
+    //     }
+    //   });
   }
 }

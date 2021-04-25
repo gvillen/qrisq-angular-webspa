@@ -15,6 +15,7 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { Guid } from 'guid-typescript';
 import { SignUpService } from '../../service/SignUpService.service';
 import { NewUser } from '../../schema/models';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'qrisq-register-payment-page',
@@ -55,15 +56,18 @@ export class RegisterPaymentPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.initConfig();
-    this.signUpService.getNewUser().subscribe((newUser) => {
-      this.newUser = newUser;
-    });
+    this.signUpService
+      .getNewUser()
+      .pipe(take(1))
+      .subscribe((newUser) => {
+        this.newUser = newUser;
+      });
   }
 
   onCreditCardPaymentSubmit(creditCardInfo) {
     this.newUser.paymentId = Guid.create().toString().substring(0, 8);
     this.signUpService.setNewUser(this.newUser);
-    this.router.navigate(['/register/payment-successful']);
+    this.router.navigate(['/sign-up/payment-successful']);
   }
 
   onPaypalPaymentSubmit() {}

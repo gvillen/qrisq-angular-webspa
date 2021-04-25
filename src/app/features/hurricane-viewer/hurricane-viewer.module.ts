@@ -13,10 +13,11 @@ import { HurricaneViewerComponent } from './hurricane-viewer.component';
 import { HurricaneWindService } from './services/hurricane-wind-service';
 
 // routing
-import { HurricaneViewerRoutingModule } from './hurricane=viewer-routing';
+import { HurricaneViewerRoutingModule } from './hurricane-viewer-routing';
 
 // google maps
 import { AgmCoreModule } from '@agm/core';
+import { GoogleMapsAPIWrapper } from '@agm/core';
 
 // core, design & shared
 import { DesignModule } from '@design/design.module';
@@ -38,8 +39,10 @@ import { SharedModule } from '@shared/shared.module';
     HurricaneViewerRoutingModule,
 
     // google maps
-    AgmCoreModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCWrBf7hkK6LQdlv7ul98DzcyoFdF1OzLM',
+    }),
   ],
-  providers: [HurricaneWindService],
+  providers: [HurricaneWindService, GoogleMapsAPIWrapper],
 })
 export class HurricaneViewerModule {}

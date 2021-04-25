@@ -105,55 +105,65 @@
               </nz-form-control>
             </nz-form-item>
 
-            <h3>Service Address</h3>
+            <ng-container *ngIf="signUp$ | async as signUp">
+              <h3>Service Address</h3>
 
-            <!-- street address -->
-            <nz-form-item>
-              <nz-form-control>
-                <input
-                  nz-input
-                  formControlName="streetAddress"
-                  id="street-address"
-                  placeholder="Street Address"
-                />
-              </nz-form-control>
-            </nz-form-item>
+              <!-- street address -->
+              <nz-form-item>
+                <nz-form-control>
+                  <input
+                    nz-input
+                    id="street-address"
+                    placeholder="Street Address"
+                    [value]="
+                      signUp.addressStreetNumber +
+                      ' ' +
+                      signUp.addressStreetName
+                    "
+                    disabled
+                  />
+                </nz-form-control>
+              </nz-form-item>
 
-            <!-- city -->
-            <nz-form-item>
-              <nz-form-control>
-                <input
-                  nz-input
-                  formControlName="city"
-                  id="city"
-                  placeholder="City"
-                />
-              </nz-form-control>
-            </nz-form-item>
+              <!-- city -->
+              <nz-form-item>
+                <nz-form-control>
+                  <input
+                    nz-input
+                    id="city"
+                    placeholder="City"
+                    [value]="signUp.addressCity"
+                    disabled
+                  />
+                </nz-form-control>
+              </nz-form-item>
 
-            <!-- state -->
-            <nz-form-item>
-              <nz-form-control>
-                <input
-                  nz-input
-                  formControlName="state"
-                  id="state"
-                  placeholder="State"
-                />
-              </nz-form-control>
-            </nz-form-item>
+              <!-- state -->
+              <nz-form-item>
+                <nz-form-control>
+                  <input
+                    nz-input
+                    id="state"
+                    placeholder="State"
+                    [value]="signUp.addressState"
+                    disabled
+                  />
+                </nz-form-control>
+              </nz-form-item>
 
-            <!-- zip -->
-            <nz-form-item>
-              <nz-form-control>
-                <input
-                  nz-input
-                  formControlName="zip"
-                  id="zip"
-                  placeholder="Zip/Postal Code"
-                />
-              </nz-form-control>
-            </nz-form-item>
+              <!-- zip -->
+              <nz-form-item>
+                <nz-form-control>
+                  <input
+                    nz-input
+                    id="zip"
+                    placeholder="Zip/Postal Code"
+                    [value]="signUp.addressZip"
+                    disabled
+                  />
+                </nz-form-control>
+              </nz-form-item>
+            </ng-container>
 
             <button nz-button nzType="primary" nzSize="large" nzDanger nzBlock>
               Continue

@@ -22,15 +22,16 @@
     </div>
 
     <!-- section-content-1 -->
-    <div nz-row class="section-map">
+    <div nz-row class="section-map" nzJustify="center">
       <!-- col-1 -->
       <div nz-col class="col-1" nzSpan="24">
         <div *ngIf="isDataLoaded">
           <agm-map
-            [latitude]="lat"
-            [longitude]="lng"
-            [zoom]="zoom"
-            [mapTypeId]="'satellite'"
+            [latitude]="40"
+            [longitude]="-90"
+            [zoom]="4"
+            [mapTypeId]="'hybrid'"
+            (mapReady)="onMapReady($event)"
           >
             <agm-data-layer
               [geoJson]="windGeoJSON"

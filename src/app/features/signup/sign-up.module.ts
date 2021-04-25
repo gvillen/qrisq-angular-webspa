@@ -1,3 +1,4 @@
+import { SignUpEffects } from './store/signup.effects';
 // angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,7 +31,7 @@ import { RegisterAccountCreatedPageComponent } from './pages/account-created/acc
 import { RegisterGeolocationPageComponent } from './pages/geolocation/geolocation.component';
 
 // services
-import { SignUpService } from './service/SignUpService.service';
+import { SignUpService } from './service/signup.service';
 
 // store
 import { SignUpStore } from './store/SignUpStore.service';
@@ -44,6 +45,9 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 // angular-credit-cards
 import { CreditCardDirectivesModule } from 'angular-cc-library';
+
+// store
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -90,6 +94,9 @@ import { CreditCardDirectivesModule } from 'angular-cc-library';
 
     // angular-cc-library
     CreditCardDirectivesModule,
+
+    // ngrx
+    EffectsModule.forFeature([SignUpEffects]),
   ],
   exports: [SignUpComponent],
   providers: [SignUpService, SignUpStore],

@@ -5,7 +5,15 @@ import axios from 'axios';
 import { environment } from '@env';
 import { SignUpService } from '../../service/SignUpService.service';
 import { NewUser } from '../../schema/models';
-
+import { take } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
+import {
+  actionFetchSubscriptionPlanListRequest,
+  actionRegisterStart,
+} from '../../store/signup.actions';
+import { Observable } from 'rxjs';
+import { SubscriptionPlan } from '../../store/signup.models';
+import { selectSubscriptionPlans } from '../../store/signup.selectors';
 const { API_URL } = environment;
 
 @Component({
@@ -14,38 +22,24 @@ const { API_URL } = environment;
   styleUrls: ['./service-area-available.component.css'],
 })
 export class SignUpServiceAreaAvailablePageComponent implements OnInit {
-  loading = false;
-  subscriptionPlans: Array<NewUserSubscriptionPlan>;
+  loading: boolean;
+  subscriptionPlans$: Observable<SubscriptionPlan[]>;
   newUser: NewUser;
   windServiceOnly: boolean;
 
   constructor(
     private signUpService: SignUpService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   ngOnInit() {
-    this.signUpService.getNewUser().subscribe((newUser) => {
-      this.newUser = newUser;
-      this.windServiceOnly = newUser.windServiceOnly;
-    });
-
-    this.loading = true;
-
-    this.signUpService
-      .fetchSubscriptionPlans()
-      .subscribe((subscriptionPlans) => {
-        this.subscriptionPlans = subscriptionPlans;
-        this.loading = false;
-      });
+    this.subscriptionPlans$ = this.store.pipe(select(selectSubscriptionPlans));
+    this.store.dispatch(actionFetchSubscriptionPlanListRequest());
   }
 
-  public onRegister(planId) {
-    this.newUser.subscriptionPlan = this.subscriptionPlans.find(
-      (sp) => sp.id === planId
-    );
-    this.signUpService.setNewUser(this.newUser);
-    this.router.navigate(['/sign-up/register']);
+  public onRegister(planId: number) {
+    this.store.dispatch(actionRegisterStart({ subscriptionPlanId: planId }));
   }
 }
