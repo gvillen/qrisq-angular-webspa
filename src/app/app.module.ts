@@ -24,6 +24,7 @@ import { StormDataModule } from '@features/storm-data/storm-data.module';
 import { RegisterModule } from '@features/register/register.module';
 import { IdentityModule } from '@features/identity/identity.module';
 import { CompanyServicesModule } from '@features/company-services/company-services.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(en);
 
@@ -52,6 +53,8 @@ registerLocaleData(en);
 
     // routing
     AppRoutingModule,
+
+    NgbModule,
   ],
   bootstrap: [AppComponent],
 })
