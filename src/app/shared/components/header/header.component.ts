@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'qrisq-header',
@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   public isMenuCollapsed = true;
+  @Input() isUserLogin: boolean;
+
+  @Input() userFirstName: string;
+
   constructor() {}
   ngOnInit() {}
 }

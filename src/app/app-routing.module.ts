@@ -9,6 +9,7 @@ import { RegisterComponent } from '@features/register/register.component';
 import { IdentityComponent } from '@features/identity/identity.component';
 import { StormDataComponent } from '@features/storm-data/storm-data.component';
 import { CompanyServicesComponent } from './features/company-services/company-services.component';
+import { HurricaneViewerComponent } from './features/hurricane-viewer/hurricane-viewer.component';
 
 // guard
 import { NoAuthGuard } from '@core/guard/no-auth.guard';
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: 'services',
     component: CompanyServicesComponent,
+  },
+  {
+    path: 'hurricane-viewer',
+    component: HurricaneViewerComponent,
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' },

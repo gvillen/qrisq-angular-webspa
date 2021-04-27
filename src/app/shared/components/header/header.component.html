@@ -23,6 +23,12 @@
     Login
     <i nz-icon nzType="down"></i>
   </ng-template>
+
+  <ng-template #submenuTitleUserTpl>
+    Hi, {{ userFirstName }}
+    <i nz-icon nzType="down"></i>
+  </ng-template>
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation" (click)="isMenuCollapsed = !isMenuCollapsed">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -64,24 +70,53 @@
         </ul>
       </li>
 
-      <li nz-submenu [nzTitle]="submenuTitleLoginTpl">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['identity/login']">Login</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['#']">Account</a>
-          </li>
+      <div *ngIf="isUserLogin; then userMenuItem; else loginMenuItem"></div>
+      <ng-template #loginMenuItem
+        ><li nz-submenu [nzTitle]="submenuTitleLoginTpl">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['identity/login']">Account Login</a>
+            </li>
 
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['#']">Register</a>
-          </li>
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['onboarding']">Register</a>
+            </li>
 
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['contact-us']">Contact Us</a>
-          </li>
-        </ul>
-      </li>
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['contact-us']">Contact Us</a>
+            </li>
+          </ul>
+        </li></ng-template
+      >
+      <ng-template #userMenuItem
+        ><li nz-submenu [nzTitle]="submenuTitleUserTpl">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['hurricane-viewer/wind-risk']">Billing Info</a>
+            </li>
+
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['hurricane-viewer/wind-risk']"
+                >Contact Information</a
+              >
+            </li>
+
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['hurricane-viewer/wind-risk']">Contact Us</a>
+            </li>
+
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['hurricane-viewer/wind-risk']"
+                >Cancel Subscription</a
+              >
+            </li>
+
+            <li nz-menu-item nzMatchRouter>
+              <a [routerLink]="['hurricane-viewer/wind-risk']">Logout</a>
+            </li>
+          </ul>
+        </li></ng-template
+      >
     </ul>
   </div>
 </nz-header>

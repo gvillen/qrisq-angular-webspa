@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { IdentityComponent } from './identity.component';
 
@@ -16,6 +17,7 @@ import { IdentityRoutingModule } from './identity-routing.module';
 
 // pages
 import { IdentityLoginPageComponent } from './pages/login/login.component';
+import { IdentityService } from './services/IdentityService.service';
 
 @NgModule({
   declarations: [IdentityComponent, IdentityLoginPageComponent],
@@ -23,6 +25,7 @@ import { IdentityLoginPageComponent } from './pages/login/login.component';
     // angular
     CommonModule,
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
 
@@ -34,5 +37,6 @@ import { IdentityLoginPageComponent } from './pages/login/login.component';
     // routing
     IdentityRoutingModule,
   ],
+  providers: [IdentityService],
 })
 export class IdentityModule {}

@@ -11,7 +11,6 @@ export class RegisterPaymentSuccessfulPageComponent implements OnInit {
   registerData = {
     lat: '',
     lng: '',
-    formattedAddress: '',
     planId: '',
     firstName: '',
     lastName: '',
@@ -19,6 +18,11 @@ export class RegisterPaymentSuccessfulPageComponent implements OnInit {
     password: '',
     phoneNumber: '',
     paymentId: '',
+    displayText: '',
+    streetNumber: '',
+    city: '',
+    state: '',
+    zip: '',
   };
 
   constructor(private route: ActivatedRoute, private router: Router) {}
@@ -26,9 +30,6 @@ export class RegisterPaymentSuccessfulPageComponent implements OnInit {
   ngOnInit() {
     this.registerData.lat = this.route.snapshot.paramMap.get('lat');
     this.registerData.lng = this.route.snapshot.paramMap.get('lng');
-    this.registerData.formattedAddress = this.route.snapshot.paramMap.get(
-      'formattedAddress'
-    );
     this.registerData.planId = this.route.snapshot.paramMap.get('planId');
     this.registerData.firstName = this.route.snapshot.paramMap.get('firstName');
     this.registerData.lastName = this.route.snapshot.paramMap.get('lastName');
@@ -37,6 +38,15 @@ export class RegisterPaymentSuccessfulPageComponent implements OnInit {
     this.registerData.phoneNumber = this.route.snapshot.paramMap.get(
       'phoneNumber'
     );
+    this.registerData.displayText = this.route.snapshot.paramMap.get(
+      'displayText'
+    );
+    this.registerData.streetNumber = this.route.snapshot.paramMap.get(
+      'streetNumber'
+    );
+    this.registerData.city = this.route.snapshot.paramMap.get('city');
+    this.registerData.state = this.route.snapshot.paramMap.get('state');
+    this.registerData.zip = this.route.snapshot.paramMap.get('zip');
     this.registerData.paymentId = this.route.snapshot.paramMap.get('paymentId');
   }
 

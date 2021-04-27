@@ -1,0 +1,129 @@
+<div class="main-container">
+  <!-- banner -->
+
+  <qrisq-banner [imageUrl]="'/assets/images/main-background.jpg'">
+    <div class="banner-content">
+      <h1>Q-risq Hurricane Viewer</h1>
+      <p>
+        Use the map below to see the latest storm advisory<br />
+        for your service address.
+      </p>
+    </div>
+  </qrisq-banner>
+
+  <div class="page-content">
+    <!-- section-content-1 -->
+    <div nz-row class="section-storm" nzJustify="center">
+      <!-- col-1 -->
+      <div nz-col class="col-1" nzSpan="12">
+        <h1>{{ stormName }}</h1>
+        <h3>Expected at {{ displayAddress }}</h3>
+      </div>
+    </div>
+
+    <!-- section-content-1 -->
+    <div nz-row class="section-map">
+      <!-- col-1 -->
+      <div nz-col class="col-1" nzSpan="24">
+        <div *ngIf="isDataLoaded">
+          <agm-map
+            [latitude]="lat"
+            [longitude]="lng"
+            [zoom]="zoom"
+            [mapTypeId]="'satellite'"
+          >
+            <agm-data-layer
+              [geoJson]="windGeoJSON"
+              [style]="styleFunc"
+            ></agm-data-layer>
+
+            <agm-data-layer
+              [geoJson]="lineGeoJSON"
+              [style]="styleFunc"
+            ></agm-data-layer>
+
+            <agm-data-layer
+              [geoJson]="pointsGeoJSON"
+              [style]="styleFunc"
+            ></agm-data-layer>
+
+            <agm-data-layer
+              [geoJson]="polygonGeoJSON"
+              [style]="styleFunc"
+            ></agm-data-layer>
+          </agm-map>
+        </div>
+      </div>
+
+      <nz-divider></nz-divider>
+
+      <!-- footer -->
+      <div nz-row class="section-footer">
+        <div nz-col nzSpan="16" class="section-footer-trackstorm">
+          <h3><strong>Track Storm Activities</strong></h3>
+          <img nz-image nzSrc="/assets/images/ourservice-botton.jpg" alt="" />
+          <p>
+            Stay current on storm activity with the National Hurricane Center’s
+            up-to-date weather information for tropical storms and hurricanes.
+          </p>
+          <button nz-button nzType="primary" nzSize="large" nzDanger nzBlock>
+            Visit the National Hurricane Center
+          </button>
+        </div>
+
+        <div nz-col nzSpan="8" class="section-footer-messageform">
+          <h3><strong>Send us a message</strong></h3>
+          <div class="form-container">
+            <form nz-form [nzLayout]="'vertical'">
+              <nz-form-item>
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="name"
+                    placeholder="Name (Required)"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item>
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="email"
+                    placeholder="Email (Required)"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item>
+                <nz-form-control>
+                  <textarea
+                    rows="10"
+                    nz-input
+                    formControlName="message"
+                    placeholder="Message (Required)"
+                  ></textarea>
+                </nz-form-control>
+              </nz-form-item>
+
+              <button
+                nz-button
+                nzBlock
+                nzType="primary"
+                nzDanger
+                nzSize="large"
+              >
+                Submit
+              </button>
+
+              <p>
+                *Please excuse slower than normal response time during a storm
+                event.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

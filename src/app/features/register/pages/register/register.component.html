@@ -109,12 +109,48 @@
 
             <!-- street address -->
             <nz-form-item>
-              <nz-form-control nzErrorTip="Please input your service address!">
+              <nz-form-control>
                 <input
                   nz-input
-                  formControlName="serviceAddress"
-                  id="serviceAddress"
-                  placeholder="Service Address"
+                  formControlName="streetAddress"
+                  id="street-address"
+                  placeholder="Street Address"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <!-- city -->
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="city"
+                  id="city"
+                  placeholder="City"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <!-- state -->
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="state"
+                  id="state"
+                  placeholder="State"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <!-- zip -->
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  nz-input
+                  formControlName="zip"
+                  id="zip"
+                  placeholder="Zip/Postal Code"
                 />
               </nz-form-control>
             </nz-form-item>

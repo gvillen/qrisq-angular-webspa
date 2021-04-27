@@ -1,5 +1,8 @@
 <qrisq-layout>
-  <qrisq-header></qrisq-header>
+  <qrisq-header
+    [isUserLogin]="isUserLogin"
+    [userFirstName]="userFirstName"
+  ></qrisq-header>
   <qrisq-content>
     <router-outlet></router-outlet>
   </qrisq-content>

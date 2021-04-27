@@ -21,6 +21,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import { CreditCardOutline } from '@ant-design/icons-angular/icons';
 import { InfoCircleOutline } from '@ant-design/icons-angular/icons';
@@ -53,6 +54,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
     NzPopconfirmModule,
     NzPopoverModule,
     NzModalModule,
+    NzNotificationModule,
   ],
   imports: [NzIconModule.forRoot(icons)],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

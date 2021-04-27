@@ -25,6 +25,7 @@ import { RegisterModule } from '@features/register/register.module';
 import { IdentityModule } from '@features/identity/identity.module';
 import { CompanyServicesModule } from '@features/company-services/company-services.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HurricaneViewerModule } from './features/hurricane-viewer/hurricane-viewer.module';
 
 registerLocaleData(en);
 
@@ -46,6 +47,7 @@ registerLocaleData(en);
     StormDataModule,
     IdentityModule,
     CompanyServicesModule,
+    HurricaneViewerModule,
 
     // angular
     BrowserModule,
