@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 
 // design
-import { DesignModule } from '@design/design.module';
+import { DesignModule } from '@app/design/design.module';
 import { CompanyWidgetGroupComponent } from './components/company-widget-group/company-widget-group.component';
 
 // guard
@@ -13,21 +13,19 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 // store
-import { reducers } from './store/core.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@env';
+import { reducers } from './store/core.state';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { IdentityEffects } from '@app/features/identity/store/identity.effects';
 
 @NgModule({
   declarations: [CompanyWidgetGroupComponent],
   imports: [
-    DesignModule,
+    DesignModule, // ngrx
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([]),
-    // Instrumentation must be imported after importing StoreModule (config is optional)
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
+    StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot([IdentityEffects]),
   ],
   exports: [CompanyWidgetGroupComponent],
   providers: [NoAuthGuard],

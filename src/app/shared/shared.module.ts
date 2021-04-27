@@ -1,33 +1,16 @@
 // angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-
-// design
-import { DesignModule } from '@design/design.module';
-
-// components
-import { HeaderComponent } from './components/header/header.component';
-import { LayoutComponent } from './components/layout/layout.component';
-import { ContentComponent } from './components/content/content.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { DesignModule } from '@app/design/design.module';
 import { BannerComponent } from './components/banner/banner.component';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    LayoutComponent,
-    ContentComponent,
-    FooterComponent,
-    BannerComponent,
+  imports: [
+    // angular
+    CommonModule,
+    DesignModule,
   ],
-  imports: [CommonModule, DesignModule, RouterModule],
-  exports: [
-    HeaderComponent,
-    LayoutComponent,
-    ContentComponent,
-    FooterComponent,
-    BannerComponent,
-  ],
+  declarations: [BannerComponent],
+  exports: [BannerComponent],
 })
 export class SharedModule {}

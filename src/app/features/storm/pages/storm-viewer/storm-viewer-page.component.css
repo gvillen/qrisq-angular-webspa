@@ -1,0 +1,172 @@
+/* main-container */
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #fff;
+}
+
+/* qrisq-banner */
+
+qrisq-banner .banner-content {
+  padding-right: 50%;
+}
+
+qrisq-banner h1 {
+  color: #fff;
+  font-size: 4rem;
+  font-family: Oswald, Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+qrisq-banner p {
+  color: #fff;
+  font-size: 1.4rem;
+  font-family: Rubik, Arial, Helvetica, sans-serif;
+}
+
+/* page-content */
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 92%;
+  margin: auto;
+  padding-bottom: 1%;
+  background-size: contain;
+  background-image: url('/assets/images/bg-graph.png') !important;
+  background-repeat: no-repeat;
+  background-position: left top;
+}
+
+/****** storm-data ******/
+
+.storm-data {
+  width: 100%;
+  text-align: center;
+}
+
+.storm-data .storm-name {
+  font-size: 1.8rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+.storm-data .storm-name img {
+  height: 1.8rem;
+  margin-right: 8px;
+}
+
+.storm-data .user-address {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-left: 8px;
+}
+
+.storm-data .user-address i {
+  font-size: 1.4rem;
+  margin-left: 4px;
+}
+
+.storm-data .max-winds {
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.storm-data .max-winds .desc {
+  font-size: 2rem;
+  text-decoration: underline;
+}
+
+.storm-data .max-winds .speed {
+  font-size: 1.5rem;
+}
+
+.storm-data .advisory-date {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* section-storm-data */
+
+.section-storm {
+  width: 100%;
+  padding-top: 1%;
+  padding-bottom: 4%;
+}
+
+.section-storm .col-1 {
+  width: 100%;
+}
+
+.section-storm .col-1 h1,
+.section-storm .col-1 h3 {
+  text-align: center;
+}
+
+/* footer */
+
+.section-footer {
+  width: 100%;
+  padding-top: 65px;
+  margin-top: -24px;
+}
+
+.section-footer-trackstorm h3,
+.section-footer-messageform h3 {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  color: #2f5597;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.section-footer-trackstorm img {
+  max-width: 100%;
+  height: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.section-footer-trackstorm p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  font-weight: 450;
+}
+
+.section-footer-trackstorm button,
+.section-footer-messageform button {
+  font-weight: 500;
+}
+
+.section-footer-trackstorm,
+.section-footer-messageform {
+  padding: 0px 24px;
+}
+
+.section-footer-messageform .form-container {
+  background-color: #ebebeb;
+  padding: 1.5em;
+}
+
+.section-footer-messageform .form-container button {
+  margin-bottom: 20px;
+}
+
+nz-divider {
+  border-top: 2px solid #000;
+}
+
+/* agm-map */
+agm-map {
+  height: 800px;
+  width: 800px;
+}

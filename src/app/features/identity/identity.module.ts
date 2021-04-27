@@ -5,22 +5,39 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { IdentityComponent } from './identity.component';
+import { QrIdentityComponent } from './identity.component';
 
 // core, design & shared
 import { CoreModule } from '@core/core.module';
-import { DesignModule } from '@design/design.module';
+import { DesignModule } from '@app/design/design.module';
 import { SharedModule } from '@shared/shared.module';
 
 // routing
-import { IdentityRoutingModule } from './identity-routing.module';
+import { QrIdentityRoutingModule } from './identity-routing.module';
 
 // pages
-import { IdentityLoginPageComponent } from './pages/login/login.component';
-import { IdentityService } from './services/IdentityService.service';
+
+import { QrIdentityService } from './services/identity.service';
+import { QrCheckServiceAreaPageComponent } from './pages/check-service-area/check-service-area.component';
+import { PaymentFormCardComponent } from './components/payment-form-card/payment-form-card.component';
+import { PaymentFormPaypalComponent } from './components/payment-form-paypal/payment-form-paypal.component';
+import { GeolocationStreetViewComponent } from './components/geolocation-street-view/geolocation-street-view.component';
+import { AgmCoreModule } from '@agm/core';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { CreditCardDirectivesModule } from 'angular-cc-library';
+import { EffectsModule } from '@ngrx/effects';
+import { IdentityEffects } from './store/identity.effects';
+import { QrCheckServiceAreaComponentStore } from './pages/check-service-area/check-service-area.component-store';
 
 @NgModule({
-  declarations: [IdentityComponent, IdentityLoginPageComponent],
+  declarations: [
+    QrIdentityComponent,
+    QrCheckServiceAreaPageComponent,
+    GeolocationStreetViewComponent,
+    PaymentFormCardComponent,
+    PaymentFormPaypalComponent,
+  ],
   imports: [
     // angular
     CommonModule,
@@ -29,14 +46,29 @@ import { IdentityService } from './services/IdentityService.service';
     FormsModule,
     ReactiveFormsModule,
 
-    // core, design & shared
+    // modules
     CoreModule,
     DesignModule,
     SharedModule,
 
     // routing
-    IdentityRoutingModule,
+    QrIdentityRoutingModule,
+
+    // angular google maps
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCWrBf7hkK6LQdlv7ul98DzcyoFdF1OzLM',
+    }),
+    GooglePlaceModule,
+
+    // paypal
+    NgxPayPalModule,
+
+    // angular-cc-library
+    CreditCardDirectivesModule,
+
+    // ngrx
+    EffectsModule.forFeature([IdentityEffects]),
   ],
-  providers: [IdentityService],
+  providers: [QrIdentityService, QrCheckServiceAreaComponentStore],
 })
-export class IdentityModule {}
+export class QrIdentityModule {}

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-identity',
+  selector: 'qr-identity',
   templateUrl: './identity.component.html',
 })
-export class IdentityComponent implements OnInit {
+export class QrIdentityComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 }

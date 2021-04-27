@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // design, core and shared
-import { DesignModule } from '@design/design.module';
+import { DesignModule } from '@app/design/design.module';
 import { SharedModule } from '@shared/shared.module';
 import { CoreModule } from '@core/core.module';
 
@@ -12,7 +12,7 @@ import { StormDataComponent } from './storm-data.component';
 
 // pages
 import { StormDataFaqPageComponent } from './pages/faq-page/faq-page.component';
-import { StormDataHistoricalPageComponent } from './pages/historical-page/historical-page.component';
+import { StormDataHistoricalPageComponent } from '../../pages/storm-data/historical-page/historical-page.component';
 import { StormDataHindcastPageComponent } from './pages/hindcast-page/hindcast-page.component';
 import { StormDataForecastPageComponent } from './pages/forecast-page/forecast-page.component';
 

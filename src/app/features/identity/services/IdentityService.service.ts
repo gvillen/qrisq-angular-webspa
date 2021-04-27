@@ -7,8 +7,8 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '@env';
-import { HttpResponseUser, User } from '../schema/User';
-import { IdentityStore } from '../store/IdentityStore.service';
+import { HttpResponseUser, User } from '../models/identity.models';
+import { Store } from '@ngrx/store';
 
 const { API_URL } = environment;
 
@@ -16,7 +16,7 @@ const { API_URL } = environment;
   providedIn: 'root',
 })
 export class IdentityService {
-  constructor(private http: HttpClient, private store: IdentityStore) {}
+  constructor(private http: HttpClient, private store: Store) {}
 
   authenticateUser(username: string, password: string): Observable<User> {
     return new Observable((observer) => {
@@ -50,7 +50,7 @@ export class IdentityService {
             // this.store.refreshToken = refresh;
             console.log(response);
             console.log(response.user_info);
-            this.store.setUser(response.user_info);
+            // this.store.setUser(response.user_info);
             observer.next(response.user_info);
           },
           (error) => {
@@ -58,13 +58,5 @@ export class IdentityService {
           }
         );
     });
-  }
-
-  getUser(): Observable<User> {
-    return this.store.user;
-  }
-
-  isUserLogin(): Observable<boolean> {
-    return this.store.isAuthenticated;
   }
 }

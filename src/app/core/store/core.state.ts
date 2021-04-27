@@ -1,17 +1,17 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { Params } from '@angular/router';
-import { signUpReducer } from '@features/signup/store/signup.reducer';
-import { SignUpState } from '@app/features/signup/store/signup.state';
+
+import { StormReducer } from '@app/features/storm/store/storm.reducer';
+import { HurricaneViewerState } from '@app/features/storm/store/storm.state';
+import { IdentityState } from '@app/features/identity/store/identity.models';
+import { IdentityReducer } from '@app/features/identity/store/identity.reducer';
 
 export const reducers: ActionReducerMap<RootState> = {
-  signup: signUpReducer,
+  identity: IdentityReducer,
+  storm: StormReducer,
   router: routerReducer,
 };
-
-export interface RootState {
-  signup: SignUpState;
-}
 
 export interface RouterStateUrl {
   url: string;
@@ -20,6 +20,7 @@ export interface RouterStateUrl {
 }
 
 export interface RootState {
-  signup: SignUpState;
+  identity: IdentityState;
+  storm: HurricaneViewerState;
   router: RouterReducerState<RouterStateUrl>;
 }

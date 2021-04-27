@@ -1,7 +1,7 @@
 // angular
 import { NgModule } from '@angular/core';
 
-// components
+// ng-zorro
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzImageModule } from 'ng-zorro-antd/image';
@@ -22,20 +22,18 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 import { CreditCardOutline } from '@ant-design/icons-angular/icons';
 import { InfoCircleOutline } from '@ant-design/icons-angular/icons';
-
 const icons: IconDefinition[] = [CreditCardOutline, InfoCircleOutline];
 
-// providers
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
-
-// constants
 import { en_US } from 'ng-zorro-antd/i18n';
 
 @NgModule({
   exports: [
+    // ng-zorro
     NzLayoutModule,
     NzButtonModule,
     NzImageModule,
@@ -55,6 +53,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
     NzPopoverModule,
     NzModalModule,
     NzNotificationModule,
+    NzSkeletonModule,
   ],
   imports: [NzIconModule.forRoot(icons)],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

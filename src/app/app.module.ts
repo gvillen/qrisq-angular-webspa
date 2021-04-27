@@ -5,53 +5,64 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 
-// app
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-// modules
-import { CoreModule } from '@core/core.module';
-import { DesignModule } from '@design/design.module';
-import { SharedModule } from '@shared/shared.module';
-
-// maps
+// google maps
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
-// features
-import { HomeModule } from '@features/home/home.module';
-import { StormDataModule } from '@features/storm-data/storm-data.module';
-import { SignUpModule } from '@app/features/signup/sign-up.module';
-import { IdentityModule } from '@features/identity/identity.module';
-import { CompanyServicesModule } from '@features/company-services/company-services.module';
-import { HurricaneViewerModule } from './features/hurricane-viewer/hurricane-viewer.module';
+// qrisq
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from '@core/core.module';
+import { DesignModule } from '@app/design/design.module';
+import { SharedModule } from '@shared/shared.module';
+
+import { AppComponent } from './app.component';
+import { AppLayoutComponent } from './components/layout/layout.component';
+import { AppHeaderComponent } from './components/header/header.component';
+import { AppContentComponent } from './components/content/content.component';
+import { AppFooterComponent } from './components/footer/footer.component';
+
+import { QrHistoricalPageComponent } from './pages/storm-data/historical-page/historical-page.component';
+import { QrFaqPageComponent } from './pages/storm-data/faq-page/faq-page.component';
+import { QrForecastPageComponent } from './pages/storm-data/forecast-page/forecast-page.component';
+import { QrHomeownersPageComponent } from './pages/services/homeowners-page/homeowners-page.component';
+import { QrGovernmentPageComponent } from './pages/services/government-page/government.component';
+import { QrInsurancePageComponent } from './pages/services/insurance-page/insurance-page.component';
+import { QrHindcastPageComponent } from './pages/storm-data/hindcast-page/hindcast-page.component';
+import { QrIdentityModule } from './features/identity/identity.module';
+import { QrHomePageComponent } from './pages/home-page/home-page.component';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    AppLayoutComponent,
+    AppHeaderComponent,
+    AppContentComponent,
+    AppFooterComponent,
+    QrHomePageComponent,
+    QrHomeownersPageComponent,
+    QrGovernmentPageComponent,
+    QrHomeownersPageComponent,
+    QrInsurancePageComponent,
+    QrFaqPageComponent,
+    QrForecastPageComponent,
+    QrHindcastPageComponent,
+    QrHistoricalPageComponent,
+  ],
   imports: [
-    // core, shared & design
-    CoreModule,
-    SharedModule,
-    DesignModule,
-
-    // maps
-    GooglePlaceModule,
-
-    // features
-    HomeModule,
-    SignUpModule,
-    StormDataModule,
-    IdentityModule,
-    CompanyServicesModule,
-    HurricaneViewerModule,
-
     // angular
     BrowserModule,
     BrowserAnimationsModule,
 
-    // routing
+    // third-party
+    GooglePlaceModule,
+
     AppRoutingModule,
+    // qrisq
+    CoreModule,
+    DesignModule,
+    SharedModule,
+    QrIdentityModule,
   ],
   bootstrap: [AppComponent],
 })

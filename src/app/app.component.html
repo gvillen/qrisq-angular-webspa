@@ -1,10 +1,6 @@
-<qrisq-layout>
-  <qrisq-header
-    [isUserLogin]="isUserLogin"
-    [userFirstName]="userFirstName"
-  ></qrisq-header>
-  <qrisq-content>
+<app-layout class="main-layout">
+  <app-header></app-header>
+  <app-content>
     <router-outlet></router-outlet>
-  </qrisq-content>
-  <qrisq-footer></qrisq-footer>
-</qrisq-layout>
+  </app-content>
+</app-layout>

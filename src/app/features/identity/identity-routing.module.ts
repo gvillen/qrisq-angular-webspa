@@ -2,22 +2,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// pages
-import { IdentityLoginPageComponent } from './pages/login/login.component';
+// component
+import { QrIdentityComponent } from './identity.component';
+import { QrCheckServiceAreaPageComponent } from './pages/check-service-area/check-service-area.component';
 
 export const routes: Routes = [
   {
-    path: 'identity/login',
-    component: IdentityLoginPageComponent,
+    path: 'identity',
+    component: QrIdentityComponent,
+  },
+  {
+    path: 'identity/check-service-area',
+    component: QrCheckServiceAreaPageComponent,
   },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      scrollPositionRestoration: 'enabled',
-    }),
-  ],
+  declarations: [],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class IdentityRoutingModule {}
+export class QrIdentityRoutingModule {}

@@ -1,0 +1,172 @@
+<div class="main-container">
+  <!-- banner -->
+
+  <qrisq-banner [imageUrl]="'/assets/images/main-background.jpg'">
+    <div class="banner-content">
+      <h1>Q-risq Hurricane Viewer</h1>
+      <p>
+        Use the map below to see the latest storm advisory<br />
+        for your service address.
+      </p>
+    </div>
+  </qrisq-banner>
+
+  <div class="page-content">
+    <div class="storm-data">
+      <div nz-row nzJustify="center">
+        <div nz-col nzSpan="12">
+          <ng-container
+            *ngIf="stormData$ | async as stormData; else loadingStormData"
+          >
+            <h3 class="storm-name">
+              <span
+                ><img nz-image nzSrc="/assets/images/icon-triangle-green.png"
+              /></span>
+              {{ stormData.stormName }}
+            </h3>
+            <h4 class="user-address">
+              Expected at {{ stormData.address }}
+              <span>
+                <i
+                  nz-icon
+                  [style]="{
+                    color: windRiskCategories[stormData.windRisk].colorHex
+                  }"
+                >
+                  <svg viewBox="0 0 512 512.01067">
+                    <path
+                      d="m503.898438 231.476562-236.800782-226.984374c-6.1875-5.976563-16-5.976563-22.1875 0l-237.011718 227.199218c-5.121094 4.90625-7.89453175 11.945313-7.89453175 18.984375 0 14.722657 11.94921875 26.667969 26.66796875 26.667969h37.332031v192c0 23.46875 19.203125 42.667969 42.667969 42.667969h298.667969c23.464844 0 42.664062-19.199219 42.664062-42.667969v-192h37.335938c14.71875 0 26.664062-11.945312 26.664062-26.667969 0-7.039062-2.773437-14.078125-8.105468-19.199219zm0 0"
+                      (fill)="(windRiskCategories[stormData.windRisk].colorHex)"
+                    />
+                    <path
+                      d="m400.003906 512.011719h-288c-26.472656 0-48-21.527344-48-48v-186.667969h-37.332031c-14.699219 0-26.66796875-11.96875-26.66796875-26.667969 0-7.058593 2.88281275-13.972656 7.89453175-18.984375l237.035156-227.242187c6.1875-5.933594 15.957031-5.933594 22.144531 0l236.800781 226.984375c5.246094 5.269531 8.125 12.183594 8.125 19.242187 0 14.699219-11.964844 26.667969-26.664062 26.667969h-37.335938v186.667969c0 26.472656-21.523437 48-48 48zm-360.125-266.667969h40.125c8.832032 0 16 7.167969 16 16v202.667969c0 8.832031 7.167969 16 16 16h288c8.832032 0 16-7.167969 16-16v-202.667969c0-8.832031 7.167969-16 16-16h40.128906l-216.128906-207.167969zm441.621094 8.960938h.210938zm0 0"
+                    />
+                  </svg> </i
+              ></span>
+            </h4>
+            <h1 class="max-winds">
+              Max Sustained Winds of
+              <span
+                class="desc"
+                [style]="{
+                  color: windRiskCategories[stormData.windRisk].colorHex
+                }"
+                >{{ windRiskCategories[stormData.windRisk].shortDesc }}</span
+              >
+              <span class="speed"
+                >&nbsp;({{ windRiskCategories[stormData.windRisk].speedDesc }})
+              </span>
+            </h1>
+            <h4 class="advisory-date">~{{ toCDT(stormData.advisoryDate) }}</h4>
+          </ng-container>
+          <ng-template #loadingStormData>
+            <nz-skeleton [nzActive]="true"> </nz-skeleton
+          ></ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="storm-map">
+      <div nz-row nzJustify="center">
+        <div nz-col class="col-1" nzSpan="24">
+          <agm-map
+            [latitude]="40"
+            [longitude]="-90"
+            [zoom]="4"
+            [mapTypeId]="'satellite'"
+            (mapReady)="onMapReady($event)"
+          >
+            <agm-data-layer
+              [geoJson]="windGeoJSON"
+              [style]="styleFunc"
+            ></agm-data-layer>
+
+            <agm-data-layer
+              [geoJson]="lineGeoJSON"
+              [style]="styleFunc"
+            ></agm-data-layer>
+
+            <agm-data-layer
+              [geoJson]="pointsGeoJSON"
+              [style]="styleFunc"
+            ></agm-data-layer>
+
+            <agm-data-layer
+              [geoJson]="polygonGeoJSON"
+              [style]="styleFunc"
+            ></agm-data-layer>
+          </agm-map>
+        </div>
+      </div>
+      <nz-divider></nz-divider>
+
+      <!-- footer -->
+      <div nz-row class="section-footer">
+        <div nz-col nzSpan="16" class="section-footer-trackstorm">
+          <h3><strong>Track Storm Activities</strong></h3>
+          <img nz-image nzSrc="/assets/images/ourservice-botton.jpg" alt="" />
+          <p>
+            Stay current on storm activity with the National Hurricane Center’s
+            up-to-date weather information for tropical storms and hurricanes.
+          </p>
+          <button nz-button nzType="primary" nzSize="large" nzDanger nzBlock>
+            Visit the National Hurricane Center
+          </button>
+        </div>
+
+        <div nz-col nzSpan="8" class="section-footer-messageform">
+          <h3><strong>Send us a message</strong></h3>
+          <div class="form-container">
+            <form nz-form [nzLayout]="'vertical'">
+              <nz-form-item>
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="name"
+                    placeholder="Name (Required)"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item>
+                <nz-form-control>
+                  <input
+                    nz-input
+                    formControlName="email"
+                    placeholder="Email (Required)"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item>
+                <nz-form-control>
+                  <textarea
+                    rows="10"
+                    nz-input
+                    formControlName="message"
+                    placeholder="Message (Required)"
+                  ></textarea>
+                </nz-form-control>
+              </nz-form-item>
+
+              <button
+                nz-button
+                nzBlock
+                nzType="primary"
+                nzDanger
+                nzSize="large"
+              >
+                Submit
+              </button>
+
+              <p>
+                *Please excuse slower than normal response time during a storm
+                event.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

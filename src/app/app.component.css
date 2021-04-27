@@ -1,5 +1,6 @@
 .main-layout {
   min-height: 100vh;
+  width: 100%;
 }
 
 title > span {
@@ -10,7 +11,7 @@ nz-content {
   flex: 1;
 }
 
-qrisq-header {
+app-header {
   position: fixed;
   width: 100%;
   z-index: 9999;

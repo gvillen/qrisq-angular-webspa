@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 // pages
 import { StormDataForecastPageComponent } from './pages/forecast-page/forecast-page.component';
 import { StormDataHindcastPageComponent } from './pages/hindcast-page/hindcast-page.component';
-import { StormDataHistoricalPageComponent } from './pages/historical-page/historical-page.component';
+import { StormDataHistoricalPageComponent } from '../../pages/storm-data/historical-page/historical-page.component';
 import { StormDataFaqPageComponent } from './pages/faq-page/faq-page.component';
 
 const routes: Routes = [

@@ -6,23 +6,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // core, design & shared
-import { DesignModule } from '@design/design.module';
+import { DesignModule } from '@app/design/design.module';
 import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 
 // routing
-import { SignUpRoutingModule } from './sign-up-routing.module';
+import { SignUpRoutingModule } from '../identity/sign-up-routing.module';
 
 // components
 import { SignUpComponent as SignUpComponent } from './sign-up.component';
-import { PaymentFormCardComponent } from './components/payment-form-card/payment-form-card.component';
-import { PaymentFormPaypalComponent } from './components/payment-form-paypal/payment-form-paypal.component';
-import { GeolocationStreetViewComponent } from './components/geolocation-street-view/geolocation-street-view.component';
+import { PaymentFormCardComponent } from '../identity/sign-up/components/payment-form-card/payment-form-card.component';
+import { PaymentFormPaypalComponent } from '../identity/sign-up/components/payment-form-paypal/payment-form-paypal.component';
+import { GeolocationStreetViewComponent } from '../identity/sign-up/components/geolocation-street-view/geolocation-street-view.component';
 
 // pages
 import { SignUpCheckServiceAreaPageComponent } from './pages/check-service-area/check-service-area.component';
 import { SignUpServiceAreaAvailablePageComponent } from './pages/service-area-available/service-area-available';
-import { SignUpServiceAreaUnavailablePageComponent } from './pages/service-area-unavailable/service-area-unavailable.component';
+import { SignUpServiceAreaUnavailablePageComponent } from '../identity/pages/service-area-unavailable/service-area-unavailable.component';
 
 import { SignUpRegisterPageComponent } from './pages/register/register.component';
 import { RegisterPaymentPageComponent } from './pages/payment/payment.component';
@@ -34,7 +34,7 @@ import { RegisterGeolocationPageComponent } from './pages/geolocation/geolocatio
 import { SignUpService } from './service/signup.service';
 
 // store
-import { SignUpStore } from './store/SignUpStore.service';
+import { SignUpStore } from '../identity/sign-up/store/SignUpStore.service';
 
 // paypal
 import { NgxPayPalModule } from 'ngx-paypal';

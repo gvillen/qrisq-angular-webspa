@@ -10,6 +10,18 @@
   src: local('Muli'), url(./assets/fonts/Muli.ttf) format('truetype');
 }
 
-:root {
-  font-family: Rubik, Arial, Helvetica, sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+app-root {
+  min-width: 100%;
 }

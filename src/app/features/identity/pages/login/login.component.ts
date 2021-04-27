@@ -10,7 +10,7 @@ import {
 import { Router } from '@angular/router';
 
 import { environment } from '@env';
-import { IdentityService } from '@app/features/identity/services/IdentityService.service';
+import { IdentityService } from '@app/features/identity/sign-up/services/IdentityService.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
