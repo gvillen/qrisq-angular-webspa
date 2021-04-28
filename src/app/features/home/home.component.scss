@@ -9,13 +9,19 @@
 
 qrisq-banner .banner-content {
   padding-right: 60%;
+  @media(max-width:980px) {
+    padding: 16% 0;
+  }
 }
 
-qrisq-banner h2 {
+qrisq-banner h1 {
   color: #fff;
-  font-size: 3rem;
-  font-family: Oswald, Arial, Helvetica, sans-serif;
-  font-weight: 520;
+  font-size: 50px;
+  font-weight: 500;
+  @media(max-width:768px){
+    font-size: 40px;
+    margin-top: 30px;
+  }
 }
 
 qrisq-banner p {
