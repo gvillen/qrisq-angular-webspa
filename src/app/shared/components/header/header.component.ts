@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'qrisq-header',
@@ -13,4 +13,13 @@ export class HeaderComponent implements OnInit {
 
   constructor() {}
   ngOnInit() {}
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e) {
+    let element = document.querySelector('.navbar');
+    if (window.pageYOffset > element.clientHeight) {
+      element.classList.add('navbar-dark');
+    } else {
+      element.classList.remove('navbar-dark');
+    }
+  }
 }
