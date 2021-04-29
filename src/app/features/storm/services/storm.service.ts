@@ -11,7 +11,6 @@ import { environment } from '@env';
 // module
 import { QrStormModule } from '@app/features/storm/storm.module';
 
-// gzip
 import pako from 'pako';
 
 const {

@@ -4,7 +4,6 @@ import { actionStormDataFetchRequest } from '../../store/storm.actions';
 // angular
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { Component, OnInit } from '@angular/core';
-import { IdentityService } from '@app/features/identity/services/IdentityService.service';
 
 // gzip
 import pako from 'pako';
@@ -22,9 +21,9 @@ import { StormData } from '../../store/storm.models';
 import { TimeUtils } from '../../common/utils';
 
 @Component({
-  selector: 'qr-storm-viewer-page',
-  templateUrl: './storm-viewer-page.component.html',
-  styleUrls: ['./storm-viewer-page.component.css'],
+  selector: 'qr-storm-page',
+  templateUrl: './storm-page.component.html',
+  styleUrls: ['./storm-page.component.css'],
 })
 export class QrStormViewerPageComponent implements OnInit {
   lat: number;
@@ -53,11 +52,7 @@ export class QrStormViewerPageComponent implements OnInit {
     return WindRiskCategories;
   }
 
-  constructor(
-    private windService: StormService,
-    private identityService: IdentityService,
-    private store: Store
-  ) {}
+  constructor(private store: Store) {}
 
   ngOnInit() {
     this.stormData$ = this.store.pipe(select(selectStormData));

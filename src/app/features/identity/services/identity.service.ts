@@ -3,7 +3,7 @@ import { AgmGeocoder } from '@agm/core';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
-import { SignUp } from '../models/identity.models';
+import { SignUpState } from '../store/identity.models';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +36,7 @@ export class QrIdentityService {
     return this.agmGeocoder.geocode({ location });
   }
 
-  createAccount(signUp: SignUp) {
+  createAccount(signUp: SignUpState) {
     const data = {
       email: signUp.email,
       password: signUp.password,
@@ -60,5 +60,30 @@ export class QrIdentityService {
     return this.httpClient.post(environment.API_URL + '/auth/signup', data, {
       headers: { 'Content-type': 'application/json; charset=utf-8' },
     });
+  }
+
+  signIn(username: string, password: string) {
+    return this.httpClient.post(
+      environment.API_URL + '/auth/login',
+      {
+        email: username,
+        password,
+      },
+      {
+        headers: { 'Content-type': 'application/json; charset=utf-8' },
+      }
+    );
+  }
+
+  verifyEmail(email: string) {
+    return this.httpClient.post(
+      environment.API_URL + '/verify-email',
+      {
+        email: email,
+      },
+      {
+        headers: { 'Content-type': 'application/json; charset=utf-8' },
+      }
+    );
   }
 }

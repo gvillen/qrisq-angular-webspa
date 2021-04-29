@@ -19,8 +19,8 @@ export class QrCheckServiceAreaComponentStore extends ComponentStore<QrCheckServ
   }
 
   readonly location$: Observable<{
-    lattitude: number;
-    longitude: number;
+    lattitude: number | null;
+    longitude: number | null;
   }> = this.select((state) => ({
     lattitude: state.lattitude,
     longitude: state.longitude,
@@ -36,11 +36,13 @@ export class QrCheckServiceAreaComponentStore extends ComponentStore<QrCheckServ
     (
       state: QrCheckServiceAreaState,
       location: { lattitude: number; longitude: number }
-    ) => ({
-      ...state,
-      lattitude: location.lattitude,
-      longitude: location.longitude,
-    })
+    ) => {
+      return {
+        ...state,
+        lattitude: location.lattitude,
+        longitude: location.longitude,
+      };
+    }
   );
 
   resetState(): void {

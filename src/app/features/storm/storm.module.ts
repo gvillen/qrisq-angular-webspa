@@ -4,16 +4,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // pages
-import { QrStormViewerPageComponent } from './pages/storm-viewer/storm-viewer-page.component';
+import { QrStormViewerPageComponent } from './pages/storm/storm-page.component';
 
 // components
 import { StormComponent } from './storm.component';
 
 // services
 import { StormService } from './services/storm.service';
-
-// routing
-import { HurricaneViewerRoutingModule } from './storm-routing';
 
 // google maps
 import { AgmCoreModule } from '@agm/core';
@@ -25,6 +22,7 @@ import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { HurricaneViewerEffects } from './store/storm.effects';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [StormComponent, QrStormViewerPageComponent],
@@ -32,13 +30,11 @@ import { HurricaneViewerEffects } from './store/storm.effects';
     // angular
     CommonModule,
 
-    // core, design & shared
-    CoreModule,
+    // design & shared
     DesignModule,
     SharedModule,
 
-    // routing
-    HurricaneViewerRoutingModule,
+    RouterModule,
 
     // google maps
     AgmCoreModule.forRoot({
@@ -48,6 +44,6 @@ import { HurricaneViewerEffects } from './store/storm.effects';
     // ngrx
     EffectsModule.forFeature([HurricaneViewerEffects]),
   ],
-  providers: [StormService, GoogleMapsAPIWrapper],
+  providers: [StormService, GoogleMapsAPIWrapper, QrStormViewerPageComponent],
 })
 export class QrStormModule {}

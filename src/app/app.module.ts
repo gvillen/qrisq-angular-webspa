@@ -28,7 +28,7 @@ import { QrGovernmentPageComponent } from './pages/services/government-page/gove
 import { QrInsurancePageComponent } from './pages/services/insurance-page/insurance-page.component';
 import { QrHindcastPageComponent } from './pages/storm-data/hindcast-page/hindcast-page.component';
 import { QrIdentityModule } from './features/identity/identity.module';
-import { QrHomePageComponent } from './pages/home-page/home-page.component';
+import { QrHomePageComponent } from './home/home-page.component';
 
 registerLocaleData(en);
 

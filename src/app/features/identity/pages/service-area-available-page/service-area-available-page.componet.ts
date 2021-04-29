@@ -7,9 +7,10 @@ import { concatMap, map, take } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs';
-import { QrServiceAreaAvailableComponentStore } from './service-area-available-page.component-store';
+
 import { QrIdentityService } from '../../services/identity.service';
 import { actionRegisterStart } from '../../store/identity.actions';
+import { selectSignUp } from '../../store/identity.selectors';
 
 const { API_URL } = environment;
 
@@ -20,18 +21,14 @@ const { API_URL } = environment;
 })
 export class QrServiceAreaAvailablePageComponent implements OnInit {
   constructor(
-    private componentStore: QrServiceAreaAvailableComponentStore,
     private identityService: QrIdentityService,
     private store: Store
   ) {}
 
-  readonly subscriptionPlans$ = this.componentStore.selectSubscriptionPlans$;
+  windOnly$ = this.store.select(selectSignUp);
+  subscriptionPlans$ = this.identityService.fetchSubscriptionPlans();
 
-  readonly windOnly$ = this.componentStore.selectWindOnly$;
-
-  ngOnInit(): void {
-    this.componentStore.resetState();
-  }
+  ngOnInit(): void {}
 
   public onRegister(planId: number): void {
     this.store.dispatch(actionRegisterStart({ subscriptionPlanId: planId }));

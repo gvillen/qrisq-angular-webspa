@@ -1,9 +1,10 @@
+import { AppComponent } from './app.component';
 // angular
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // pages
-import { QrHomePageComponent } from '@app/pages/home-page/home-page.component';
+import { QrHomePageComponent } from './home/home-page.component';
 import { QrForecastPageComponent } from './pages/storm-data/forecast-page/forecast-page.component';
 import { QrFaqPageComponent } from './pages/storm-data/faq-page/faq-page.component';
 import { QrHindcastPageComponent } from './pages/storm-data/hindcast-page/hindcast-page.component';
@@ -14,12 +15,16 @@ import { QrInsurancePageComponent } from './pages/services/insurance-page/insura
 
 // guard
 import { NoAuthGuard } from '@core/guard/no-auth.guard';
-import { QrIdentityComponent } from './features/identity/identity.component';
 import { QrCheckServiceAreaPageComponent } from './features/identity/pages/check-service-area/check-service-area.component';
+import { QrServiceAreaAvailablePageComponent } from './features/identity/pages/service-area-available-page/service-area-available-page.componet';
+import { QrRegisterPageComponent } from './features/identity/pages/register/register-page.component';
+import { QrAccountCreatedPageComponent } from './features/identity/pages/account-created/account-created.component';
+import { QrStormViewerPageComponent } from './features/storm/pages/storm/storm-page.component';
+import { QrLoginPageComponent } from './features/identity/pages/login-page/login-page.component';
+import { QrGeolocationPageComponent } from './features/identity/pages/geolocation/geolocation.component';
 
 const routes: Routes = [
   { path: 'home', component: QrHomePageComponent },
-  { path: 'identity', component: QrCheckServiceAreaPageComponent },
   {
     path: 'storm-data/forecast',
     component: QrForecastPageComponent,
@@ -49,13 +54,36 @@ const routes: Routes = [
     component: QrInsurancePageComponent,
   },
   {
-    path: 'identity',
-    component: QrIdentityComponent,
+    path: 'identity/sign-up',
+    component: QrCheckServiceAreaPageComponent,
+  },
+  {
+    path: 'identity/sign-up/service-area-available',
+    component: QrServiceAreaAvailablePageComponent,
+  },
+  {
+    path: 'identity/sign-up/register',
+    component: QrRegisterPageComponent,
+  },
+  {
+    path: 'identity/sign-up/geolocation',
+    component: QrGeolocationPageComponent,
+  },
+  {
+    path: 'identity/sign-up/account-created',
+    component: QrAccountCreatedPageComponent,
+  },
+  {
+    path: 'hurricane-viewer/wind-risk',
+    component: QrStormViewerPageComponent,
+  },
+  {
+    path: 'identity/login',
+    component: QrLoginPageComponent,
   },
   {
     path: 'storm',
-    loadChildren: () =>
-      import('./features/storm/storm.module').then((m) => m.QrStormModule),
+    component: QrStormViewerPageComponent,
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' },

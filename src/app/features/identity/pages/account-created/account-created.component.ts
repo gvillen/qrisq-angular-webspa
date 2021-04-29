@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
   templateUrl: './account-created.component.html',
   styleUrls: ['./account-created.component.css'],
 })
-export class RegisterAccountCreatedPageComponent implements OnInit {
+export class QrAccountCreatedPageComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {}
 
   toLogin() {
-    this.router.navigate(['/identity/login']);
+    this.router.navigate(['identity/login']);
   }
 }

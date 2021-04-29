@@ -12,6 +12,6 @@ export class QrHomePageComponent implements OnInit {
   ngOnInit() {}
 
   OnSignUp() {
-    this.router.navigate(['/sign-up']);
+    this.router.navigate(['/identity/sign-up']);
   }
 }

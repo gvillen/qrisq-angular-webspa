@@ -1,32 +1,35 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Action, createAction, props } from '@ngrx/store';
-import { SignUp } from '../models/identity.models';
+import { GeocodedAddress } from '../models/Geocoding.models';
+import { HttpSignInResponse } from '../models/HttpSignInResponse.models';
+import { SignUpState } from './identity.models';
 
 export const actionCheckServiceAreaRequest = createAction(
-  '[SignUp] Check Service Area Request',
+  '[Identity] Check Service Area Request',
   props<{ lattitude: number; longitude: number }>()
 );
 
 export const actionCheckServiceAreaRequestSuccess = createAction(
-  '[SignUp] Check Service Area Request Success',
+  '[Identity] Check Service Area Request Success',
   props<{ available: boolean; services: Array<string> }>()
 );
 
 export const actionServiceAreaAvailable = createAction(
-  '[SignUp] Service Area Available',
+  '[Identity] Service Area Available',
   props<{ onlyWind: boolean }>()
 );
 
 export const actionServiceAreaUnavailable = createAction(
-  '[SignUp] Service Area Unavailable'
+  '[Identity] Service Area Unavailable'
 );
 
 export const actionGeocodeLocationRequest = createAction(
-  '[SignUp] Geocode Location Request',
+  '[Identity] Geocode Location Request',
   props<{ lattitude: number; longitude: number }>()
 );
 
 export const actionGeocodeLocationRequestSuccess = createAction(
-  '[SignUp] Geocode Location Request Success',
+  '[Identity] Geocode Location Request Success',
   props<{
     formattedAddress?: string;
     displayText?: string;
@@ -39,18 +42,18 @@ export const actionGeocodeLocationRequestSuccess = createAction(
 );
 
 export const actionGeocodeLocationRequestFailed = createAction(
-  '[SignUp] Geocode Location Request Failed'
+  '[Identity] Geocode Location Request Failed'
 );
 
 export const actionRegisterStart = createAction(
-  '[SignUp] Register Start',
+  '[Identity] Register Start',
   props<{
     subscriptionPlanId: number;
   }>()
 );
 
 export const actionRegisterFormSubmit = createAction(
-  '[SignUp] Register Form Submit',
+  '[Identity] Register Form Submit',
   props<{
     firstName: string;
     lastName: string;
@@ -60,77 +63,53 @@ export const actionRegisterFormSubmit = createAction(
   }>()
 );
 
-export const actionCreateAccountRequest = createAction(
-  '[SignUp] Create Account Request',
+export const actionVerifyEmailRequest = createAction(
+  '[Identity] Verify Email Request',
   props<{
-    signUp: SignUp;
+    signUp: SignUpState;
+  }>()
+);
+
+export const actionVerifyEmailRequestSuccess = createAction(
+  '[Identity] Verify Email Request Success'
+);
+
+export const actionVerifyEmailRequestFailed = createAction(
+  '[Identity] Verify Email Request Failed',
+  props<{ error: HttpErrorResponse }>()
+);
+
+export const actionCreateAccountRequest = createAction(
+  '[Identity] Create Account Request',
+  props<{
+    signUp: SignUpState;
   }>()
 );
 
 export const actionCreateAccountRequestSuccess = createAction(
-  '[SignUp] Create Account Request Success'
+  '[Identity] Create Account Request Success'
 );
 
 export const actionCreateAccountRequestFailed = createAction(
-  '[SignUp] Create Account Request Failed'
+  '[Identity] Create Account Request Failed'
 );
 
-export const SIGN_UP = 'SIGN_UP';
-export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const actionSignInRequest = createAction(
+  '[Identity] Sign In Request',
+  props<{ username: string; password: string }>()
+);
 
-export const SIGN_UP_CHECK_SERVICE_AREA_REQUEST =
-  'SIGN_UP_CHECK_SERVICE_AREA_REQUEST';
-export const SIGN_UP_CHECK_SERVICE_AREA_SUCCESS =
-  'SIGN_UP_CHECK_SERVICE_AREA_SUCCESS';
+export const actionSignInSuccess = createAction(
+  '[Identity] Sign In Success',
+  props<{ response: HttpSignInResponse }>()
+);
 
-export class SignUpAction implements Action {
-  readonly type = SIGN_UP;
+export const actionSignInFailed = createAction(
+  '[Identity] Sign In Failed',
+  props<{ error: HttpErrorResponse }>()
+);
 
-  constructor(
-    public payload: {
-      email: string;
-      password: string;
-      confirm_password: string;
-      first_name: string;
-      last_name: string;
-      phone_number: string;
-      address: {
-        lat: number;
-        lng: number;
-        displayText: string;
-      };
-      street_number: string;
-      city: string;
-      state: string;
-      zip_code: string;
-      subbscription_plan_id: string;
-      payment_id: string;
-    }
-  ) {}
-}
-
-export class SignUpSuccessAction implements Action {
-  readonly type = SIGN_UP_SUCCESS;
-
-  constructor(public payload: { effect: string }) {}
-}
-
-export class SignUpCheckServiceAreaRequestAction implements Action {
-  readonly type = SIGN_UP_CHECK_SERVICE_AREA_REQUEST;
-
-  constructor(public payload: { lattitude: number; longitude: number }) {}
-}
-
-export class SignUpCheckServiceAreaSuccessAction implements Action {
-  readonly type = SIGN_UP_CHECK_SERVICE_AREA_SUCCESS;
-
-  constructor(
-    public payload: { available: boolean; services: Array<string> }
-  ) {}
-}
-
-export type SignUpActions =
-  | SignUpAction
-  | SignUpSuccessAction
-  | SignUpCheckServiceAreaRequestAction
-  | SignUpCheckServiceAreaSuccessAction;
+export const actionSignUpAddressChanged = createAction(
+  '[Identity] Sign In Address Changed',
+  props<{ address: GeocodedAddress }>()
+);

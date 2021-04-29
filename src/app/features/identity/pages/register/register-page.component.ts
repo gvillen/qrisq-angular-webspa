@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 
 import { selectSignUp } from '../../store/identity.selectors';
 import { actionRegisterFormSubmit } from '../../store/identity.actions';
-import { SignUp } from '../../models/identity.models';
+import { SignUpState } from '../../store/identity.models';
 
 @Component({
   selector: 'qr-register-page',
@@ -21,20 +21,19 @@ import { SignUp } from '../../models/identity.models';
 })
 export class QrRegisterPageComponent implements OnInit {
   registerForm: FormGroup;
-  signUp$: Observable<SignUp>;
+  signUp$: Observable<SignUpState>;
 
-  constructor(
-    private fb: FormBuilder,    
-    private store: Store
-  ) {}
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit(): void {
     this.signUp$ = this.store.pipe(select(selectSignUp));
     this.registerForm = this.buildFormGroup();
   }
 
-  buildFormGroup(): FormGroup {    
-    const passwordFieldValidator = (control: FormControl): { [s: string]: boolean } => {
+  buildFormGroup(): FormGroup {
+    const passwordFieldValidator = (
+      control: FormControl
+    ): { [s: string]: boolean } => {
       if (!control.value) {
         return { required: true };
       } else if (control.value !== this.registerForm.controls.password.value) {
@@ -43,14 +42,21 @@ export class QrRegisterPageComponent implements OnInit {
       return {};
     };
 
-    const firstNameField = [null, [Validators.required]];
-    const lastNameField =  [null, [Validators.required]];    
-    const emailField = [null, [Validators.email, Validators.required]];    
-    const passwordField = [null, [Validators.required, Validators.minLength(8)]];
-    const checkPasswordField = [null, [Validators.required, passwordFieldValidator]];
-    const phoneNumberField = [null, [Validators.required]];
+    const firstName = [null, [Validators.required]];
+    const lastName = [null, [Validators.required]];
+    const email = [null, [Validators.email, Validators.required]];
+    const password = [null, [Validators.required, Validators.minLength(8)]];
+    const checkPassword = [null, [Validators.required, passwordFieldValidator]];
+    const phoneNumber = [null, [Validators.required]];
 
-    return this.fb.group({firstNameField, lastNameField, emailField, passwordField, checkPasswordField, phoneNumberField});    
+    return this.fb.group({
+      firstName,
+      lastName,
+      email,
+      password,
+      checkPassword,
+      phoneNumber,
+    });
   }
 
   submitForm(): void {
@@ -76,6 +82,4 @@ export class QrRegisterPageComponent implements OnInit {
       this.registerForm.controls.checkPassword.updateValueAndValidity()
     );
   }
-
-  confirmationValidator = ;
 }

@@ -1,3 +1,6 @@
+import { QrGeocodingService } from './services/geocode.service';
+import { QrAccountCreatedPageComponent } from './pages/account-created/account-created.component';
+import { QrRegisterPageComponent } from './pages/register/register-page.component';
 // angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -5,7 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { QrIdentityComponent } from './identity.component';
+// import { QrIdentityComponent } from './identity.component';
 
 // core, design & shared
 import { CoreModule } from '@core/core.module';
@@ -13,7 +16,7 @@ import { DesignModule } from '@app/design/design.module';
 import { SharedModule } from '@shared/shared.module';
 
 // routing
-import { QrIdentityRoutingModule } from './identity-routing.module';
+// import { QrIdentityRoutingModule } from './identity-routing.module';
 
 // pages
 
@@ -29,11 +32,20 @@ import { CreditCardDirectivesModule } from 'angular-cc-library';
 import { EffectsModule } from '@ngrx/effects';
 import { IdentityEffects } from './store/identity.effects';
 import { QrCheckServiceAreaComponentStore } from './pages/check-service-area/check-service-area.component-store';
+import { QrServiceAreaAvailablePageComponent } from './pages/service-area-available-page/service-area-available-page.componet';
+import { RouterModule } from '@angular/router';
+
+import { QrLoginPageComponent } from './pages/login-page/login-page.component';
+import { QrGeolocationPageComponent } from './pages/geolocation/geolocation.component';
 
 @NgModule({
   declarations: [
-    QrIdentityComponent,
     QrCheckServiceAreaPageComponent,
+    QrServiceAreaAvailablePageComponent,
+    QrRegisterPageComponent,
+    QrAccountCreatedPageComponent,
+    QrLoginPageComponent,
+    QrGeolocationPageComponent,
     GeolocationStreetViewComponent,
     PaymentFormCardComponent,
     PaymentFormPaypalComponent,
@@ -41,7 +53,6 @@ import { QrCheckServiceAreaComponentStore } from './pages/check-service-area/che
   imports: [
     // angular
     CommonModule,
-    BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -50,9 +61,9 @@ import { QrCheckServiceAreaComponentStore } from './pages/check-service-area/che
     CoreModule,
     DesignModule,
     SharedModule,
-
+    RouterModule,
     // routing
-    QrIdentityRoutingModule,
+    // QrIdentityRoutingModule,
 
     // angular google maps
     AgmCoreModule.forRoot({
@@ -69,6 +80,18 @@ import { QrCheckServiceAreaComponentStore } from './pages/check-service-area/che
     // ngrx
     EffectsModule.forFeature([IdentityEffects]),
   ],
-  providers: [QrIdentityService, QrCheckServiceAreaComponentStore],
+  providers: [
+    QrIdentityService,
+    QrGeocodingService,
+    QrCheckServiceAreaComponentStore,
+  ],
+  exports: [
+    QrServiceAreaAvailablePageComponent,
+    QrCheckServiceAreaPageComponent,
+    QrRegisterPageComponent,
+    QrAccountCreatedPageComponent,
+    PaymentFormPaypalComponent,
+    QrGeolocationPageComponent,
+  ],
 })
 export class QrIdentityModule {}

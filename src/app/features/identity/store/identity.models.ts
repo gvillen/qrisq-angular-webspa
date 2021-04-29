@@ -1,8 +1,74 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { SignUp } from '../models/identity.models';
+import { HttpErrorResponse } from '@angular/common/http';
+import { User } from '../models/User.models';
 
+//
+// IdentityState
+//
 export interface IdentityState {
-  signUp: SignUp;
+  signUp: SignUpState;
+  signIn: SignInState;
+  credentials: CredentialsState;
+  signedUser: SignedUserState;
   errors: Array<HttpErrorResponse>;
   loading: boolean;
+}
+
+//
+// IdentityStateSignUp
+//
+export interface SignUpState {
+  lattitude?: number;
+  longitude?: number;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  password?: string;
+  windServiceOnly?: boolean;
+  phoneNumber?: string;
+  subscriptionPlanId?: number;
+  subscriptionPlanName?: string;
+  subscriptionPlanPrice?: number;
+  paymentId?: string;
+  addressFormatted?: string;
+  addressDisplayText?: string;
+  addressStreetName?: string;
+  addressStreetNumber?: string;
+  addressCity?: string;
+  addressState?: string;
+  addressZip?: string;
+}
+
+//
+// IdentityStateSignIn
+//
+export interface SignInState {
+  username: string;
+  password: string;
+  requested: boolean;
+  succeeded: boolean;
+  failed: boolean;
+  error: HttpErrorResponse;
+}
+
+export interface CredentialsState {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface SignedUserState {
+  user: User;
+}
+
+export interface IdentitySignedUserAddressState {
+  displayText: string;
+  phoneNumber: string;
+  streetNumber: string;
+  city: string;
+  state: string;
+  zipCode: string;
+}
+
+export interface IdentitySignedUserGeoLocationState {
+  lattitude: number;
+  longitude: number;
 }

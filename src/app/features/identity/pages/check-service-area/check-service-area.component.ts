@@ -6,7 +6,7 @@ import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
 // rxjs
-import { map, takeLast } from 'rxjs/operators';
+import { map, take, takeLast } from 'rxjs/operators';
 
 // ngrx
 import { Store } from '@ngrx/store';
@@ -16,6 +16,7 @@ import { actionCheckServiceAreaRequest } from '../../store/identity.actions';
 
 // component store
 import { QrCheckServiceAreaComponentStore } from './check-service-area.component-store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'qr-check-service-area',
@@ -32,6 +33,21 @@ export class QrCheckServiceAreaPageComponent implements OnInit {
 
   isLocation$ = this.componentStore.IsLocation$;
 
+  location$ = this.componentStore.state$.subscribe((state) => {
+    this.location = {
+      lattitude: state.lattitude,
+      longitude: state.longitude,
+    };
+  });
+
+  location: {
+    lattitude: number | null;
+    longitude: number | null;
+  } = {
+    lattitude: 0,
+    longitude: 0,
+  };
+
   ngOnInit(): void {
     this.componentStore.resetState();
   }
@@ -43,16 +59,7 @@ export class QrCheckServiceAreaPageComponent implements OnInit {
   }
 
   public OnSearch(): void {
-    this.componentStore.location$.pipe(
-      takeLast(1),
-      map((location) =>
-        this.store.dispatch(
-          actionCheckServiceAreaRequest({
-            lattitude: location.lattitude,
-            longitude: location.longitude,
-          })
-        )
-      )
-    );
+    this.store.dispatch(actionCheckServiceAreaRequest(this.location));
+    this.location$.unsubscribe();
   }
 }

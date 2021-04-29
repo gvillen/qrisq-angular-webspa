@@ -4,8 +4,8 @@ import { Params } from '@angular/router';
 
 import { StormReducer } from '@app/features/storm/store/storm.reducer';
 import { HurricaneViewerState } from '@app/features/storm/store/storm.state';
-import { IdentityState } from '@app/features/identity/store/identity.models';
 import { IdentityReducer } from '@app/features/identity/store/identity.reducer';
+import { IdentityState } from '@app/features/identity/store/identity.models';
 
 export const reducers: ActionReducerMap<RootState> = {
   identity: IdentityReducer,

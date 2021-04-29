@@ -23,10 +23,19 @@ import {
   actionRegisterStart,
   actionServiceAreaAvailable,
   actionServiceAreaUnavailable,
+  actionSignInFailed,
+  actionSignInRequest,
+  actionSignInSuccess,
+  actionVerifyEmailRequest,
+  actionVerifyEmailRequestFailed,
+  actionVerifyEmailRequestSuccess,
 } from './identity.actions';
 import { Store } from '@ngrx/store';
 import { selectSignUp } from './identity.selectors';
 import { QrIdentityService } from '../services/identity.service';
+import { HttpSignInResponse } from '../models/HttpSignInResponse.models';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable()
 export class IdentityEffects {
@@ -68,13 +77,15 @@ export class IdentityEffects {
       ofType(actionServiceAreaAvailable),
       withLatestFrom(this.store.select(selectSignUp)),
       map(([action, signUp]) => {
-        this.router.navigate(['sign-up', 'service-area-available'], {
-          queryParams: {
-            lattitude: signUp.lattitude,
-            longitude: signUp.longitude,
-          },
-          relativeTo: this.route,
-        });
+        this.router.navigate(
+          ['identity', 'sign-up', 'service-area-available'],
+          {
+            queryParams: {
+              lattitude: signUp.lattitude,
+              longitude: signUp.longitude,
+            },
+          }
+        );
         return actionGeocodeLocationRequest({
           lattitude: signUp.lattitude,
           longitude: signUp.longitude,
@@ -176,7 +187,7 @@ export class IdentityEffects {
       this.actions$.pipe(
         ofType(actionRegisterStart),
         tap((action) => {
-          this.router.navigate(['/sign-up/register'], {
+          this.router.navigate(['/identity/sign-up/register'], {
             relativeTo: this.route,
           });
         })
@@ -188,8 +199,42 @@ export class IdentityEffects {
     this.actions$.pipe(
       ofType(actionRegisterFormSubmit),
       withLatestFrom(this.store.select(selectSignUp)),
-      map(([action, signUp]) => actionCreateAccountRequest({ signUp }))
+      map(([action, signUp]) => actionVerifyEmailRequest({ signUp }))
     )
+  );
+
+  //
+  // Verify Email Request
+  //
+  effectVerifyEmailRequest = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionVerifyEmailRequest),
+        switchMap((action) =>
+          this.identityService.verifyEmail(action.signUp.email).pipe(
+            take(1),
+            map((response) => {
+              this.router.navigate(['/identity/sign-up/geolocation']);
+            }),
+            catchError((error: HttpErrorResponse) => {
+              if (error.status === 400) {
+                this.notification.create(
+                  'error',
+                  'Error',
+                  'Email already exist.',
+                  { nzPlacement: 'bottomRight' }
+                );
+              } else {
+                this.notification.create('error', 'Error', error.message, {
+                  nzPlacement: 'bottomRight',
+                });
+              }
+              return of(error);
+            })
+          )
+        )
+      ),
+    { dispatch: false }
   );
 
   effectCreateAccountRequest = createEffect(() =>
@@ -209,10 +254,67 @@ export class IdentityEffects {
       this.actions$.pipe(
         ofType(actionCreateAccountRequestSuccess),
         tap((action) => {
-          this.router.navigate(['/sign-up/account-created']);
+          this.router.navigate(['/identity/sign-up/account-created']);
         })
       ),
     { dispatch: false }
+  );
+
+  effectSignInRequest = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actionSignInRequest),
+      switchMap(({ username, password }) =>
+        this.identityService.signIn(username, password).pipe(
+          take(1),
+          map((response: HttpSignInResponse) => {
+            return actionSignInSuccess({ response });
+          }),
+          catchError((error: HttpErrorResponse) => {
+            return of(actionSignInFailed({ error }));
+          })
+        )
+      )
+    )
+  );
+
+  effectSignInRequestSuccess = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionSignInSuccess),
+        map((action) => {
+          this.notification.create('success', 'Bienvenido', '', {
+            nzPlacement: 'bottomRight',
+          });
+          this.router.navigate(['storm']);
+        })
+      ),
+    {
+      dispatch: false,
+    }
+  );
+
+  effectSignInRequestFailed = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionSignInFailed),
+        map((action) => {
+          if (action.error.status === 401) {
+            this.notification.create(
+              'error',
+              'Failed',
+              'User or password not valid.',
+              { nzPlacement: 'bottomRight' }
+            );
+          } else {
+            this.notification.create('error', 'Error', action.error.message, {
+              nzPlacement: 'bottomRight',
+            });
+          }
+        })
+      ),
+    {
+      dispatch: false,
+    }
   );
 
   constructor(
@@ -220,6 +322,7 @@ export class IdentityEffects {
     private identityService: QrIdentityService,
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store
+    private store: Store,
+    private notification: NzNotificationService
   ) {}
 }

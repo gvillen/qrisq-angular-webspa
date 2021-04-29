@@ -10,17 +10,22 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { environment } from '@env';
-import { SignUpService } from '../../service/SignUpService.service';
-import { NewUser } from '../../sign-up/schema/models';
 import { take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { selectSignUp } from '../../store/identity.selectors';
+import { QrGeocodingService } from '../../services/geocode.service';
+import {
+  actionCreateAccountRequest,
+  actionSignUpAddressChanged,
+} from '../../store/identity.actions';
+import { SignUpState } from '../../store/identity.models';
 
 @Component({
   selector: 'qrisq-register-geolocation-page',
   templateUrl: './geolocation.component.html',
   styleUrls: ['./geolocation.component.css'],
 })
-export class RegisterGeolocationPageComponent implements OnInit {
+export class QrGeolocationPageComponent implements OnInit {
   @ViewChild('mapMarker') googleMapMarker: ElementRef;
   lat: number;
   lng: number;
@@ -29,26 +34,24 @@ export class RegisterGeolocationPageComponent implements OnInit {
   pinMoveAttempts: Number;
   infoPopoverVisible: Boolean;
   pinAttemptsModalVisible: Boolean;
-  newUser: NewUser;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private agmGeocoder: AgmGeocoder,
-    private signUpService: SignUpService
+    private geocodingService: QrGeocodingService,
+    private store: Store
   ) {}
 
-  // tslint:disable-next-line:use-life-cycle-interface
-  ngOnInit() {
-    this.signUpService
-      .getNewUser()
-      .pipe(take(1))
-      .subscribe((newUser) => {
-        this.newUser = newUser;
-        this.lat = newUser.lat;
-        this.lng = newUser.lng;
-        this.formattedAddress = newUser.address.formattedAddress;
-      });
+  signUp: SignUpState;
+  signUp$ = this.store.select(selectSignUp);
+
+  ngOnInit(): void {
+    this.signUp$.subscribe((signUp) => {
+      if (signUp) {
+        this.lat = signUp.lattitude;
+        this.lng = signUp.longitude;
+        this.formattedAddress = signUp.addressFormatted;
+        this.signUp = signUp;
+      }
+    });
     this.zoom = 20;
     this.pinMoveAttempts = 1;
     this.infoPopoverVisible = false;
@@ -64,12 +67,11 @@ export class RegisterGeolocationPageComponent implements OnInit {
     this.lat = event.latLng.toJSON().lat;
     this.lng = event.latLng.toJSON().lng;
 
-    this.signUpService
+    this.geocodingService
       .geocodeLocation(this.lat, this.lng)
       .pipe(take(1))
-      .subscribe((newUserAddress) => {
-        this.newUser.address = newUserAddress;
-        this.formattedAddress = newUserAddress.formattedAddress;
+      .subscribe((address) => {
+        this.store.dispatch(actionSignUpAddressChanged({ address }));
       });
 
     this.pinMoveAttempts = this.pinMoveAttempts.valueOf() + 1;
@@ -80,15 +82,6 @@ export class RegisterGeolocationPageComponent implements OnInit {
   }
 
   onSubmit(event) {
-    this.signUpService
-      .registerNewUser(this.newUser)
-      .pipe(take(1))
-      .subscribe((result) => {
-        if (result) {
-          this.router.navigate(['/sign-up/account-created']);
-        } else {
-          console.log('error');
-        }
-      });
+    this.store.dispatch(actionCreateAccountRequest({ signUp: this.signUp }));
   }
 }
