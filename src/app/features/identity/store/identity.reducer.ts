@@ -167,6 +167,7 @@ const reducer = createReducer(
       },
     },
     credentials: {
+      userId: response.user.id,
       accessToken: response.access,
       refreshToken: response.refresh,
     },

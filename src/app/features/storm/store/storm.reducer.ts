@@ -8,7 +8,7 @@ import { HurricaneViewerState, initialState } from './storm.state';
 
 const reducer = createReducer(
   initialState,
-  on(actionStormDataFetchRequest, (state, { userId }) => ({
+  on(actionStormDataFetchRequest, (state, { userId, accessToken }) => ({
     ...state,
     loading: true,
   })),

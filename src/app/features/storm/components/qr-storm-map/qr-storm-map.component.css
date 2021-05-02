@@ -1,0 +1,55 @@
+/* agm-map */
+agm-map {
+  height: 700px;
+  width: 1400px;
+}
+
+#select-map-layer {
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 180px;
+  height: 160px;
+  margin: 20px;
+  padding: 15px;
+}
+
+#select-map-layer h1 {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 5px 0px 10px;
+}
+
+#select-map-layer label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #b6da99;
+  border-color: #b6da99;
+}
+
+#property-surge-risk {
+  background-color: rgba(0, 0, 0, 0.7);
+  margin: 10px;
+  padding: 10px;
+}
+
+#legend-water-depth {
+  background-color: rgba(0, 0, 0, 0.7);
+  margin: 10px;
+  width: 180px;
+}
+
+#legend-water-depth img {
+  margin-left: -3px;
+}
+
+[nz-radio] {
+  display: block;
+  height: 32px;
+  line-height: 32px;
+}

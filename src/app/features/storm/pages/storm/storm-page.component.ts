@@ -1,6 +1,5 @@
+import { selectStormData } from './../../store/storm.selectors';
 import { WindRiskCategories } from '../../common/constants';
-import { selectStormData } from '../../store/storm.selectors';
-import { actionStormDataFetchRequest } from '../../store/storm.actions';
 // angular
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { Component, OnInit } from '@angular/core';
@@ -10,15 +9,25 @@ import pako from 'pako';
 
 // rxjs
 import { forkJoin, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 // services
-import { StormService } from '../../services/storm.service';
+import { QrStormDataService } from '../../services/StormData.service';
 
 // data
 import { select, Store } from '@ngrx/store';
-import { StormData } from '../../store/storm.models';
 import { TimeUtils } from '../../common/utils';
+import {
+  selectCredentials,
+  selectSignIn,
+} from '@app/features/identity/store/identity.selectors';
+import { actionStormDataFetchRequest } from '../../store/storm.actions';
+import { QrIdentityService } from '@app/features/identity/services/identity.service';
+import { StormData } from '../../models/StormData.models';
+import { QrStormSurgeService } from '../../services/StormSurgeService.service';
+import { StormGeoJSON } from '../../models/StormGeoJSON.models';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '@env';
 
 @Component({
   selector: 'qr-storm-page',
@@ -40,52 +49,87 @@ export class QrStormViewerPageComponent implements OnInit {
   windy: any;
   canvasLayer: any;
   context: any;
-  wind_data = {
-    '2020-10-28T18:00:00Z':
-      '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',
-  };
   map: any;
+  mapMode = 'summary';
 
-  stormData$: Observable<StormData>;
+  stormData$: Observable<StormData> = this.store.select(selectStormData);
+  stormGeoJSON$: Observable<StormGeoJSON>;
+  surgeGeoJson: Object;
 
   public get windRiskCategories() {
     return WindRiskCategories;
   }
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private identityService: QrIdentityService,
+    private stormService: QrStormDataService,
+    private stormSurgeService: QrStormSurgeService,
+    private httpClient: HttpClient
+  ) {}
 
   ngOnInit() {
-    this.stormData$ = this.store.pipe(select(selectStormData));
-    this.store.dispatch(actionStormDataFetchRequest({ userId: '59' }));
-    this.stormData$.subscribe((value) => {
-      if (value) {
-        console.log(WindRiskCategories[value.windRisk]);
-      }
+    // this.fetchSurge();
+    this.identityService
+      .signIn('jdoe@worldwindsinc.com', 'unknown')
+      .subscribe((credentials) =>
+        this.store.dispatch(
+          actionStormDataFetchRequest({
+            userId: 17,
+            accessToken: credentials['access'],
+          })
+        )
+      );
+
+    this.stormSurgeService.getSurgeGeoJSON().subscribe((surge) => {
+      console.log(surge);
+      this.surgeGeoJson = surge;
     });
-    // let wind = this.windService.getWindGeoJSON();
-    // let line = this.windService.getLineGeoJSON();
-    // let points = this.windService.getPointsGeoJSON();
-    // let polygon = this.windService.getPolygonGeoJSON();
-    // let user = forkJoin([wind, line, points, polygon]).subscribe((results) => {
-    //   this.windGeoJSON = results[0];
-    //   this.lineGeoJSON = results[1];
-    //   this.pointsGeoJSON = results[2];
-    //   this.polygonGeoJSON = results[3];
 
-    //   this.stormName = this.pointsGeoJSON.features[0].properties.STORMNAME;
-
-    //   this.identityService
-    //     .getUser()
-    //     .pipe(take(1))
-    //     .subscribe((user) => {
-    //       this.displayAddress = user.profile.address.displayText;
-    //       this.isDataLoaded = true;
-    //     });
+    // this.stormData$.subscribe(stormData => {
+    //   if(stormData) {
+    //     this.stormGeoJSON$ = new Obvservable<>
+    //   }
     // });
   }
 
   toCDT(utc) {
     return TimeUtils.toCDT(utc);
+  }
+
+  onMapModeChange(mode) {
+    this.mapMode = mode;
+    console.log(mode);
+  }
+
+  mapReady(event) {
+    this.map = event;
+    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
+      document.getElementById('Settings')
+    );
+    // this.stormSurgeService
+    //   .getPolygonGeoJSON()
+    //   .subscribe((geoJson) => console.log(geoJson));
+  }
+
+  fetchSurge() {
+    this.httpClient
+      .get(environment.SURGE_SHP_ZIP_URL, {
+        observe: 'response',
+        responseType: 'blob',
+      })
+      .subscribe((response) => {
+        const url = URL.createObjectURL(response.body);
+        loadshp(
+          {
+            url,
+            encoding: 'ISO-8859-1',
+          },
+          (data) => {
+            this.surgeGeoJson = data;
+          }
+        );
+      });
   }
 
   onMapReady(map) {
@@ -124,21 +168,21 @@ export class QrStormViewerPageComponent implements OnInit {
           },
         };
 
-        canvasLayer = new CanvasLayer(canvasLayerOptions);
+        // canvasLayer = new CanvasLayer(canvasLayerOptions);
 
-        windy = new Windy({
-          canvas: canvasLayer.canvas,
-          data: result,
-        });
+        // windy = new Windy({
+        //   canvas: canvasLayer.canvas,
+        //   data: result,
+        // });
 
-        //prepare context var
-        let context = canvasLayer.canvas.getContext('2d');
+        // //prepare context var
+        // let context = canvasLayer.canvas.getContext('2d');
 
-        google.maps.event.addListener(map, 'bounds_changed', function () {
-          console.log('sds');
-          windy.stop();
-          context.clearRect(0, 0, 3000, 3000);
-        });
+        // google.maps.event.addListener(map, 'bounds_changed', function () {
+        //   console.log('sds');
+        //   windy.stop();
+        //   context.clearRect(0, 0, 3000, 3000);
+        // });
       });
   }
 

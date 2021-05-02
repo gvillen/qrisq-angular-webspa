@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { StormData } from './storm.models';
+import { StormData } from '../models/StormData.models';
 
 export interface HurricaneViewerState {
   stormData: StormData;

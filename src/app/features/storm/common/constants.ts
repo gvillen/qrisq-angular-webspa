@@ -1,5 +1,11 @@
-import { WindRiskCategoryId } from './enums';
-import { WindRiskCategory } from './models';
+import {
+  SurgeRiskLevel,
+  SurgeRiskLevelId,
+} from '../models/SurgeRiskLevel.models';
+import {
+  WindRiskCategory,
+  WindRiskCategoryId,
+} from '../models/WindRiskCategory.models';
 
 export const WindRiskCategories: Record<
   WindRiskCategoryId,
@@ -46,5 +52,39 @@ export const WindRiskCategories: Record<
     shortDesc: 'Cat 5',
     speedDesc: '157 < MPH',
     colorHex: '#f70404',
+  },
+};
+
+export const SurgeRiskLevels: Record<
+  SurgeRiskLevelId,
+  Partial<SurgeRiskLevel>
+> = {
+  N: {
+    id: SurgeRiskLevelId.NoRisk,
+    riskDesc: 'NO',
+    levelDesc: '-',
+    colorHex: '#fff',
+    iconUrl: 'assets/icons/surge-risk/no.png',
+  },
+  L: {
+    id: SurgeRiskLevelId.LowRisk,
+    riskDesc: 'LOW',
+    levelDesc: 'Surge Nearby',
+    colorHex: '#f7f704',
+    iconUrl: 'assets/icons/surge-risk/low.png',
+  },
+  M: {
+    id: SurgeRiskLevelId.ModerateRisk,
+    riskDesc: 'MODERATE',
+    levelDesc: 'Up to 3ft.',
+    colorHex: '#f7a804',
+    iconUrl: 'assets/icons/surge-risk/moderate.png',
+  },
+  H: {
+    id: SurgeRiskLevelId.HighRisk,
+    riskDesc: 'HIGH',
+    levelDesc: 'More than 3ft.',
+    colorHex: '#f70404',
+    iconUrl: 'assets/icons/surge-risk/high.png',
   },
 };

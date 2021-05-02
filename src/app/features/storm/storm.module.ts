@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // pages
-import { QrStormViewerPageComponent } from './pages/storm/storm-page.component';
+import { QrStormViewerPageComponent as QrStormPageComponent } from './pages/storm/storm-page.component';
 
 // components
 import { StormComponent } from './storm.component';
 
 // services
-import { StormService } from './services/storm.service';
+import { QrStormDataService } from './services/StormData.service';
 
 // google maps
 import { AgmCoreModule } from '@agm/core';
@@ -21,14 +21,32 @@ import { DesignModule } from '@app/design/design.module';
 import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
-import { HurricaneViewerEffects } from './store/storm.effects';
+import { QrStormEffects } from './store/storm.effects';
 import { RouterModule } from '@angular/router';
+import { QrStormSummaryInfoComponent } from './components/qr-storm-summary-info/qr-storm-summary-info.component';
+import { QrStormSurgeService } from './services/StormSurgeService.service';
+import { QrStormMapComponent } from './components/qr-storm-map/qr-storm-map.component';
+import { QrStormSurgeInfoComponent } from './components/qr-storm-surge-info/qr-storm-surge-info.component';
 
 @NgModule({
-  declarations: [StormComponent, QrStormViewerPageComponent],
+  declarations: [
+    StormComponent,
+
+    // pages
+    QrStormPageComponent,
+
+    // summary
+    QrStormSummaryInfoComponent,
+    QrStormSurgeInfoComponent,
+
+    // map
+    QrStormMapComponent,
+  ],
   imports: [
     // angular
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
 
     // design & shared
     DesignModule,
@@ -42,8 +60,9 @@ import { RouterModule } from '@angular/router';
     }),
 
     // ngrx
-    EffectsModule.forFeature([HurricaneViewerEffects]),
+    EffectsModule.forFeature([QrStormEffects]),
   ],
-  providers: [StormService, GoogleMapsAPIWrapper, QrStormViewerPageComponent],
+  providers: [QrStormDataService, QrStormSurgeService, GoogleMapsAPIWrapper],
+  exports: [QrStormPageComponent],
 })
 export class QrStormModule {}

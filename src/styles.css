@@ -10,6 +10,12 @@
   src: local('Muli'), url(./assets/fonts/Muli.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Open Sans';
+  src: url(./assets/fonts/OpenSans-Regular.ttf) format('truetype'),
+    url(./assets/fonts/OpenSans-Bold.ttf) format('truetype') font-weight-bold;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

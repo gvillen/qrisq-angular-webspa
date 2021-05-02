@@ -1,3 +1,4 @@
+import { QrStormEffects } from './../features/storm/store/storm.effects';
 // angular
 import { NgModule } from '@angular/core';
 
@@ -25,7 +26,7 @@ import { IdentityEffects } from '@app/features/identity/store/identity.effects';
     DesignModule, // ngrx
     StoreModule.forRoot(reducers),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([IdentityEffects]),
+    EffectsModule.forRoot([IdentityEffects, QrStormEffects]),
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

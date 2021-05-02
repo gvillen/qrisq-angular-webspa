@@ -1,0 +1,100 @@
+<div class="container">
+  <agm-map
+    [latitude]="userLattitude"
+    [longitude]="userLongitude"
+    [zoom]="5"
+    [mapTypeId]="'hybrid'"
+    [disableDefaultUI]="true"
+    (mapReady)="mapReady($event)"
+  >
+    <ng-container *ngIf="mode === 'summary'">
+      <agm-data-layer
+        [geoJson]="surgeGeoJSON"
+        [style]="surgeStyleFunc"
+      ></agm-data-layer>
+      <agm-data-layer
+        [geoJson]="lineGeoJSON"
+        [style]="lineStyleFunc"
+      ></agm-data-layer>
+
+      <agm-data-layer
+        [geoJson]="pointsGeoJSON"
+        [style]="pointsStyleFunc"
+      ></agm-data-layer>
+
+      <agm-data-layer
+        [geoJson]="polygonsGeoJSON"
+        [style]="polygonsStyleFunc"
+      ></agm-data-layer>
+
+      <ng-container *ngIf="stormDistancePath$ | async as stormDistancePath">
+        <agm-polyline strokeColor="#fff" strokeWeight="3" zIndex="40">
+          <agm-icon-sequence
+            [offset]="'50%'"
+            [path]="stormDistancePath"
+            [scale]="1"
+            [strokeWeight]="2"
+            [rotation]="-90"
+            [anchorY]="10"
+          ></agm-icon-sequence>
+          <agm-polyline-point
+            [latitude]="userLattitude"
+            [longitude]="userLongitude"
+          >
+          </agm-polyline-point>
+          <agm-polyline-point
+            [latitude]="stormLattitude"
+            [longitude]="stormLongitude"
+          >
+          </agm-polyline-point>
+        </agm-polyline>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="mode === 'surge'">
+      <agm-data-layer
+        [geoJson]="surgeGeoJSON"
+        [style]="surgeStyleFunc"
+      ></agm-data-layer>
+    </ng-container>
+
+    <ng-container *ngIf="mode === 'wind'">
+      <agm-data-layer
+        [geoJson]="windGeoJSON"
+        [style]="windStyleFunc"
+      ></agm-data-layer>
+    </ng-container>
+
+    <agm-marker
+      [latitude]="userLattitude"
+      [longitude]="userLongitude"
+      [iconUrl]="levels[surgeRisk].iconUrl"
+    >
+    </agm-marker>
+    <!-- [iconUrl]="getUserLocationIcon(surgeRisk)" -->
+
+    <div id="select-map-layer">
+      <h1>Select Map Layer</h1>
+      <label
+        nz-checkbox
+        [(ngModel)]="isTrackAndConeChecked"
+        [nzDisabled]="activeLayer === 'wind'"
+        >Track and Cone</label
+      >
+      <nz-radio-group [(ngModel)]="activeLayer">
+        <label nz-radio nzValue="surge">Storm Surge</label>
+        <label nz-radio nzValue="wind">Max Winds</label>
+      </nz-radio-group>
+    </div>
+    E
+    <div id="property-surge-risk">
+      <img src="assets/images/property-surge-risk.png" />
+    </div>
+
+    <div id="legend-water-depth">
+      <img src="assets/images/legend-water-depth.png" />
+    </div>
+
+    <button id="Settings" class="toggle-button controls button">Button</button>
+  </agm-map>
+</div>

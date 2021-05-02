@@ -51,6 +51,7 @@ export interface SignInState {
 }
 
 export interface CredentialsState {
+  userId: number;
   accessToken: string;
   refreshToken: string;
 }

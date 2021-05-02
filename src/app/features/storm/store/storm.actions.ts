@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { StormData } from './storm.models';
+import { StormData } from '../models/StormData.models';
 
 export const actionStormDataFetchRequest = createAction(
   '[Hurricane Viewer] Storm Data Fetch Request',
-  props<{ userId: string }>()
+  props<{ userId: number; accessToken: string }>()
 );
 
 export const actionStormDataFetchRequestSuccess = createAction(
