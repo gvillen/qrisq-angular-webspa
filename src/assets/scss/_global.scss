@@ -18,5 +18,9 @@ h1, h2, h3, h4, h5, h6 {
     flex: 0 0 100%;
     margin-bottom: 30px;
     max-width: 100%;
+    &-offset-8 {
+      max-width: 94%;
+      margin: 0 auto 30px;
+    }
   }
 }
