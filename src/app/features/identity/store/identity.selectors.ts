@@ -1,5 +1,5 @@
 // ngrx
-import { RootState } from '@app/core/store/core.state';
+import { RootState } from '@app/core/store/state';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { IdentityState } from './identity.models';
 

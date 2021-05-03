@@ -87,13 +87,21 @@
       </nz-radio-group>
     </div>
     E
-    <div id="property-surge-risk">
-      <img src="assets/images/property-surge-risk.png" />
-    </div>
 
-    <div id="legend-water-depth">
-      <img src="assets/images/legend-water-depth.png" />
-    </div>
+    <ng-container *ngIf="activeLayer !== 'wind'">
+      <div id="property-surge-risk">
+        <img src="assets/images/property-surge-risk.png" />
+      </div>
+      <div id="legend-water-depth">
+        <img src="assets/images/legend-water-depth.png" />
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeLayer === 'wind'">
+      <div id="property-surge-risk">
+        <img src="assets/images/property-wind-risk.png" />
+      </div>
+    </ng-container>
 
     <button id="Settings" class="toggle-button controls button">Button</button>
   </agm-map>

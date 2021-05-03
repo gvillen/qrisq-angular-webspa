@@ -16,7 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 // store
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@env';
-import { reducers } from './store/core.state';
+import { reducers } from './store/state';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { IdentityEffects } from '@app/features/identity/store/identity.effects';
 
