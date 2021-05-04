@@ -7,13 +7,14 @@ import { routerReducer, RouterReducerState } from '@ngrx/router-store';
 import { Params } from '@angular/router';
 
 import { StormReducer } from '@app/features/storm/store/storm.reducer';
-import { HurricaneViewerState } from '@app/features/storm/store/storm.state';
+import { StormState } from '@app/features/storm/store/storm.state';
 import { IdentityReducer } from '@app/features/identity/store/identity.reducer';
 import { IdentityState } from '@app/features/identity/store/identity.models';
 import { storageSync } from '@larscom/ngrx-store-storagesync';
 
 export function storageSyncReducer(reducer: ActionReducer<RootState>) {
   const metaReducer = storageSync<RootState>({
+    version: 1,
     features: [
       {
         stateKey: 'router',
@@ -21,10 +22,11 @@ export function storageSyncReducer(reducer: ActionReducer<RootState>) {
       },
       {
         stateKey: 'identity',
-        excludeKeys: ['signIn', 'errors', 'loading'],
       },
     ],
     storage: window.localStorage,
+    storageError: console.error,
+    rehydrate: true,
   });
 
   return metaReducer(reducer);
@@ -44,6 +46,6 @@ export interface RouterStateUrl {
 
 export interface RootState {
   identity: IdentityState;
-  storm: HurricaneViewerState;
+  storm: StormState;
   router: RouterReducerState<RouterStateUrl>;
 }

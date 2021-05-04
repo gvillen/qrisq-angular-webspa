@@ -10,13 +10,13 @@ import { CompanyWidgetGroupComponent } from './components/company-widget-group/c
 import { NoAuthGuard } from '@core/guard/no-auth.guard';
 
 // ngrx
-import { StoreModule } from '@ngrx/store';
+import { ActionReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 // store
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@env';
-import { reducers } from './store/state';
+import { reducers, RootState, storageSyncReducer } from './store/state';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { IdentityEffects } from '@app/features/identity/store/identity.effects';
 
@@ -24,14 +24,6 @@ import { IdentityEffects } from '@app/features/identity/store/identity.effects';
   declarations: [CompanyWidgetGroupComponent],
   imports: [
     DesignModule, // ngrx
-    StoreModule.forRoot(reducers),
-    StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([IdentityEffects, QrStormEffects]),
-    // Instrumentation must be imported after importing StoreModule (config is optional)
-    StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
-    }),
   ],
   exports: [CompanyWidgetGroupComponent],
   providers: [NoAuthGuard],

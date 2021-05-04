@@ -113,3 +113,13 @@ export const actionSignUpAddressChanged = createAction(
   '[Identity] Sign In Address Changed',
   props<{ address: GeocodedAddress }>()
 );
+
+export const actionAccessTokenRefreshed = createAction(
+  '[Identity] Access Token Refreshed',
+  props<{ newAccessToken: string }>()
+);
+
+export const actionSignOut = createAction(
+  '[Identity] Sign Out',
+  props<{ refreshToken: string }>()
+);

@@ -76,9 +76,6 @@ import { QrGeolocationPageComponent } from './pages/geolocation/geolocation.comp
 
     // angular-cc-library
     CreditCardDirectivesModule,
-
-    // ngrx
-    EffectsModule.forFeature([IdentityEffects]),
   ],
   providers: [
     QrIdentityService,

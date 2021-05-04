@@ -4,11 +4,11 @@ import {
   actionStormDataFetchRequest,
   actionStormDataFetchRequestSuccess,
 } from './storm.actions';
-import { HurricaneViewerState, initialState } from './storm.state';
+import { StormState, initialState } from './storm.state';
 
 const reducer = createReducer(
   initialState,
-  on(actionStormDataFetchRequest, (state, { userId, accessToken }) => ({
+  on(actionStormDataFetchRequest, (state, { userId }) => ({
     ...state,
     loading: true,
   })),
@@ -24,8 +24,8 @@ const reducer = createReducer(
 );
 
 export function StormReducer(
-  state: HurricaneViewerState | undefined,
+  state: StormState | undefined,
   action: Action
-): HurricaneViewerState {
+): StormState {
   return reducer(state, action);
 }

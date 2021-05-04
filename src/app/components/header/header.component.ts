@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,11 @@ export class AppHeaderComponent implements OnInit {
 
   @Input() userFirstName: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  openStormViewer() {
+    this.router.navigate(['/storm']); 2
+  }
 }

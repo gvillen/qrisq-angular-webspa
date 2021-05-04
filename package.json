@@ -42,6 +42,7 @@
     "express": "^4.17.1",
     "guid-typescript": "^1.0.9",
     "gzipy": "^0.0.2",
+    "hex-rgb": "^5.0.0",
     "moment": "^2.29.1",
     "ng-zorro-antd": "^11.1.0",
     "ngrx-store-localstorage": "^11.0.0",

@@ -1,5 +1,8 @@
 <app-layout class="main-layout">
-  <app-header [isUserLogin]="isUserLogin"></app-header>
+  <app-header
+    [isUserLogin]="isUserLogin"
+    [userFirstName]="userFirstName"
+  ></app-header>
   <app-content>
     <router-outlet></router-outlet>
   </app-content>

@@ -1,16 +1,16 @@
 import { createAction, props } from '@ngrx/store';
-import { StormData } from '../models/StormData.models';
+import { StormData } from '../models/storm.models';
 
 export const actionStormDataFetchRequest = createAction(
-  '[Hurricane Viewer] Storm Data Fetch Request',
-  props<{ userId: number; accessToken: string }>()
+  '[Storm] Storm Data Fetch Request',
+  props<{ userId: number }>()
 );
 
 export const actionStormDataFetchRequestSuccess = createAction(
-  '[Hurricane Viewer] Storm Data Fetch Request Success',
+  '[Storm] Storm Data Fetch Request Success',
   props<{ stormData: StormData }>()
 );
 
 export const actionStormDataFetchRequestFailed = createAction(
-  '[Hurricane Viewer] Storm Data Fetch Request Failed'
+  '[Storm] Storm Data Fetch Request Failed'
 );

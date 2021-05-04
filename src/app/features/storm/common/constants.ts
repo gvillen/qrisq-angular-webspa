@@ -1,57 +1,62 @@
 import {
-  SurgeRiskLevel,
+  WindRiskLevelId,
+  WindRiskLevel,
   SurgeRiskLevelId,
-} from '../models/SurgeRiskLevel.models';
-import {
-  WindRiskCategory,
-  WindRiskCategoryId,
-} from '../models/WindRiskCategory.models';
+  SurgeRiskLevel,
+} from '../models/storm.models';
 
-export const WindRiskCategories: Record<
-  WindRiskCategoryId,
-  Partial<WindRiskCategory>
+export const WindRiskLevels: Record<
+  WindRiskLevelId,
+  Partial<WindRiskLevel>
 > = {
   N: {
-    id: WindRiskCategoryId.Minimal,
+    id: WindRiskLevelId.Minimal,
     shortDesc: 'Minimal',
     speedDesc: '',
     colorHex: '#fff',
+    iconUrl: 'assets/icons/minimal-wind.png',
   },
   TS: {
-    id: WindRiskCategoryId.TropicalStorm,
+    id: WindRiskLevelId.TropicalStorm,
     shortDesc: 'Tropical Storm',
     speedDesc: '39-73 MPH',
     colorHex: '#0404f7',
+    iconUrl: 'assets/icons/tropicalstorm-wind.png',
   },
   '1': {
-    id: WindRiskCategoryId.Category1,
+    id: WindRiskLevelId.Category1,
     shortDesc: 'Cat 1',
     speedDesc: '74-95 MPH',
     colorHex: '#04f7f7',
+    iconUrl: 'assets/icons/category1-wind.png',
   },
   '2': {
-    id: WindRiskCategoryId.Category2,
+    id: WindRiskLevelId.Category2,
     shortDesc: 'Cat 2',
     speedDesc: '96-110 MPH',
     colorHex: '#04f704',
+    iconUrl: 'assets/icons/category2-wind.png',
   },
   '3': {
-    id: WindRiskCategoryId.Category3,
+    id: WindRiskLevelId.Category3,
     shortDesc: 'Cat 3',
     speedDesc: '111-129 MPH',
     colorHex: '#f7f704',
+    iconUrl: 'assets/icons/category3-wind.png',
   },
   '4': {
-    id: WindRiskCategoryId.Category4,
+    id: WindRiskLevelId.Category4,
     shortDesc: 'Cat 4',
     speedDesc: '130-156 MPH',
     colorHex: '#f7a804',
+    iconUrl: 'assets/icons/category4-wind.png',
   },
   '5': {
-    id: WindRiskCategoryId.Category5,
+    id: WindRiskLevelId.Category5,
     shortDesc: 'Cat 5',
     speedDesc: '157 < MPH',
     colorHex: '#f70404',
+    iconUrl: 'assets/icons/category5-wind.png',
   },
 };
 
@@ -64,27 +69,27 @@ export const SurgeRiskLevels: Record<
     riskDesc: 'NO',
     levelDesc: '-',
     colorHex: '#fff',
-    iconUrl: 'assets/icons/surge-risk/no.png',
+    iconUrl: 'assets/icons/no-risk.png',
   },
   L: {
     id: SurgeRiskLevelId.LowRisk,
     riskDesc: 'LOW',
     levelDesc: 'Surge Nearby',
     colorHex: '#f7f704',
-    iconUrl: 'assets/icons/surge-risk/low.png',
+    iconUrl: 'assets/icons/low-risk.png',
   },
   M: {
     id: SurgeRiskLevelId.ModerateRisk,
     riskDesc: 'MODERATE',
     levelDesc: 'Up to 3ft.',
     colorHex: '#f7a804',
-    iconUrl: 'assets/icons/surge-risk/moderate.png',
+    iconUrl: 'assets/icons/moderate-risk.png',
   },
   H: {
     id: SurgeRiskLevelId.HighRisk,
     riskDesc: 'HIGH',
     levelDesc: 'More than 3ft.',
     colorHex: '#f70404',
-    iconUrl: 'assets/icons/surge-risk/high.png',
+    iconUrl: 'assets/icons/high-risk.png',
   },
 };

@@ -1,7 +1,7 @@
 // ngrx
 import { RootState } from '@app/core/store/state';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IdentityState } from './identity.models';
+import { CredentialsState, IdentityState } from './identity.models';
 
 export const selectIdentityState = createFeatureSelector<
   RootState,
@@ -22,4 +22,14 @@ export const selectSignIn = createSelector(
 export const selectCredentials = createSelector(
   selectIdentityState,
   (state: IdentityState) => state.credentials
+);
+
+export const selectSignedUser = createSelector(
+  selectIdentityState,
+  (state: IdentityState) => state.signedUser
+);
+
+export const selectIsAuthenticated = createSelector(
+  selectCredentials,
+  (state: CredentialsState) => state.isAuthenticated
 );

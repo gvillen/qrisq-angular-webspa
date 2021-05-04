@@ -1,40 +1,26 @@
-import { selectStormData } from './../../store/storm.selectors';
-import { WindRiskCategories } from '../../common/constants';
-// angular
-import { GoogleMapsAPIWrapper } from '@agm/core';
-import { Component, OnInit } from '@angular/core';
-
-// gzip
-import pako from 'pako';
-
-// rxjs
-import { forkJoin, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-
-// services
-import { QrStormDataService } from '../../services/StormData.service';
-
-// data
-import { select, Store } from '@ngrx/store';
-import { TimeUtils } from '../../common/utils';
-import {
-  selectCredentials,
-  selectSignIn,
-} from '@app/features/identity/store/identity.selectors';
-import { actionStormDataFetchRequest } from '../../store/storm.actions';
-import { QrIdentityService } from '@app/features/identity/services/identity.service';
-import { StormData } from '../../models/StormData.models';
-import { QrStormSurgeService } from '../../services/StormSurgeService.service';
-import { StormGeoJSON } from '../../models/StormGeoJSON.models';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { environment } from '@env';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { WindRiskLevels } from '../../common/constants';
+import { TimeUtils } from '../../common/utils';
+import { actionStormDataFetchRequest } from '../../store/storm.actions';
+import { selectStormData } from '../../store/storm.selectors';
+
+import { QrStormService } from '../../services/storm.service';
+import { QrIdentityService } from '@app/features/identity/services/identity.service';
+import { selectSignedUser } from '@app/features/identity/store/identity.selectors';
+import { map, take } from 'rxjs/operators';
+import { StormData } from '../../models/storm.models';
 
 @Component({
   selector: 'qr-storm-page',
   templateUrl: './storm-page.component.html',
   styleUrls: ['./storm-page.component.css'],
 })
-export class QrStormViewerPageComponent implements OnInit {
+export class QrStormPageComponent implements OnInit {
   lat: number;
   lng: number;
   zoom = 4;
@@ -53,44 +39,25 @@ export class QrStormViewerPageComponent implements OnInit {
   mapMode = 'summary';
 
   stormData$: Observable<StormData> = this.store.select(selectStormData);
-  stormGeoJSON$: Observable<StormGeoJSON>;
   surgeGeoJson: Object;
 
   public get windRiskCategories() {
-    return WindRiskCategories;
+    return WindRiskLevels;
   }
 
   constructor(
     private store: Store,
     private identityService: QrIdentityService,
-    private stormService: QrStormDataService,
-    private stormSurgeService: QrStormSurgeService,
+    private stormService: QrStormService,
     private httpClient: HttpClient
   ) {}
 
   ngOnInit() {
-    // this.fetchSurge();
-    this.identityService
-      .signIn('jdoe@worldwindsinc.com', 'unknown')
-      .subscribe((credentials) =>
-        this.store.dispatch(
-          actionStormDataFetchRequest({
-            userId: 17,
-            accessToken: credentials['access'],
-          })
-        )
+    this.store
+      .select(selectSignedUser)
+      .subscribe((signedUser) =>
+        this.store.dispatch(actionStormDataFetchRequest({ userId: 17 }))
       );
-
-    this.stormSurgeService.getSurgeGeoJSON().subscribe((surge) => {
-      console.log(surge);
-      this.surgeGeoJson = surge;
-    });
-
-    // this.stormData$.subscribe(stormData => {
-    //   if(stormData) {
-    //     this.stormGeoJSON$ = new Obvservable<>
-    //   }
-    // });
   }
 
   toCDT(utc) {

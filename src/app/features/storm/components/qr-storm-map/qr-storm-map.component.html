@@ -8,10 +8,10 @@
     (mapReady)="mapReady($event)"
   >
     <ng-container *ngIf="mode === 'summary'">
-      <agm-data-layer
+      <!-- <agm-data-layer
         [geoJson]="surgeGeoJSON"
         [style]="surgeStyleFunc"
-      ></agm-data-layer>
+      ></agm-data-layer> -->
       <agm-data-layer
         [geoJson]="lineGeoJSON"
         [style]="lineStyleFunc"
@@ -26,6 +26,7 @@
         [geoJson]="polygonsGeoJSON"
         [style]="polygonsStyleFunc"
       ></agm-data-layer>
+      -->
 
       <ng-container *ngIf="stormDistancePath$ | async as stormDistancePath">
         <agm-polyline strokeColor="#fff" strokeWeight="3" zIndex="40">
@@ -71,6 +72,7 @@
       [iconUrl]="levels[surgeRisk].iconUrl"
     >
     </agm-marker>
+    -->
     <!-- [iconUrl]="getUserLocationIcon(surgeRisk)" -->
 
     <div id="select-map-layer">

@@ -19,9 +19,10 @@ import { QrCheckServiceAreaPageComponent } from './features/identity/pages/check
 import { QrServiceAreaAvailablePageComponent } from './features/identity/pages/service-area-available-page/service-area-available-page.componet';
 import { QrRegisterPageComponent } from './features/identity/pages/register/register-page.component';
 import { QrAccountCreatedPageComponent } from './features/identity/pages/account-created/account-created.component';
-import { QrStormViewerPageComponent } from './features/storm/pages/storm/storm-page.component';
+import { QrStormPageComponent } from './features/storm/pages/storm/storm-page.component';
 import { QrLoginPageComponent } from './features/identity/pages/login-page/login-page.component';
 import { QrGeolocationPageComponent } from './features/identity/pages/geolocation/geolocation.component';
+import { AuthGuard } from './core/guard/auth.guard';
 
 const routes: Routes = [
   { path: 'home', component: QrHomePageComponent },
@@ -74,16 +75,13 @@ const routes: Routes = [
     component: QrAccountCreatedPageComponent,
   },
   {
-    path: 'hurricane-viewer/wind-risk',
-    component: QrStormViewerPageComponent,
-  },
-  {
     path: 'identity/login',
     component: QrLoginPageComponent,
   },
   {
     path: 'storm',
-    component: QrStormViewerPageComponent,
+    component: QrStormPageComponent,
+    canActivate: [AuthGuard],
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' },

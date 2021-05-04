@@ -2,6 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { HttpSignInResponse } from '../models/HttpSignInResponse.models';
 
 import {
+  actionAccessTokenRefreshed,
   actionCheckServiceAreaRequest,
   actionCheckServiceAreaRequestSuccess,
   actionCreateAccountRequest,
@@ -17,6 +18,7 @@ import {
   actionSignInFailed,
   actionSignInRequest,
   actionSignInSuccess,
+  actionSignOut,
   actionSignUpAddressChanged,
   actionVerifyEmailRequest,
   actionVerifyEmailRequestFailed,
@@ -170,6 +172,7 @@ const reducer = createReducer(
       userId: response.user.id,
       accessToken: response.access,
       refreshToken: response.refresh,
+      isAuthenticated: true,
     },
   })),
 
@@ -227,6 +230,26 @@ const reducer = createReducer(
       addressState: address.state,
       addressZip: address.zipCode,
     },
+  })),
+
+  //
+  // Access Token Refreshed
+  //
+  on(actionAccessTokenRefreshed, (state, { newAccessToken }) => ({
+    ...state,
+    credentials: {
+      ...state.credentials,
+      access: newAccessToken,
+    },
+  })),
+
+  //
+  // SignOut
+  //
+  on(actionSignOut, (state, { refreshToken }) => ({
+    ...state,
+    signedUser: null,
+    credentials: null,
   }))
 );
 

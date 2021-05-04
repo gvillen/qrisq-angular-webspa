@@ -3,7 +3,8 @@ import { AgmGeocoder } from '@agm/core';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
-import { SignUpState } from '../store/identity.models';
+import { CredentialsState, SignUpState } from '../store/identity.models';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -81,6 +82,26 @@ export class QrIdentityService {
       {
         email: email,
       },
+      {
+        headers: { 'Content-type': 'application/json; charset=utf-8' },
+      }
+    );
+  }
+
+  refreshCredentials(refreshToken: string) {
+    return this.httpClient.post(
+      environment.API_URL + '/auth/refresh',
+      { refresh: refreshToken },
+      {
+        headers: { 'Content-type': 'application/json; charset=utf-8' },
+      }
+    );
+  }
+
+  signOut(refreshToken: string) {
+    return this.httpClient.post(
+      environment.API_URL + '/auth/logout',
+      { refresh: refreshToken },
       {
         headers: { 'Content-type': 'application/json; charset=utf-8' },
       }

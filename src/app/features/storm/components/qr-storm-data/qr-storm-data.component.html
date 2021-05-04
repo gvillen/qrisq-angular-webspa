@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="storm-name">
+    <h3>
+      <span
+        ><img nz-image nzSrc="/assets/images/icon-triangle-green.png"
+      /></span>
+      {{ stormName }} Impact
+    </h3>
+  </div>
+
+  <div class="user-address">
+    <h4>
+      Expected at {{ userAddress }}
+      <span class="icon-level">
+        <img
+          [src]="
+            mode === 'wind' ? windLevels[windRisk] : surgeLevels[surgeRisk]
+          "
+        />
+      </span>
+    </h4>
+  </div>
+
+  <div class="risk-header">
+    <ng-container
+      *ngIf="mode === 'wind'; then windRiskHeader; else surgeRiskHeader"
+    ></ng-container>
+
+    <ng-template #windRiskHeader
+      ><h1>
+        Max Sustained Winds of
+        <span
+          [style]="{
+            color: windLevels[windRisk].colorHex
+          }"
+          >{{ windLevels[windRisk].shortDesc }}
+        </span>
+        {{ windLevels[windRisk].speedDesc }}
+      </h1></ng-template
+    >
+
+    <ng-template #surgeRiskHeader
+      ><h1>
+        <span
+          [style]="{
+            color: surgeLevels[surgeRisk].colorHex
+          }"
+          >{{ surgeLevels[surgeRisk].riskDesc }}</span
+        >
+        Surge Risk ({{ levels[surgeRisk].levelDesc }})
+      </h1></ng-template
+    >
+  </div>
+
+  <div class="advisory-date">
+    <h4>~{{ advisoryDate }}</h4>
+  </div>
+
+  <ng-container *ngIf="mode === 'summary'">
+    <div class="landfall-expected">
+      <h2>Landfall Expected ~{{ toCDT(landfallDate) }}</h2>
+      <h4>Near {{ landfallLocation }}</h4>
+    </div>
+  </ng-container>
+</div>

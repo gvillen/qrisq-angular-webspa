@@ -26,6 +26,7 @@ import {
   actionSignInFailed,
   actionSignInRequest,
   actionSignInSuccess,
+  actionSignOut,
   actionVerifyEmailRequest,
   actionVerifyEmailRequestFailed,
   actionVerifyEmailRequestSuccess,
@@ -237,6 +238,23 @@ export class IdentityEffects {
     { dispatch: false }
   );
 
+  //
+  // SignOut
+  //
+  effectSignOut = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionSignOut),
+        switchMap((action) =>
+          this.identityService.signOut(action.refreshToken).pipe(take(1))
+        )
+      ),
+    { dispatch: false }
+  );
+
+  //
+  // Create Account Request
+  //
   effectCreateAccountRequest = createEffect(() =>
     this.actions$.pipe(
       ofType(actionCreateAccountRequest),

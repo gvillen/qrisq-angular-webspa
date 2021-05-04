@@ -6,7 +6,9 @@
   </div>
 
   <div class="button-container">
-    <button nz-button nzShape="round" nzGhost>Hurricane Viewer</button>
+    <button nz-button nzShape="round" nzGhost (click)="openStormViewer()">
+      Hurricane Viewer
+    </button>
   </div>
 
   <ng-template #submenuTitleStormDataTpl>

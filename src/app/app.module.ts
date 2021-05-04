@@ -29,6 +29,18 @@ import { QrInsurancePageComponent } from './pages/services/insurance-page/insura
 import { QrHindcastPageComponent } from './pages/storm-data/hindcast-page/hindcast-page.component';
 import { QrIdentityModule } from './features/identity/identity.module';
 import { QrHomePageComponent } from './home/home-page.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { AuthGuard } from './core/guard/auth.guard';
+import { StoreModule } from '@ngrx/store';
+import { reducers, storageSyncReducer } from './core/store/state';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
+import { IdentityEffects } from './features/identity/store/identity.effects';
+import { QrStormEffects } from './features/storm/store/storm.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '@env';
+import { QrStormModule } from './features/storm/storm.module';
 
 registerLocaleData(en);
 
@@ -53,7 +65,14 @@ registerLocaleData(en);
     // angular
     BrowserModule,
     BrowserAnimationsModule,
-
+    StoreModule.forRoot(reducers, { metaReducers: [storageSyncReducer] }),
+    StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot([IdentityEffects, QrStormEffects]),
+    // Instrumentation must be imported after importing StoreModule (config is optional)
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
     // third-party
     GooglePlaceModule,
 
@@ -63,7 +82,16 @@ registerLocaleData(en);
     DesignModule,
     SharedModule,
     QrIdentityModule,
+    QrStormModule,
   ],
   bootstrap: [AppComponent],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class AppModule {}
