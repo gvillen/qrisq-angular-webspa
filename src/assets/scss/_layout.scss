@@ -1,10 +1,15 @@
 .main-container {
+  align-items: center;
+  background-color: #fff;
+  background-size: contain;
+  background-image: url('/assets/images/bg-graph.png') !important;
+  background-repeat: no-repeat;
+  background-attachment: scroll!important;
+  background-position: -75px 600px!important;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   width: 100%;
-  background-color: #fff;
 }
 /* page-content */
 .page-content {
@@ -19,16 +24,28 @@
 }
 
 /* bullet text */
+.bullet-paragraph-container {
+  display: flex;
+  align-items: flex-start;
+  img {
+    max-width: 100%;
+    height: auto;
+    max-height: 40px;
+    margin-top: 5px;
+    margin-bottom: auto;
+    margin-right: 30px;
+  }
+  h3 {
+    margin: 0;
+  }
+}
+
+/*content sections*/
 
 .section-content {
   width: 100%;
   padding-top: 1%;
   padding-bottom: 4%;
-  background-color: #fff;
-  background-size: contain;
-  background-image: url('/assets/images/bg-graph.png') !important;
-  background-repeat: no-repeat;
-  background-position: left center;
 }
 
 .section-content .inner-container {
@@ -114,6 +131,7 @@
   margin-top: -24px;
 }
 
+.section-footer-ourservices h3,
 .section-footer-trackstorm h3,
 .section-footer-messageform h3 {
   font-family: Roboto, Arial, Helvetica, sans-serif;
@@ -122,6 +140,7 @@
   font-size: 24px;
 }
 
+.section-footer-ourservices img,
 .section-footer-trackstorm img {
   max-width: 100%;
   height: auto;
@@ -129,18 +148,20 @@
   margin-bottom: auto;
 }
 
+.section-footer-ourservices p,
 .section-footer-trackstorm p {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  font-weight: 450;
+  font-size: 1rem;
+  margin: 20px 0;
+  min-height: 130px;
 }
 
+.section-footer-ourservices button,
 .section-footer-trackstorm button,
 .section-footer-messageform button {
   font-weight: 500;
 }
 
+.section-footer-ourservices,
 .section-footer-trackstorm,
 .section-footer-messageform {
   padding: 0px 24px;
@@ -160,4 +181,9 @@ nz-divider {
   width: 94%!important;
   min-width: 94%!important;
   margin: 24px auto;
+}
+
+/* Forms, inputs*/
+.ant-form-item {
+  margin-bottom: 7px;
 }
