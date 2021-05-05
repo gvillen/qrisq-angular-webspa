@@ -66,7 +66,6 @@ export class QrStormPageComponent implements OnInit {
 
   onMapModeChange(mode) {
     this.mapMode = mode;
-    console.log(mode);
   }
 
   mapReady(event) {

@@ -46,6 +46,16 @@ qrisq-banner p {
   background-position: left top;
 }
 
+/****** storm-section ******/
+.storm-section {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /****** storm-data ******/
 
 .storm-data {

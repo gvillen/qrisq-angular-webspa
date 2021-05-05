@@ -14,7 +14,9 @@
       <span class="icon-level">
         <img
           [src]="
-            mode === 'wind' ? windLevels[windRisk] : surgeLevels[surgeRisk]
+            mode === 'wind'
+              ? windLevels[windRisk].iconUrl
+              : surgeLevels[surgeRisk].iconUrl
           "
         />
       </span>
@@ -47,7 +49,7 @@
           }"
           >{{ surgeLevels[surgeRisk].riskDesc }}</span
         >
-        Surge Risk ({{ levels[surgeRisk].levelDesc }})
+        Surge Risk ({{ surgeLevels[surgeRisk].levelDesc }})
       </h1></ng-template
     >
   </div>
