@@ -1,7 +1,7 @@
-<nz-header>
-  <div class="logo-container">
+<nz-header class="navbar navbar-expand-lg" (scroll)="onWindowScroll($event);">
+  <div class="logo-container navbar-brand">
     <a href="/home">
-      <img height="60px" src="/assets/images/qrisq-logo-3d.png" alt="Qrisq" />
+      <img src="/assets/images/qrisq-logo-3d.png" alt="Qrisq" />
     </a>
   </div>
 
@@ -31,8 +31,11 @@
     <i nz-icon nzType="down"></i>
   </ng-template>
 
-  <div class="menu-container">
-    <ul nz-menu nzMode="horizontal">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation" (click)="isMenuCollapsed = !isMenuCollapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div [ngbCollapse]="isMenuCollapsed" class="menu-container collapse navbar-collapse" id="navbarToggler" role="navigation">
+    <ul class="navbar-nav" nz-menu nzMode="horizontal">
       <li nz-submenu [nzTitle]="submenuTitleStormDataTpl">
         <ul>
           <li nz-menu-item nzMatchRouter>
