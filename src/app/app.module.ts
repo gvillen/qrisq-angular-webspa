@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import en from '@angular/common/locales/en';
 
 // google maps
@@ -65,6 +66,7 @@ registerLocaleData(en);
     // angular
     BrowserModule,
     BrowserAnimationsModule,
+    NgbModule,
     StoreModule.forRoot(reducers, { metaReducers: [storageSyncReducer] }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([IdentityEffects, QrStormEffects]),
