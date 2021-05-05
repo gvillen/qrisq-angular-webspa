@@ -25,7 +25,9 @@ import { QrGeolocationPageComponent } from './features/identity/pages/geolocatio
 import { AuthGuard } from './core/guard/auth.guard';
 
 const routes: Routes = [
-  { path: 'home', component: QrHomePageComponent },
+  { path: 'home',
+    component: QrHomePageComponent,
+  },
   {
     path: 'storm-data/forecast',
     component: QrForecastPageComponent,
