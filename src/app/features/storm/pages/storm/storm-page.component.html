@@ -14,17 +14,19 @@
   <div class="page-content">
     <div class="storm-section">
       <ng-container *ngIf="stormData$ | async as stormData">
-        <!-- <qr-storm-data
+        <qr-storm-data
           [stormName]="stormData.stormName"
           [userAddress]="stormData.address"
           [userAddress]="stormData.address"
           [surgeRisk]="stormData.surgeRisk"
+          [windRisk]="stormData.windRisk"
           [advisoryDate]="stormData.advisoryDate"
           [landfallDate]="stormData.landfallDate"
           [landfallLocation]="stormData.landfallLocation"
           [stormDistance]="stormData.stormDistance"
+          [mode]="mapMode"
         >
-        </qr-storm-data> -->
+        </qr-storm-data>
 
         <qr-storm-map
           [surgeGeoJSON]="stormData.surgeGeoJSON"

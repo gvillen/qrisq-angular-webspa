@@ -5,6 +5,7 @@ import { SurgeRiskLevels } from '../../common/constants';
 import moment from 'moment';
 import { Observable } from 'rxjs';
 import hexRgb from 'hex-rgb';
+import { getESRISurgeLevelColor } from '../../common/utils';
 
 @Component({
   selector: 'qr-storm-map',
@@ -700,15 +701,16 @@ export class QrStormMapComponent implements OnInit {
         fillColor = '#DCDCDC';
       }
     }
+    fillColor = getESRISurgeLevelColor(Number.parseFloat(maxft));
     return {
       clickable: false,
       draggable: false,
       editable: false,
       fillColor: fillColor,
       fillOpacity: 0.7,
-      strokeOpacity: 0.5,
       strokeColor: fillColor,
-      strokeWeight: 2,
+      strokeWeight: 0.2,
+      strokeOpacity: 0.7,
     };
   }
 
@@ -1249,41 +1251,41 @@ export class QrStormMapComponent implements OnInit {
     );
 
     // @ts-ignore TODO(jpoehnelt) fix deckgl typings
-    const deckOverlay = new deck.GoogleMapsOverlay({
-      layers: [
-        // @ts-ignore TODO(jpoehnelt) fix deckgl typings
-        new deck.GeoJsonLayer({
-          id: 'earthquakes',
-          data: this.surgeGeoJSON,
-          filled: true,
-          pointRadiusMinPixels: 2,
-          pointRadiusMaxPixels: 200,
-          opacity: 0.4,
-          pointRadiusScale: 0.3,
-          getRadius: (f: any) => Math.pow(10, f.properties.mag),
-          getFillColor: (f) => {
-            const { red, green, blue } = hexRgb(this.deckSurgeStyleFunc(f));
-            return [red, green, blue, 255];
-          },
-          autoHighlight: true,
-          transitions: {
-            getRadius: {
-              type: 'spring',
-              stiffness: 0.1,
-              damping: 0.15,
-              enter: (_) => [0], // grow from size 0,
-              duration: 10000,
-            },
-          },
-          onDataLoad: (_) => {
-            // @ts-ignore defined in include
-            progress.done(); // hides progress bar
-          },
-        }),
-      ],
-    });
+    // const deckOverlay = new deck.GoogleMapsOverlay({
+    //   layers: [
+    //     // @ts-ignore TODO(jpoehnelt) fix deckgl typings
+    //     new deck.GeoJsonLayer({
+    //       id: 'earthquakes',
+    //       data: this.surgeGeoJSON,
+    //       filled: true,
+    //       pointRadiusMinPixels: 2,
+    //       pointRadiusMaxPixels: 200,
+    //       opacity: 0.4,
+    //       pointRadiusScale: 0.3,
+    //       getRadius: (f: any) => Math.pow(10, f.properties.mag),
+    //       getFillColor: (f) => {
+    //         const { red, green, blue } = hexRgb(this.deckSurgeStyleFunc(f));
+    //         return [red, green, blue, 255];
+    //       },
+    //       autoHighlight: true,
+    //       transitions: {
+    //         getRadius: {
+    //           type: 'spring',
+    //           stiffness: 0.1,
+    //           damping: 0.15,
+    //           enter: (_) => [0], // grow from size 0,
+    //           duration: 10000,
+    //         },
+    //       },
+    //       onDataLoad: (_) => {
+    //         // @ts-ignore defined in include
+    //         progress.done(); // hides progress bar
+    //       },
+    //     }),
+    //   ],
+    // });
 
-    deckOverlay.setMap(map);
+    // deckOverlay.setMap(map);
 
     // let windy;
     // let canvasLayer;

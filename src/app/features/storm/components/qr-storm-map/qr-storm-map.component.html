@@ -8,10 +8,10 @@
     (mapReady)="mapReady($event)"
   >
     <ng-container *ngIf="mode === 'summary'">
-      <!-- <agm-data-layer
+      <agm-data-layer
         [geoJson]="surgeGeoJSON"
         [style]="surgeStyleFunc"
-      ></agm-data-layer> -->
+      ></agm-data-layer>
       <agm-data-layer
         [geoJson]="lineGeoJSON"
         [style]="lineStyleFunc"
