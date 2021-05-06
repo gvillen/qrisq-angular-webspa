@@ -8,7 +8,7 @@ import { SignUpService } from '../../service/SignUpService.service';
 @Component({
   selector: 'qrisq-payment-successful',
   templateUrl: './payment-successful.component.html',
-  styleUrls: ['./payment-successful.component.css'],
+  styleUrls: ['./payment-successful.component.scss'],
 })
 export class RegisterPaymentSuccessfulPageComponent implements OnInit {
   constructor(private router: Router) {}

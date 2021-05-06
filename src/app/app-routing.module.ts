@@ -27,7 +27,9 @@ import { QrRegisterPaymentPageComponent } from './features/identity/pages/paymen
 import { PaymentGuard } from './core/guard/payment.guards';
 
 const routes: Routes = [
-  { path: 'home', component: QrHomePageComponent },
+  { path: 'home',
+    component: QrHomePageComponent,
+  },
   {
     path: 'storm-data/forecast',
     component: QrForecastPageComponent,

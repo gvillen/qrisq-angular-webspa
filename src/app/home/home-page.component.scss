@@ -1,75 +1,25 @@
-.main-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: #fff;
-}
-
-qrisq-banner .banner-content {
-  padding-right: 60%;
-}
-
-qrisq-banner h2 {
-  color: #fff;
-  font-size: 3rem;
-  font-family: Oswald, Arial, Helvetica, sans-serif;
-  font-weight: 520;
-}
-
-qrisq-banner p {
-  color: #fff;
-  font-size: 1.1rem;
-  font-family: Rubik, Arial, Helvetica, sans-serif;
-}
-
-qrisq-banner .button-container {
-  width: 100%;
-  text-align: right;
-}
-
-qrisq-banner button {
-  width: 160px;
-}
-
-.page-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 92%;
-  margin: auto;
-  padding-bottom: 5%;
-}
-
 .section-bg-image {
   background-size: contain;
   background-image: url('/assets/images/map-bg.png') !important;
   background-repeat: no-repeat;
   background-position: center right;
   width: 100%;
+  @media (max-width: 980px) {
+    background-image: initial !important;
+    .ant-row {
+      width: 100%;
+      .ant-col {
+        max-width: 100%;
+        padding: 0 20px;
+      }
+    }
+  }
 }
 
 [nz-row].section {
   padding: 40px 0px;
   font-size: 1.5rem;
   font-family: Rubik, Arial, Helvetica, sans-serif;
-}
-
-.bullet-paragraph-container {
-  display: flex;
-  align-items: flex-start;
-}
-
-.bullet-paragraph-container img {
-  max-width: 100%;
-  height: auto;
-  max-height: 40px;
-  margin-top: 5px;
-  margin-bottom: auto;
-  margin-right: 30px;
 }
 
 .section-forecast {

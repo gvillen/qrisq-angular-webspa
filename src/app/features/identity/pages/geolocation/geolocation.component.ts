@@ -23,7 +23,7 @@ import { SignUpState } from '../../store/identity.models';
 @Component({
   selector: 'qrisq-register-geolocation-page',
   templateUrl: './geolocation.component.html',
-  styleUrls: ['./geolocation.component.css'],
+  styleUrls: ['./geolocation.component.scss'],
 })
 export class QrGeolocationPageComponent implements OnInit {
   @ViewChild('mapMarker') googleMapMarker: ElementRef;
