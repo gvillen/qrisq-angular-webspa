@@ -1,7 +1,8 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Action, createAction, props } from '@ngrx/store';
 import { GeocodedAddress } from '../models/Geocoding.models';
 import { HttpSignInResponse } from '../models/HttpSignInResponse.models';
+import { PaymentInformation } from '../models/Payment.models';
 import { SignUpState } from './identity.models';
 
 export const actionCheckServiceAreaRequest = createAction(
@@ -122,4 +123,21 @@ export const actionAccessTokenRefreshed = createAction(
 export const actionSignOut = createAction(
   '[Identity] Sign Out',
   props<{ refreshToken: string }>()
+);
+
+/* --------------------------------- Payment -------------------------------- */
+
+export const actionProcessPaymentRequest = createAction(
+  '[Identity] Process Payment Request',
+  props<{ paymentInformation: PaymentInformation }>()
+);
+
+export const actionProcessPaymentRequestSuccess = createAction(
+  '[Identity] Process Payment Request Success',
+  props<{ response: HttpResponse<any> }>()
+);
+
+export const actionProcessPaymentRequestFailed = createAction(
+  '[Identity] Process Payment Request Failed',
+  props<{ error: HttpErrorResponse }>()
 );

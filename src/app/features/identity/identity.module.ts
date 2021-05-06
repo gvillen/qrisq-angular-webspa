@@ -37,6 +37,8 @@ import { RouterModule } from '@angular/router';
 
 import { QrLoginPageComponent } from './pages/login-page/login-page.component';
 import { QrGeolocationPageComponent } from './pages/geolocation/geolocation.component';
+import { QrRegisterPaymentPageComponent } from './pages/payment/payment.component';
+import { QrPaymentService } from './services/payment.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { QrGeolocationPageComponent } from './pages/geolocation/geolocation.comp
     QrAccountCreatedPageComponent,
     QrLoginPageComponent,
     QrGeolocationPageComponent,
+    QrRegisterPaymentPageComponent,
     GeolocationStreetViewComponent,
+
     PaymentFormCardComponent,
     PaymentFormPaypalComponent,
   ],
@@ -80,12 +84,14 @@ import { QrGeolocationPageComponent } from './pages/geolocation/geolocation.comp
   providers: [
     QrIdentityService,
     QrGeocodingService,
+    QrPaymentService,
     QrCheckServiceAreaComponentStore,
   ],
   exports: [
     QrServiceAreaAvailablePageComponent,
     QrCheckServiceAreaPageComponent,
     QrRegisterPageComponent,
+    QrRegisterPaymentPageComponent,
     QrAccountCreatedPageComponent,
     PaymentFormPaypalComponent,
     QrGeolocationPageComponent,

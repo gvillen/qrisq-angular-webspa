@@ -26,7 +26,6 @@
         [geoJson]="polygonsGeoJSON"
         [style]="polygonsStyleFunc"
       ></agm-data-layer>
-      -->
 
       <ng-container *ngIf="stormDistancePath$ | async as stormDistancePath">
         <agm-polyline strokeColor="#fff" strokeWeight="3" zIndex="40">
@@ -66,13 +65,30 @@
       ></agm-data-layer>
     </ng-container>
 
+    <div id="property-surge-risk">
+      <ng-container *ngIf="mode !== 'wind'">
+        <img src="assets/images/property-surge-risk.png" />
+      </ng-container>
+    </div>
+    <div id="legend-water-depth">
+      <ng-container *ngIf="mode !== 'wind'">
+        <img src="assets/images/legend-water-depth.png" />
+      </ng-container>
+    </div>
+
+    <div id="property-wind-risk">
+      <ng-container *ngIf="mode === 'wind'">
+        <img src="assets/images/property-wind-risk.png" />
+      </ng-container>
+    </div>
+
     <agm-marker
       [latitude]="userLattitude"
       [longitude]="userLongitude"
       [iconUrl]="levels[surgeRisk].iconUrl"
     >
     </agm-marker>
-    -->
+
     <!-- [iconUrl]="getUserLocationIcon(surgeRisk)" -->
 
     <div id="select-map-layer">
@@ -88,23 +104,5 @@
         <label nz-radio nzValue="wind">Max Winds</label>
       </nz-radio-group>
     </div>
-    E
-
-    <ng-container *ngIf="activeLayer !== 'wind'">
-      <div id="property-surge-risk">
-        <img src="assets/images/property-surge-risk.png" />
-      </div>
-      <div id="legend-water-depth">
-        <img src="assets/images/legend-water-depth.png" />
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="activeLayer === 'wind'">
-      <div id="property-surge-risk">
-        <img src="assets/images/property-wind-risk.png" />
-      </div>
-    </ng-container>
-
-    <button id="Settings" class="toggle-button controls button">Button</button>
   </agm-map>
 </div>

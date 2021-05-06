@@ -23,6 +23,8 @@ import { QrStormPageComponent } from './features/storm/pages/storm/storm-page.co
 import { QrLoginPageComponent } from './features/identity/pages/login-page/login-page.component';
 import { QrGeolocationPageComponent } from './features/identity/pages/geolocation/geolocation.component';
 import { AuthGuard } from './core/guard/auth.guard';
+import { QrRegisterPaymentPageComponent } from './features/identity/pages/payment/payment.component';
+import { PaymentGuard } from './core/guard/payment.guards';
 
 const routes: Routes = [
   { path: 'home', component: QrHomePageComponent },
@@ -67,8 +69,8 @@ const routes: Routes = [
     component: QrRegisterPageComponent,
   },
   {
-    path: 'identity/sign-up/geolocation',
-    component: QrGeolocationPageComponent,
+    path: 'identity/sign-up/payment',
+    component: QrRegisterPaymentPageComponent,
   },
   {
     path: 'identity/sign-up/account-created',
@@ -81,7 +83,7 @@ const routes: Routes = [
   {
     path: 'storm',
     component: QrStormPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, PaymentGuard],
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' },

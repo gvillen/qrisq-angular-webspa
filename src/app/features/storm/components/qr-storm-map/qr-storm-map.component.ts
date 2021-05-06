@@ -27,6 +27,7 @@ export class QrStormMapComponent implements OnInit {
   @Output() modeChange = new EventEmitter<string>();
 
   map: any;
+  canvasLayer: any;
 
   stormLattitude = 0;
   stormLongitude = 0;
@@ -54,11 +55,14 @@ export class QrStormMapComponent implements OnInit {
   public set activeLayer(v: string) {
     if (v === 'surge') {
       if (this.isTrackAndConeChecked) {
+        this.canvasLayer.setMap(null);
         this.modeChange.emit('summary');
       } else {
+        this.canvasLayer.setMap(null);
         this.modeChange.emit('surge');
       }
     } else {
+      this.canvasLayer.setMap(this.map);
       this.modeChange.emit('wind');
     }
     this._activeLayer = v;
@@ -81,7 +85,6 @@ export class QrStormMapComponent implements OnInit {
           this.stormDistance.toFixed(2).toString() + ' miles',
           { fontSize: 20, kerning: true }
         );
-        console.log(d);
         observer.next(d);
         observer.complete();
       });
@@ -172,10 +175,10 @@ export class QrStormMapComponent implements OnInit {
       draggable: feature.getProperty('draggable'),
       editable: feature.getProperty('editable'),
       fillColor: feature.getProperty('fill'),
-      fillOpacity: feature.getProperty('fillOpacity'),
+      fillOpacity: 0.8,
       strokeColor: feature.getProperty('fill'),
-      strokeOpacity: feature.getProperty('fillOpacity'),
-      strokeWeight: feature.getProperty('strokeWidth'),
+      strokeOpacity: 0.8,
+      strokeWeight: 0.5,
       title: feature.getProperty('title'),
       visible: feature.getProperty('visible'),
       zIndex: feature.getProperty('zIndex'),
@@ -1249,6 +1252,11 @@ export class QrStormMapComponent implements OnInit {
     this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(
       document.getElementById('legend-water-depth')
     );
+    this.map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(
+      document.getElementById('property-wind-risk')
+    );
+
+    console.log('map ready');
 
     // @ts-ignore TODO(jpoehnelt) fix deckgl typings
     // const deckOverlay = new deck.GoogleMapsOverlay({
@@ -1287,52 +1295,53 @@ export class QrStormMapComponent implements OnInit {
 
     // deckOverlay.setMap(map);
 
-    // let windy;
-    // let canvasLayer;
-    // let timer;
+    let windy;
 
-    // const canvasLayerOptions = {
-    //   map: map,
-    //   animate: false,
-    //   updateHandler: (overlay, params) => {
-    //     if (timer) {
-    //       window.clearTimeout(timer);
-    //     }
+    let timer;
 
-    //     timer = setTimeout(function () {
-    //       let bounds = map.getBounds();
-    //       let mapSizeX = map.getDiv().offsetWidth;
-    //       let mapSizeY = map.getDiv().offsetHeight;
-    //       windy.start(
-    //         [
-    //           [0, 0],
-    //           [mapSizeX, mapSizeY],
-    //         ],
-    //         mapSizeX,
-    //         mapSizeY,
-    //         [
-    //           [bounds.getSouthWest().lng(), bounds.getSouthWest().lat()],
-    //           [bounds.getNorthEast().lng(), bounds.getNorthEast().lat()],
-    //         ]
-    //       );
-    //     }, 750);
-    //   },
-    // };
+    const canvasLayerOptions = {
+      map: map,
+      animate: false,
+      updateHandler: (overlay, params) => {
+        if (timer) {
+          window.clearTimeout(timer);
+        }
 
-    // canvasLayer = new CanvasLayer(canvasLayerOptions);
+        timer = setTimeout(function () {
+          let bounds = map.getBounds();
+          let mapSizeX = map.getDiv().offsetWidth;
+          let mapSizeY = map.getDiv().offsetHeight;
+          windy.start(
+            [
+              [0, 0],
+              [mapSizeX, mapSizeY],
+            ],
+            mapSizeX,
+            mapSizeY,
+            [
+              [bounds.getSouthWest().lng(), bounds.getSouthWest().lat()],
+              [bounds.getNorthEast().lng(), bounds.getNorthEast().lat()],
+            ]
+          );
+        }, 750);
+      },
+    };
 
-    // windy = new Windy({
-    //   canvas: canvasLayer.canvas,
-    //   data: this.windData,
-    // });
+    this.canvasLayer = new CanvasLayer(canvasLayerOptions);
+    this.canvasLayer.setMap(null);
 
-    // //prepare context var
-    // let context = canvasLayer.canvas.getContext('2d');
+    windy = new Windy({
+      canvas: this.canvasLayer.canvas,
+      data: this.windData,
+    });
 
-    // google.maps.event.addListener(map, 'bounds_changed', function () {
-    //   windy.stop();
-    //   context.clearRect(0, 0, 3000, 3000);
-    // });
+    //prepare context var
+    let context = this.canvasLayer.canvas.getContext('2d');
+
+    google.maps.event.addListener(map, 'bounds_changed', function () {
+      windy.stop();
+      context.clearRect(0, 0, 3000, 3000);
+    });
   }
 
   sortByForecastLongDate(fa, fb) {

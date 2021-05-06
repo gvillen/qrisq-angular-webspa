@@ -131,7 +131,7 @@
       <div nz-col>
         <qrisq-payment-form-card
           *ngIf="paymentMethod == 'card'"
-          (submit)="onCreditCardPaymentSubmit($event)"
+          (submitPayment)="onCreditCardPaymentSubmit($event)"
         ></qrisq-payment-form-card>
         <qrisq-payment-form-paypal *ngIf="paymentMethod == 'paypal'"
           ><ngx-paypal [config]="payPalConfig"></ngx-paypal

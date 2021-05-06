@@ -27,6 +27,7 @@ import {
 import { IdentityState } from './identity.models';
 
 import { initialState } from './identity.state';
+import { actionProcessPaymentRequest } from './identity.actions';
 
 const reducer = createReducer(
   initialState,
@@ -157,6 +158,7 @@ const reducer = createReducer(
         phoneNumber: response.user.profile.phone_number,
         isPreprocessed: response.user.profile.is_preprocessed,
         subscription: {
+          id: response.user.subscription.plan.id,
           name: response.user.subscription.plan.name,
           feature: response.user.subscription.plan.feature,
           isCancelled: response.user.subscription.is_cancelled,
@@ -250,6 +252,11 @@ const reducer = createReducer(
     ...state,
     signedUser: null,
     credentials: null,
+  })),
+
+  // Payment
+  on(actionProcessPaymentRequest, (state, { paymentInformation }) => ({
+    ...state,
   }))
 );
 

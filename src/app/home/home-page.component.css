@@ -226,6 +226,13 @@ nz-divider {
   border-top: 2px solid #000;
 }
 
+.ant-btn-ghost:hover,
+.ant-btn-ghost:focus {
+  color: #000;
+  background: transparent;
+  border-color: #000;
+}
+
 /* .text-panel {
   margin-bottom: 32px;
 }

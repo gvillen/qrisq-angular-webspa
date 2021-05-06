@@ -18,7 +18,12 @@ import {
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  protectedUrls = ['/storm-data', '/wind-data', '/surge-data'];
+  protectedUrls = [
+    '/storm-data',
+    '/wind-data',
+    '/surge-data',
+    '/process-transaction',
+  ];
 
   constructor(
     private store: Store,

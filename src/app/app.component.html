@@ -2,6 +2,7 @@
   <app-header
     [isUserLogin]="isUserLogin"
     [userFirstName]="userFirstName"
+    (logout)="onLogout($event)"
   ></app-header>
   <app-content>
     <router-outlet></router-outlet>

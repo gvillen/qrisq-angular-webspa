@@ -22,9 +22,10 @@ export class QrStormService {
         surge: this.getSurgeParameters(),
         wind: this.getWindParameters(),
       }).subscribe((result) => {
+        console.log(result);
         const stormData: StormData = {
           lattitude: Number.parseFloat(result.storm.latitude),
-          longitude: Number.parseFloat(result.storm.latitude),
+          longitude: Number.parseFloat(result.storm.longitude),
           address: result.storm.address,
           clientId: Number.parseInt(result.storm.client_id),
           surgeRisk: result.storm.surgerisk,
@@ -156,13 +157,13 @@ export class QrStormService {
               (observer) => {
                 let windGeoJSON: Object;
                 let windGrib2JSON: Object;
-
                 // process grib2 binary data
                 const data = JSON.parse(response.js_data);
                 if (data != '') {
                   let instances, vtime;
                   instances = Object.keys(data);
                   instances.sort();
+                  let range = instances.length - 1;
                   vtime = instances[0];
                   if (!vtime) {
                     instances = Object.keys(data);
@@ -178,7 +179,7 @@ export class QrStormService {
                     pako.inflate(zlibData, { to: 'string' })
                   );
                   result[0].data = Array(result[1].data.length).fill(280);
-                  windGrib2JSON = result[0].data;
+                  windGrib2JSON = result;
                 }
                 windGeoJSON = JSON.parse(response.json_data);
                 observer.next({ windGeoJSON, windGrib2JSON });

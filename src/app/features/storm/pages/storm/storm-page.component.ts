@@ -55,8 +55,11 @@ export class QrStormPageComponent implements OnInit {
   ngOnInit() {
     this.store
       .select(selectSignedUser)
+      .pipe(take(1))
       .subscribe((signedUser) =>
-        this.store.dispatch(actionStormDataFetchRequest({ userId: 17 }))
+        this.store.dispatch(
+          actionStormDataFetchRequest({ userId: signedUser.user.id })
+        )
       );
   }
 

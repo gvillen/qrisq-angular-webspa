@@ -4,6 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
 import {
   catchError,
+  finalize,
   map,
   mergeMap,
   switchMap,
@@ -19,6 +20,8 @@ import {
   actionCreateAccountRequestSuccess,
   actionGeocodeLocationRequest,
   actionGeocodeLocationRequestSuccess,
+  actionProcessPaymentRequestFailed,
+  actionProcessPaymentRequestSuccess,
   actionRegisterFormSubmit,
   actionRegisterStart,
   actionServiceAreaAvailable,
@@ -32,11 +35,13 @@ import {
   actionVerifyEmailRequestSuccess,
 } from './identity.actions';
 import { Store } from '@ngrx/store';
-import { selectSignUp } from './identity.selectors';
+import { selectCredentials, selectSignUp } from './identity.selectors';
 import { QrIdentityService } from '../services/identity.service';
 import { HttpSignInResponse } from '../models/HttpSignInResponse.models';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { actionProcessPaymentRequest } from './identity.actions';
+import { QrPaymentService } from '../services/payment.service';
 
 @Injectable()
 export class IdentityEffects {
@@ -207,35 +212,33 @@ export class IdentityEffects {
   //
   // Verify Email Request
   //
-  effectVerifyEmailRequest = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(actionVerifyEmailRequest),
-        switchMap((action) =>
-          this.identityService.verifyEmail(action.signUp.email).pipe(
-            take(1),
-            map((response) => {
-              this.router.navigate(['/identity/sign-up/geolocation']);
-            }),
-            catchError((error: HttpErrorResponse) => {
-              if (error.status === 400) {
-                this.notification.create(
-                  'error',
-                  'Error',
-                  'Email already exist.',
-                  { nzPlacement: 'bottomRight' }
-                );
-              } else {
-                this.notification.create('error', 'Error', error.message, {
-                  nzPlacement: 'bottomRight',
-                });
-              }
-              return of(error);
-            })
-          )
+  effectVerifyEmailRequest = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actionVerifyEmailRequest),
+      switchMap((action) =>
+        this.identityService.verifyEmail(action.signUp.email).pipe(
+          take(1),
+          map((response) =>
+            actionCreateAccountRequest({ signUp: action.signUp })
+          ),
+          catchError((error: HttpErrorResponse) => {
+            if (error.status === 400) {
+              this.notification.create(
+                'error',
+                'Error',
+                'Email already exist.',
+                { nzPlacement: 'bottomRight' }
+              );
+            } else {
+              this.notification.create('error', 'Error', error.message, {
+                nzPlacement: 'bottomRight',
+              });
+            }
+            return of(actionVerifyEmailRequestFailed(error));
+          })
         )
-      ),
-    { dispatch: false }
+      )
+    )
   );
 
   //
@@ -245,8 +248,12 @@ export class IdentityEffects {
     () =>
       this.actions$.pipe(
         ofType(actionSignOut),
+        take(1),
         switchMap((action) =>
-          this.identityService.signOut(action.refreshToken).pipe(take(1))
+          this.identityService.signOut(action.refreshToken).pipe(
+            take(1),
+            finalize(() => this.router.navigate(['/login']))
+          )
         )
       ),
     { dispatch: false }
@@ -335,12 +342,54 @@ export class IdentityEffects {
     }
   );
 
+  // Payment
+  effectProcessPaymentRequest = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actionProcessPaymentRequest),
+      switchMap((action) =>
+        this.paymentService.processPayment(action.paymentInformation).pipe(
+          take(1),
+          map((response: HttpResponse<any>) => {
+            console.log(response);
+            return actionProcessPaymentRequestSuccess({ response });
+          }),
+          catchError((error) => {
+            this.notification.create('error', 'Error', error, {
+              nzPlacement: 'bottomRight',
+            });
+            return of(actionProcessPaymentRequestFailed(error));
+          })
+        )
+      )
+    )
+  );
+
+  effectProcessPaymentRequestSuccess = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionProcessPaymentRequestSuccess),
+        map((action) => {
+          this.notification.create(
+            'success',
+            'Payment',
+            'Payment has been processed successfully.',
+            {
+              nzPlacement: 'bottomRight',
+            }
+          );
+          this.store.dispatch(actionSignOut({ refreshToken: 'sds' }));
+        })
+      ),
+    { dispatch: false }
+  );
+
   constructor(
     private actions$: Actions,
     private identityService: QrIdentityService,
     private router: Router,
     private route: ActivatedRoute,
     private store: Store,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    private paymentService: QrPaymentService
   ) {}
 }

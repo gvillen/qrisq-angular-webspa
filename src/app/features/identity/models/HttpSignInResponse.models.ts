@@ -22,6 +22,7 @@ export interface Subscription {
 }
 
 export interface Plan {
+  id: number;
   name: string;
   feature: string;
   price?: any;

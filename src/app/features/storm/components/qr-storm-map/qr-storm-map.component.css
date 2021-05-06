@@ -48,6 +48,12 @@ agm-map {
   margin-left: -3px;
 }
 
+#property-wind-risk {
+  background-color: rgba(0, 0, 0, 0.7);
+  margin: 10px;
+  padding: 10px;
+}
+
 [nz-radio] {
   display: block;
   height: 32px;

@@ -13,61 +13,46 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 
 // guid
 import { Guid } from 'guid-typescript';
-import { SignUpService } from '../../service/SignUpService.service';
-import { NewUser } from '../../sign-up/schema/models';
 import { take } from 'rxjs/operators';
+import { PaymentInformation } from '../../models/Payment.models';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { SignedUserState } from '../../store/identity.models';
+import { actionProcessPaymentRequest } from '../../store/identity.actions';
+import { selectSignedUser } from '../../store/identity.selectors';
 
 @Component({
   selector: 'qrisq-register-payment-page',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css'],
 })
-export class RegisterPaymentPageComponent implements OnInit {
+export class QrRegisterPaymentPageComponent implements OnInit {
   paymentMethod = 'card';
-
   paymentFailed = false;
 
-  registerData = {
-    lat: '',
-    lng: '',
-    planId: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    phoneNumber: '',
-    paymentId: '',
-    displayText: '',
-    streetNumber: '',
-    city: '',
-    state: '',
-    zip: '',
-  };
+  signedUser$: Observable<SignedUserState>;
+  signedUser: SignedUserState;
 
   public payPalConfig?: IPayPalConfig;
-
-  newUser: NewUser;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private signUpService: SignUpService
+    private store: Store
   ) {}
 
   ngOnInit(): void {
     this.initConfig();
-    this.signUpService
-      .getNewUser()
+
+    this.store
+      .select(selectSignedUser)
       .pipe(take(1))
-      .subscribe((newUser) => {
-        this.newUser = newUser;
-      });
+      .subscribe((signedUser) => (this.signedUser = signedUser));
   }
 
-  onCreditCardPaymentSubmit(creditCardInfo) {
-    this.newUser.paymentId = Guid.create().toString().substring(0, 8);
-    this.signUpService.setNewUser(this.newUser);
-    this.router.navigate(['/sign-up/payment-successful']);
+  onCreditCardPaymentSubmit(paymentInformation: PaymentInformation) {
+    paymentInformation.subscriptionPlanId = this.signedUser.user.subscription.id;
+    this.store.dispatch(actionProcessPaymentRequest({ paymentInformation }));
   }
 
   onPaypalPaymentSubmit() {}
@@ -83,11 +68,11 @@ export class RegisterPaymentPageComponent implements OnInit {
             {
               amount: {
                 currency_code: 'USD',
-                value: '5.00',
+                value: this.signedUser.user.subscription.price,
                 breakdown: {
                   item_total: {
                     currency_code: 'USD',
-                    value: '5.00',
+                    value: `${this.signedUser.user.subscription.price}`,
                   },
                 },
               },
@@ -98,7 +83,7 @@ export class RegisterPaymentPageComponent implements OnInit {
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
                     currency_code: 'USD',
-                    value: '5.00',
+                    value: `${this.signedUser.user.subscription.price}`,
                   },
                 },
               ],
@@ -125,11 +110,11 @@ export class RegisterPaymentPageComponent implements OnInit {
             details
           );
         });
-        this.registerData.paymentId = Guid.create().toString().substring(0, 8);
-        this.router.navigate([
-          '/register/payment-successful',
-          this.registerData,
-        ]);
+        // this.registerData.paymentId = Guid.create().toString().substring(0, 8);
+        // this.router.navigate([
+        //   '/register/payment-successful',
+        //   this.registerData,
+        // ]);
       },
       onClientAuthorization: (data) => {
         console.log(

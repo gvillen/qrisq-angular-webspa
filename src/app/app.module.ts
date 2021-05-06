@@ -41,6 +41,7 @@ import { QrStormEffects } from './features/storm/store/storm.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '@env';
 import { QrStormModule } from './features/storm/storm.module';
+import { PaymentGuard } from './core/guard/payment.guards';
 
 registerLocaleData(en);
 
@@ -87,6 +88,7 @@ registerLocaleData(en);
   bootstrap: [AppComponent],
   providers: [
     AuthGuard,
+    PaymentGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

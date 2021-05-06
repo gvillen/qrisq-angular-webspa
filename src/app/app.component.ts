@@ -1,8 +1,14 @@
 // angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { createSelector, Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import { selectSignedUser } from './features/identity/store/identity.selectors';
+import { Observable, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { actionSignOut } from './features/identity/store/identity.actions';
+import { CredentialsState } from './features/identity/store/identity.models';
+import {
+  selectCredentials,
+  selectSignedUser,
+} from './features/identity/store/identity.selectors';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +17,12 @@ import { selectSignedUser } from './features/identity/store/identity.selectors';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'Qrisq';
-
   isUserLogin: boolean;
   userFirstName: string;
   subscription: Subscription;
+  credentials$: Observable<CredentialsState>;
+  credentials: CredentialsState;
+
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -29,6 +37,15 @@ export class AppComponent implements OnInit, OnDestroy {
           this.userFirstName = '';
         }
       });
+
+    this.store
+      .select(selectCredentials)
+      .subscribe((credentials) => (this.credentials = credentials));
+  }
+
+  onLogout($event) {
+    const refreshToken = this.credentials.refreshToken;
+    this.store.dispatch(actionSignOut({ refreshToken }));
   }
 
   ngOnDestroy(): void {

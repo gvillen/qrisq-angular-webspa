@@ -110,8 +110,8 @@
               >
             </li>
 
-            <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['hurricane-viewer/wind-risk']">Logout</a>
+            <li nz-menu-item>
+              <a (click)="onLogout($event)">Logout</a>
             </li>
           </ul>
         </li></ng-template

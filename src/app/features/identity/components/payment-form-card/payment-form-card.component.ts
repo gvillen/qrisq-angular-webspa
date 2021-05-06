@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 
 import { CreditCardValidators } from 'angular-cc-library';
+import { PaymentInformation } from '../../models/Payment.models';
 
 @Component({
   selector: 'qrisq-payment-form-card',
@@ -16,7 +17,7 @@ import { CreditCardValidators } from 'angular-cc-library';
 export class PaymentFormCardComponent implements OnInit {
   validateForm!: FormGroup;
 
-  @Output() submit = new EventEmitter();
+  @Output() submitPayment = new EventEmitter();
 
   constructor(private fb: FormBuilder) {}
 
@@ -43,7 +44,28 @@ export class PaymentFormCardComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.status === 'VALID') {
-      this.submit.emit(this.validateForm.value);
+      const paymentInformation: PaymentInformation = {
+        firstName: this.validateForm.get('firstName').value,
+        lastName: this.validateForm.get('lastName').value,
+        cardNumber: this.validateForm.get('cardNumber').value,
+        expirationDate: this.validateForm.get('expirationDate').value,
+        cvc: this.validateForm.get('cvc').value,
+        billingAddress: this.validateForm.get('billingAddress').value,
+        city: this.validateForm.get('city').value,
+        state: this.validateForm.get('state').value,
+        zipCode: this.validateForm.get('zipPostalCode').value,
+        amount: 0,
+        subscriptionPlanId: 0,
+      };
+      paymentInformation.cardNumber = paymentInformation.cardNumber.replace(
+        /\s/g,
+        ''
+      );
+      paymentInformation.expirationDate = paymentInformation.expirationDate.replace(
+        /\s/g,
+        ''
+      );
+      this.submitPayment.emit(paymentInformation);
     }
   }
 }

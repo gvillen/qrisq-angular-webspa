@@ -12,6 +12,7 @@ export interface User {
 }
 
 export interface UserSubscription {
+  id: number;
   name: string;
   feature: string;
   price?: any;
