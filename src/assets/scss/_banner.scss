@@ -11,6 +11,16 @@ qrisq-banner {
   .banner-content {
     margin-top: 25px;
     max-width: 880px;
+    -webkit-animation-duration: .7s;
+    -webkit-animation-delay: .9s;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-duration: .7s;
+    animation-delay: .9s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeBottom;
+    animation-name: fadeBottom;
   }
   h1 {
     color: #fff;
