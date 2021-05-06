@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'qrisq-account-created',
   templateUrl: './account-created.component.html',
-  styleUrls: ['./account-created.component.css'],
+  styleUrls: ['./account-created.component.scss'],
 })
 export class QrAccountCreatedPageComponent implements OnInit {
   constructor(private router: Router) {}

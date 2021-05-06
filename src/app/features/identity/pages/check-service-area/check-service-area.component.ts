@@ -21,7 +21,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'qr-check-service-area',
   templateUrl: './check-service-area.component.html',
-  styleUrls: ['./check-service-area.component.css'],
+  styleUrls: ['./check-service-area.component.scss'],
 })
 export class QrCheckServiceAreaPageComponent implements OnInit {
   constructor(

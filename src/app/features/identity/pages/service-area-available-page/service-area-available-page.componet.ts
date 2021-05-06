@@ -17,7 +17,7 @@ const { API_URL } = environment;
 @Component({
   selector: 'qr-service-area-available-page',
   templateUrl: './service-area-available-page.component.html',
-  styleUrls: ['./service-area-available-page.component.css'],
+  styleUrls: ['./service-area-available-page.component.scss'],
 })
 export class QrServiceAreaAvailablePageComponent implements OnInit {
   constructor(

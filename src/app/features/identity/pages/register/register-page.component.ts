@@ -17,7 +17,7 @@ import { SignUpState } from '../../store/identity.models';
 @Component({
   selector: 'qr-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.css'],
+  styleUrls: ['./register-page.component.scss'],
 })
 export class QrRegisterPageComponent implements OnInit {
   registerForm: FormGroup;

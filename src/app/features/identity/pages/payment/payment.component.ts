@@ -24,7 +24,7 @@ import { selectSignedUser } from '../../store/identity.selectors';
 @Component({
   selector: 'qrisq-register-payment-page',
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.css'],
+  styleUrls: ['./payment.component.scss'],
 })
 export class QrRegisterPaymentPageComponent implements OnInit {
   paymentMethod = 'card';
