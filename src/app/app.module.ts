@@ -9,18 +9,22 @@ import en from '@angular/common/locales/en';
 // google maps
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
-// qrisq
+// routing
 import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from '@core/core.module';
-import { DesignModule } from '@app/design/design.module';
-import { SharedModule } from '@shared/shared.module';
 
+// modules
+import { QrCoreModule } from '@core/core.module';
+import { QrDesignModule } from '@app/design/design.module';
+import { QrSharedModule } from '@shared/shared.module';
+
+// features
+import { QrStormModule } from './features/storm/storm.module';
+import { environment } from '@env';
+
+// components
 import { AppComponent } from './app.component';
-import { AppLayoutComponent } from './components/layout/layout.component';
-import { AppHeaderComponent } from './components/header/header.component';
-import { AppContentComponent } from './components/content/content.component';
-import { AppFooterComponent } from './components/footer/footer.component';
 
+// pages
 import { QrHistoricalPageComponent } from './pages/storm-data/historical-page/historical-page.component';
 import { QrFaqPageComponent } from './pages/storm-data/faq-page/faq-page.component';
 import { QrForecastPageComponent } from './pages/storm-data/forecast-page/forecast-page.component';
@@ -28,31 +32,26 @@ import { QrHomeownersPageComponent } from './pages/services/homeowners-page/home
 import { QrGovernmentPageComponent } from './pages/services/government-page/government.component';
 import { QrInsurancePageComponent } from './pages/services/insurance-page/insurance-page.component';
 import { QrHindcastPageComponent } from './pages/storm-data/hindcast-page/hindcast-page.component';
-import { QrIdentityModule } from './features/identity/identity.module';
-import { QrHomePageComponent } from './home/home-page.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-import { AuthGuard } from './core/guard/auth.guard';
+import { QrHomePageComponent } from './pages/home/home-page.component';
+
+// store
 import { StoreModule } from '@ngrx/store';
-import { reducers, storageSyncReducer } from './core/store/state';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
-import { IdentityEffects } from './features/identity/store/identity.effects';
-import { QrStormEffects } from './features/storm/store/storm.effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '@env';
-import { QrStormModule } from './features/storm/storm.module';
-import { PaymentGuard } from './core/guard/payment.guards';
+
+// state
+import { reducers, storageSyncReducer } from './core/store/state';
+import { QrStormEffects } from './features/storm/store/storm.effects';
+import { IdentityEffects } from './features/identity/store/identity.effects';
+import { QrIdentityModule } from './features/identity/identity.module';
+import { QrTrackStormCardComponent } from './shared/components/cards/track-storm/track-storm.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppLayoutComponent,
-    AppHeaderComponent,
-    AppContentComponent,
-    AppFooterComponent,
     QrHomePageComponent,
     QrHomeownersPageComponent,
     QrGovernmentPageComponent,
@@ -67,35 +66,35 @@ registerLocaleData(en);
     // angular
     BrowserModule,
     BrowserAnimationsModule,
+
+    // bootstrap
     NgbModule,
+
+    // store
     StoreModule.forRoot(reducers, { metaReducers: [storageSyncReducer] }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([IdentityEffects, QrStormEffects]),
-    // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
-      maxAge: 25, // Retains last 25 states
-      logOnly: environment.production, // Restrict extension to log-only mode
+      maxAge: 25,
+      logOnly: environment.production,
     }),
-    // third-party
+
+    // Google
     GooglePlaceModule,
 
+    // routing
     AppRoutingModule,
-    // qrisq
-    CoreModule,
-    DesignModule,
-    SharedModule,
+
+    // modules
+    QrCoreModule,
+    QrDesignModule,
+    QrSharedModule,
+
+    // features
     QrIdentityModule,
     QrStormModule,
   ],
   bootstrap: [AppComponent],
-  providers: [
-    AuthGuard,
-    PaymentGuard,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
-  ],
+  providers: [],
 })
 export class AppModule {}

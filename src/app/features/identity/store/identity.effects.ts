@@ -17,6 +17,7 @@ import {
   actionCheckServiceAreaRequest,
   actionCheckServiceAreaRequestSuccess,
   actionCreateAccountRequest,
+  actionCreateAccountRequestFailed,
   actionCreateAccountRequestSuccess,
   actionGeocodeLocationRequest,
   actionGeocodeLocationRequestSuccess,
@@ -45,6 +46,11 @@ import { QrPaymentService } from '../services/payment.service';
 
 @Injectable()
 export class IdentityEffects {
+  /* -------------------------------------------------------------------------- */
+  /*                             Check Service Area                             */
+  /* -------------------------------------------------------------------------- */
+
+  // request
   effectCheckServiceAreaRequest = createEffect(() =>
     this.actions$.pipe(
       ofType(actionCheckServiceAreaRequest),
@@ -64,6 +70,7 @@ export class IdentityEffects {
     )
   );
 
+  // success
   effectCheckServiceAreaRequestSuccess = createEffect(() =>
     this.actions$.pipe(
       ofType(actionCheckServiceAreaRequestSuccess),
@@ -78,6 +85,11 @@ export class IdentityEffects {
     )
   );
 
+  /* -------------------------------------------------------------------------- */
+  /*                                Service Area                                */
+  /* -------------------------------------------------------------------------- */
+
+  // available
   effectServiceAreaAvailable = createEffect(() =>
     this.actions$.pipe(
       ofType(actionServiceAreaAvailable),
@@ -100,6 +112,7 @@ export class IdentityEffects {
     )
   );
 
+  // unavailable
   effectServiceAreaUnvailable = createEffect(
     () =>
       this.actions$.pipe(
@@ -113,6 +126,11 @@ export class IdentityEffects {
     { dispatch: false }
   );
 
+  /* -------------------------------------------------------------------------- */
+  /*                              Geocode Location                              */
+  /* -------------------------------------------------------------------------- */
+
+  // request
   effectGeocodeLocationRequest = createEffect(() =>
     this.actions$.pipe(
       ofType(actionGeocodeLocationRequest),
@@ -188,6 +206,11 @@ export class IdentityEffects {
     )
   );
 
+  /* -------------------------------------------------------------------------- */
+  /*                                  Register                                  */
+  /* -------------------------------------------------------------------------- */
+
+  // start
   effectRegisterStart = createEffect(
     () =>
       this.actions$.pipe(
@@ -201,6 +224,7 @@ export class IdentityEffects {
     { dispatch: false }
   );
 
+  // form submit
   effectRegisterFormSubmit = createEffect(() =>
     this.actions$.pipe(
       ofType(actionRegisterFormSubmit),
@@ -209,9 +233,11 @@ export class IdentityEffects {
     )
   );
 
-  //
-  // Verify Email Request
-  //
+  /* -------------------------------------------------------------------------- */
+  /*                                Verify Email                                */
+  /* -------------------------------------------------------------------------- */
+
+  // request
   effectVerifyEmailRequest = createEffect(() =>
     this.actions$.pipe(
       ofType(actionVerifyEmailRequest),
@@ -241,9 +267,10 @@ export class IdentityEffects {
     )
   );
 
-  //
-  // SignOut
-  //
+  /* -------------------------------------------------------------------------- */
+  /*                                   SignOut                                  */
+  /* -------------------------------------------------------------------------- */
+
   effectSignOut = createEffect(
     () =>
       this.actions$.pipe(
@@ -252,32 +279,53 @@ export class IdentityEffects {
         switchMap((action) =>
           this.identityService.signOut(action.refreshToken).pipe(
             take(1),
-            finalize(() => this.router.navigate(['/login']))
+            finalize(() => this.router.navigate(['identity', 'login']))
           )
         )
       ),
     { dispatch: false }
   );
 
-  //
-  // Create Account Request
-  //
+  /* -------------------------------------------------------------------------- */
+  /*                               Create Account                               */
+  /* -------------------------------------------------------------------------- */
+
+  // request
   effectCreateAccountRequest = createEffect(() =>
     this.actions$.pipe(
       ofType(actionCreateAccountRequest),
       switchMap((action) =>
         this.identityService.createAccount(action.signUp).pipe(
           take(1),
-          map((action) => actionCreateAccountRequestSuccess())
+          map((response) => actionCreateAccountRequestSuccess({ response })),
+          catchError((error) => {
+            console.log(error);
+            return of(actionCreateAccountRequestFailed(error));
+          })
         )
       )
     )
   );
 
-  effectCreateAccountRequestSuccess = createEffect(
+  // success
+  effectCreateAccountRequestSuccess = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actionCreateAccountRequestSuccess),
+      map((action) => {
+        this.router.navigate(['/identity/sign-up/account-created']);
+        return actionSignInSuccess({
+          response: action.response,
+          redirect: false,
+        });
+      })
+    )
+  );
+
+  // failed
+  effectCreateAccountRequestFailed = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(actionCreateAccountRequestSuccess),
+        ofType(actionCreateAccountRequestFailed),
         tap((action) => {
           this.router.navigate(['/identity/sign-up/account-created']);
         })
@@ -285,6 +333,11 @@ export class IdentityEffects {
     { dispatch: false }
   );
 
+  /* -------------------------------------------------------------------------- */
+  /*                                   Sign In                                  */
+  /* -------------------------------------------------------------------------- */
+
+  // request
   effectSignInRequest = createEffect(() =>
     this.actions$.pipe(
       ofType(actionSignInRequest),
@@ -292,7 +345,7 @@ export class IdentityEffects {
         this.identityService.signIn(username, password).pipe(
           take(1),
           map((response: HttpSignInResponse) => {
-            return actionSignInSuccess({ response });
+            return actionSignInSuccess({ response, redirect: true });
           }),
           catchError((error: HttpErrorResponse) => {
             return of(actionSignInFailed({ error }));
@@ -302,6 +355,7 @@ export class IdentityEffects {
     )
   );
 
+  // success
   effectSignInRequestSuccess = createEffect(
     () =>
       this.actions$.pipe(
@@ -310,7 +364,9 @@ export class IdentityEffects {
           this.notification.create('success', 'Bienvenido', '', {
             nzPlacement: 'bottomRight',
           });
-          this.router.navigate(['storm']);
+          if (action.redirect) {
+            this.router.navigate(['storm']);
+          }
         })
       ),
     {
@@ -318,6 +374,7 @@ export class IdentityEffects {
     }
   );
 
+  // failed
   effectSignInRequestFailed = createEffect(
     () =>
       this.actions$.pipe(
@@ -342,7 +399,11 @@ export class IdentityEffects {
     }
   );
 
-  // Payment
+  /* -------------------------------------------------------------------------- */
+  /*                              Processs Payment                              */
+  /* -------------------------------------------------------------------------- */
+
+  // request
   effectProcessPaymentRequest = createEffect(() =>
     this.actions$.pipe(
       ofType(actionProcessPaymentRequest),
@@ -350,7 +411,6 @@ export class IdentityEffects {
         this.paymentService.processPayment(action.paymentInformation).pipe(
           take(1),
           map((response: HttpResponse<any>) => {
-            console.log(response);
             return actionProcessPaymentRequestSuccess({ response });
           }),
           catchError((error) => {
@@ -364,11 +424,13 @@ export class IdentityEffects {
     )
   );
 
+  // success
   effectProcessPaymentRequestSuccess = createEffect(
     () =>
       this.actions$.pipe(
         ofType(actionProcessPaymentRequestSuccess),
         map((action) => {
+          this.router.navigate(['storm']);
           this.notification.create(
             'success',
             'Payment',
@@ -377,7 +439,25 @@ export class IdentityEffects {
               nzPlacement: 'bottomRight',
             }
           );
-          this.store.dispatch(actionSignOut({ refreshToken: 'sds' }));
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // success
+  effectProcessPaymentRequestFailed = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionProcessPaymentRequestFailed),
+        map((action) => {
+          this.notification.create(
+            'error',
+            'Transaction Error',
+            'Transaction could not be processed.',
+            {
+              nzPlacement: 'bottomRight',
+            }
+          );
         })
       ),
     { dispatch: false }

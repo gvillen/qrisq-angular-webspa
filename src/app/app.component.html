@@ -1,11 +1,11 @@
-<app-layout class="main-layout">
-  <app-header
+<qr-layout class="main-layout">
+  <qr-header
     [isUserLogin]="isUserLogin"
     [userFirstName]="userFirstName"
     (logout)="onLogout($event)"
-  ></app-header>
-  <app-content>
+  ></qr-header>
+  <qr-content>
     <router-outlet></router-outlet>
-  </app-content>
-  <app-footer></app-footer>
-</app-layout>
+  </qr-content>
+  <qr-footer></qr-footer>
+</qr-layout>

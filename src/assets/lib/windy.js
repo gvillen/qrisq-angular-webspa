@@ -11,13 +11,13 @@
 */
 
 var Windy = function( params ){
-  var VELOCITY_SCALE = 0.011;              // scale for wind velocity (completely arbitrary--this value looks nice)
-  var INTENSITY_SCALE_STEP = 10;            // step size of particle intensity color scale
-  var MAX_WIND_INTENSITY = 40;              // wind velocity at which particle intensity is maximum (m/s)
-  var MAX_PARTICLE_AGE = 100;                // max number of frames a particle is drawn before regeneration
-  var PARTICLE_LINE_WIDTH = 0.8;              // line width of a drawn particle
+  var VELOCITY_SCALE = 0.020;              // scale for wind velocity (completely arbitrary--this value looks nice)
+  var INTENSITY_SCALE_STEP = 2;            // step size of particle intensity color scale
+  var MAX_WIND_INTENSITY = 80;              // wind velocity at which particle intensity is maximum (m/s)
+  var MAX_PARTICLE_AGE = 10;                // max number of frames a particle is drawn before regeneration
+  var PARTICLE_LINE_WIDTH = 0.5;              // line width of a drawn particle
   var PARTICLE_MULTIPLIER = 1/30;              // particle count scalar (completely arbitrary--this values looks nice: 1/30)
-  var PARTICLE_REDUCTION = 0.75;            // reduce particle count to this much of normal for mobile devices
+  var PARTICLE_REDUCTION = 0.80;            // reduce particle count to this much of normal for mobile devices
   var FRAME_RATE = 20;                      // desired milliseconds per frame
   var BOUNDARY = 0.45;
 
@@ -325,30 +325,19 @@ var Windy = function( params ){
     function windIntensityColorScale(step, maxWind) {
 
         result = [
-          /* blue to red
-          "rgba(" + hexToR('#178be7') + ", " + hexToG('#178be7') + ", " + hexToB('#178be7') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#8888bd') + ", " + hexToG('#8888bd') + ", " + hexToB('#8888bd') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#b28499') + ", " + hexToG('#b28499') + ", " + hexToB('#b28499') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#cc7e78') + ", " + hexToG('#cc7e78') + ", " + hexToB('#cc7e78') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#de765b') + ", " + hexToG('#de765b') + ", " + hexToB('#de765b') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#ec6c42') + ", " + hexToG('#ec6c42') + ", " + hexToB('#ec6c42') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#f55f2c') + ", " + hexToG('#f55f2c') + ", " + hexToB('#f55f2c') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#fb4f17') + ", " + hexToG('#fb4f17') + ", " + hexToB('#fb4f17') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#fe3705') + ", " + hexToG('#fe3705') + ", " + hexToB('#fe3705') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#ff0000') + ", " + hexToG('#ff0000') + ", " + hexToB('#ff0000') + ", " + 0.5 + ")"
-          */
-          "rgba(" + hexToR('#00ffff') + ", " + hexToG('#00ffff') + ", " + hexToB('#00ffff') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#64f0ff') + ", " + hexToG('#64f0ff') + ", " + hexToB('#64f0ff') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#87e1ff') + ", " + hexToG('#87e1ff') + ", " + hexToB('#87e1ff') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#a0d0ff') + ", " + hexToG('#a0d0ff') + ", " + hexToB('#a0d0ff') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#b5c0ff') + ", " + hexToG('#b5c0ff') + ", " + hexToB('#b5c0ff') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#c6adff') + ", " + hexToG('#c6adff') + ", " + hexToB('#c6adff') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#d49bff') + ", " + hexToG('#d49bff') + ", " + hexToB('#d49bff') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#e185ff') + ", " + hexToG('#e185ff') + ", " + hexToB('#e185ff') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#ec6dff') + ", " + hexToG('#ec6dff') + ", " + hexToB('#ec6dff') + ", " + 0.5 + ")",
-          "rgba(" + hexToR('#ff1edb') + ", " + hexToG('#ff1edb') + ", " + hexToB('#ff1edb') + ", " + 0.5 + ")"
-        ]
-
+          // blue to red
+          "rgba(" + hexToR('#FBFBFB') + ", " + hexToG('#FBFBFB') + ", " + hexToB('#FBFBFB') + ", " + 0.5 + ")",
+          "rgba(" + hexToR('#E5E5F1') + ", " + hexToG('#E5E5F1') + ", " + hexToB('#E5E5F1') + ", " + 0.5 + ")",
+          "rgba(" + hexToR('#CFCFE6') + ", " + hexToG('#CFCFE6') + ", " + hexToB('#CFCFE6') + ", " + 0.5 + ")",
+          "rgba(" + hexToR('#B8B8DC') + ", " + hexToG('#B8B8DC') + ", " + hexToB('#B8B8DC') + ", " + 0.5 + ")",
+          "rgba(" + hexToR('#A2A2D2') + ", " + hexToG('#A2A2D2') + ", " + hexToB('#A2A2D2') + ", " + 0.5 + ")",
+          "rgba(" + hexToR('#8C8CC7') + ", " + hexToG('#8C8CC7') + ", " + hexToB('#8C8CC7') + ", " + 0.5 + ")",
+          "rgba(" + hexToR('#7676BD') + ", " + hexToG('#7676BD') + ", " + hexToB('#7676BD') + ", " + 0.5 + ")",
+          "rgba(" + hexToR('#5F5FB3') + ", " + hexToG('#5F5FB3') + ", " + hexToB('#5F5FB3') + ", " + 0.5 + ")",
+          "rgba(" + hexToR('#4949A8') + ", " + hexToG('#4949A8') + ", " + hexToB('#4949A8') + ", " + 0.5 + ")",
+          "rgba(" + hexToR('#33339E') + ", " + hexToG('#33339E') + ", " + hexToB('#33339E') + ", " + 0.5 + ")",
+        ]        
+        
         /*       
         var result = [];
         for (var j = 225; j >= 100; j = j - step) {

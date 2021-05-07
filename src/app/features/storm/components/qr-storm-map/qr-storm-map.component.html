@@ -66,18 +66,18 @@
     </ng-container>
 
     <div id="property-surge-risk">
-      <ng-container *ngIf="mode !== 'wind'">
+      <ng-container *ngIf="mode === 'summary' || mode === 'surge'">
         <img src="assets/images/property-surge-risk.png" />
       </ng-container>
     </div>
     <div id="legend-water-depth">
-      <ng-container *ngIf="mode !== 'wind'">
+      <ng-container *ngIf="mode === 'summary' || mode === 'surge'">
         <img src="assets/images/legend-water-depth.png" />
       </ng-container>
     </div>
 
     <div id="property-wind-risk">
-      <ng-container *ngIf="mode === 'wind'">
+      <ng-container *ngIf="mode === 'wind' || mode === 'vortex'">
         <img src="assets/images/property-wind-risk.png" />
       </ng-container>
     </div>
@@ -102,6 +102,7 @@
       <nz-radio-group [(ngModel)]="activeLayer">
         <label nz-radio nzValue="surge">Storm Surge</label>
         <label nz-radio nzValue="wind">Max Winds</label>
+        <label nz-radio nzValue="vortex">Wind Vortex</label>
       </nz-radio-group>
     </div>
   </agm-map>

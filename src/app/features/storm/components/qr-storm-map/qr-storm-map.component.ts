@@ -25,6 +25,7 @@ export class QrStormMapComponent implements OnInit {
   @Input() stormDistance: number;
   @Input() mode: string;
   @Output() modeChange = new EventEmitter<string>();
+  @Output() mapLoaded = new EventEmitter<boolean>();
 
   map: any;
   canvasLayer: any;
@@ -55,15 +56,17 @@ export class QrStormMapComponent implements OnInit {
   public set activeLayer(v: string) {
     if (v === 'surge') {
       if (this.isTrackAndConeChecked) {
-        this.canvasLayer.setMap(null);
         this.modeChange.emit('summary');
       } else {
-        this.canvasLayer.setMap(null);
         this.modeChange.emit('surge');
       }
-    } else {
-      this.canvasLayer.setMap(this.map);
+      this.canvasLayer.setMap(null);
+    } else if (v === 'wind') {
       this.modeChange.emit('wind');
+      this.canvasLayer.setMap(null);
+    } else {
+      this.modeChange.emit('vortex');
+      this.canvasLayer.setMap(this.map);
     }
     this._activeLayer = v;
   }
@@ -1239,6 +1242,7 @@ export class QrStormMapComponent implements OnInit {
   }
 
   mapReady(map) {
+    this.mapLoaded.emit(true);
     this.map = map;
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
       document.getElementById('Settings')

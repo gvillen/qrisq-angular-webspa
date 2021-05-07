@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 
 import moment from 'moment';
 import pako from 'pako';
@@ -110,6 +110,7 @@ export class QrStormService {
       })
       .pipe(
         take(1),
+        tap((response) => console.log(response.url)),
         switchMap((response) =>
           this.httpClient.get(
             'https://qrisq-angular-webspa.s3.us-east-2.amazonaws.com/surge-2020-al28-17-202010282100.zip',

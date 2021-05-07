@@ -9,13 +9,13 @@
   background-color: #fff;
 }
 
-/* qrisq-banner */
+/* qr-banner */
 
-qrisq-banner .banner-content {
+qr-banner .banner-content {
   padding-right: 50%;
 }
 
-qrisq-banner h1 {
+qr-banner h1 {
   color: #fff;
   font-size: 4rem;
   font-family: Oswald, Arial, Helvetica, sans-serif;
@@ -23,7 +23,7 @@ qrisq-banner h1 {
   margin-bottom: 1rem;
 }
 
-qrisq-banner p {
+qr-banner p {
   color: #fff;
   font-size: 1.4rem;
   font-family: Oswald, Arial, Helvetica, sans-serif;
@@ -135,54 +135,8 @@ qrisq-banner p {
   margin-top: -24px;
 }
 
-.section-footer-trackstorm h3,
-.section-footer-messageform h3 {
-  font-family: Roboto, Arial, Helvetica, sans-serif;
-  color: #2f5597;
-  font-weight: 500;
-  font-size: 24px;
-}
-
-.section-footer-trackstorm img {
-  max-width: 100%;
-  height: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.section-footer-trackstorm p {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  font-weight: 450;
-}
-
-.section-footer-trackstorm button,
-.section-footer-messageform button {
-  font-weight: 500;
-}
-
-.section-footer-trackstorm,
-.section-footer-messageform {
-  padding: 0px 24px;
-}
-
-.section-footer-messageform .form-container {
-  background-color: #ebebeb;
-  padding: 1.5em;
-}
-
-.section-footer-messageform .form-container button {
-  margin-bottom: 20px;
-}
-
 nz-divider {
   border-top: 2px solid #000;
-}
-
-/* agm-map */
-agm-map {
-  height: 600px;
 }
 
 .next-forecast-container {
@@ -200,4 +154,17 @@ agm-map {
 .next-forecast-container p {
   font-size: 1.3rem;
   font-weight: 500;
+}
+
+.loadingContainer {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+[qr-storm-map] {
+  width: 1400px;
 }

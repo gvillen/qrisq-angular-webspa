@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'qrisq-account-created',
+  selector: 'qr-account-created',
   templateUrl: './account-created.component.html',
   styleUrls: ['./account-created.component.scss'],
 })
@@ -11,7 +11,7 @@ export class QrAccountCreatedPageComponent implements OnInit {
 
   ngOnInit() {}
 
-  toLogin() {
-    this.router.navigate(['identity/login']);
+  toStorm() {
+    this.router.navigate(['storm']);
   }
 }

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'qrisq-payment-form-paypal',
+  selector: 'qr-payment-form-paypal',
   templateUrl: './payment-form-paypal.component.html',
   styleUrls: ['./payment-form-paypal.component.scss'],
 })
-export class PaymentFormPaypalComponent implements OnInit {
+export class QrPaymentFormPaypalComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}

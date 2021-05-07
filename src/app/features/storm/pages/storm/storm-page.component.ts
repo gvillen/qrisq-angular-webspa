@@ -37,6 +37,7 @@ export class QrStormPageComponent implements OnInit {
   context: any;
   map: any;
   mapMode = 'summary';
+  loadingMap: boolean;
 
   stormData$: Observable<StormData> = this.store.select(selectStormData);
   surgeGeoJson: Object;
@@ -61,6 +62,8 @@ export class QrStormPageComponent implements OnInit {
           actionStormDataFetchRequest({ userId: signedUser.user.id })
         )
       );
+
+    this.loadingMap = true;
   }
 
   toCDT(utc) {
@@ -69,6 +72,10 @@ export class QrStormPageComponent implements OnInit {
 
   onMapModeChange(mode) {
     this.mapMode = mode;
+  }
+
+  onMapLoaded($event) {
+    this.loadingMap = false;
   }
 
   mapReady(event) {

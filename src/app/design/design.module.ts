@@ -25,6 +25,8 @@ import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { CreditCardOutline } from '@ant-design/icons-angular/icons';
 import { InfoCircleOutline } from '@ant-design/icons-angular/icons';
@@ -58,8 +60,10 @@ import { en_US } from 'ng-zorro-antd/i18n';
     NzSkeletonModule,
     NzCheckboxModule,
     NzSwitchModule,
+    NzProgressModule,
+    NzSpinModule,
   ],
   imports: [NzIconModule.forRoot(icons)],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
 })
-export class DesignModule {}
+export class QrDesignModule {}

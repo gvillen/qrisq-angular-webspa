@@ -1,7 +1,7 @@
 <div class="main-container">
   <!-- banner -->
 
-  <qrisq-banner [imageUrl]="'/assets/images/main-banner-forcast.jpg'">
+  <qr-banner [imageUrl]="'/assets/images/main-banner-forcast.jpg'">
     <div class="banner-content">
       <h1>Forecast: Prior to landfall</h1>
       <p>
@@ -9,7 +9,7 @@
         landfall.
       </p>
     </div>
-  </qrisq-banner>
+  </qr-banner>
 
   <div class="page-content">
     <!-- content -->
@@ -80,62 +80,11 @@
     <!-- footer -->
     <div nz-row class="section-footer">
       <div nz-col nzSpan="16" class="section-footer-trackstorm">
-        <h3><strong>Track Storm Activities</strong></h3>
-        <img nz-image nzSrc="/assets/images/ourservice-botton.jpg" alt="" />
-        <p>
-          Stay current on storm activity with the National Hurricane Center’s
-          up-to-date weather information for tropical storms and hurricanes.
-        </p>
-        <button nz-button nzType="primary" nzSize="large" nzDanger nzBlock>
-          Visit the National Hurricane Center
-        </button>
+        <qr-track-storm-card></qr-track-storm-card>
       </div>
 
       <div nz-col nzSpan="8" class="section-footer-messageform">
-        <h3><strong>Send us a message</strong></h3>
-        <div class="form-container">
-          <form nz-form [nzLayout]="'vertical'">
-            <nz-form-item>
-              <nz-form-control>
-                <input
-                  nz-input
-                  formControlName="name"
-                  placeholder="Name (Required)"
-                />
-              </nz-form-control>
-            </nz-form-item>
-
-            <nz-form-item>
-              <nz-form-control>
-                <input
-                  nz-input
-                  formControlName="email"
-                  placeholder="Email (Required)"
-                />
-              </nz-form-control>
-            </nz-form-item>
-
-            <nz-form-item>
-              <nz-form-control>
-                <textarea
-                  rows="10"
-                  nz-input
-                  formControlName="message"
-                  placeholder="Message (Required)"
-                ></textarea>
-              </nz-form-control>
-            </nz-form-item>
-
-            <button nz-button nzBlock nzType="primary" nzDanger nzSize="large">
-              Submit
-            </button>
-
-            <p>
-              *Please excuse slower than normal response time during a storm
-              event.
-            </p>
-          </form>
-        </div>
+        <qr-contact-us-form></qr-contact-us-form>
       </div>
     </div>
   </div>

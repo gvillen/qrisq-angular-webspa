@@ -1,12 +1,10 @@
 <div class="main-container">
-  <qrisq-banner
-    [imageUrl]="'/assets/images/main-banner-insurance.jpg'"
-  >
+  <qr-banner [imageUrl]="'/assets/images/main-banner-insurance.jpg'">
     <div class="banner-content">
       <h1>Welcome to Q-risq</h1>
       <p>Please login.</p>
     </div>
-  </qrisq-banner>
+  </qr-banner>
 
   <div class="form-section">
     <div nz-row nzJustify="center">
@@ -76,79 +74,19 @@
     </div>
 
     <nz-divider></nz-divider>
-        <!-- footer -->
-        <div nz-row class="section-footer">
-          <div nz-col nzSpan="8" class="section-footer-ourservices">
-            <h3><strong>Our Services</strong></h3>
-            <img nz-image nzSrc="/assets/images/ourServices.jpg" alt="" />
-            <p>
-              Knowledge is power. Know what to expect before a storm makes landfall;
-              afterward, understand the impact of winds and storm surge with data
-              from Q-risq Analytics.
-            </p>
-            <button nz-button nzType="primary" nzSize="large" nzDanger nzBlock>
-              Learn More About Our Services
-            </button>
-          </div>
+    <!-- footer -->
+    <div nz-row class="section-footer">
+      <div nz-col nzSpan="8" class="section-footer-ourservices">
+        <qr-our-services-card></qr-our-services-card>
+      </div>
 
-          <div nz-col nzSpan="8" class="section-footer-trackstorm">
-            <h3><strong>Track Storm Activities</strong></h3>
-            <img nz-image nzSrc="/assets/images/track-storm.jpg" alt="" />
-            <p>
-              Stay current on storm activity with the National Hurricane Center’s
-              up-to-date weather information for tropical storms and hurricanes.
-            </p>
-            <button nz-button nzType="primary" nzSize="large" nzDanger nzBlock>
-              Visit the National Hurricane Center
-            </button>
-          </div>
+      <div nz-col nzSpan="8" class="section-footer-trackstorm">
+        <qr-track-storm-card></qr-track-storm-card>
+      </div>
 
-          <div nz-col nzSpan="8" class="section-footer-messageform">
-            <h3><strong>Send us a message</strong></h3>
-            <div class="form-container">
-              <form nz-form [nzLayout]="'vertical'">
-                <nz-form-item>
-                  <nz-form-control>
-                    <input
-                      nz-input
-                      formControlName="name"
-                      placeholder="Name (Required)"
-                    />
-                  </nz-form-control>
-                </nz-form-item>
-
-                <nz-form-item>
-                  <nz-form-control>
-                    <input
-                      nz-input
-                      formControlName="email"
-                      placeholder="Email (Required)"
-                    />
-                  </nz-form-control>
-                </nz-form-item>
-
-                <nz-form-item>
-                  <nz-form-control>
-                    <textarea
-                      rows="10"
-                      nz-input
-                      formControlName="message"
-                      placeholder="Message (Required)"
-                    ></textarea>
-                  </nz-form-control>
-                </nz-form-item>
-
-                <button nz-button nzBlock nzType="primary" nzDanger nzSize="large">
-                  Submit
-                </button>
-
-                <p>
-                  *Please excuse slower than normal response time during a storm
-                  event.
-                </p>
-              </form>
-            </div>
-          </div>
-        </div>
+      <div nz-col nzSpan="8" class="section-footer-messageform">
+        <qr-contact-us-form></qr-contact-us-form>
+      </div>
+    </div>
   </div>
 </div>
