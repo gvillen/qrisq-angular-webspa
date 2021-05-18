@@ -47,6 +47,7 @@ nz-header.navbar {
     .logo-container.navbar-brand {
       width: 25%;
       margin-right: 0;
+      min-width: 110px;
       img {
         height: auto;
       }
@@ -57,10 +58,18 @@ nz-header.navbar {
       padding: 0;
       white-space: normal;
       width: 95px;
+      @media(max-width:480px) {
+        font-size: .75em;
+        height: 50px;
+        width: 75px;
+      }
     }
     .navbar-toggler {
       width: 25%;
       text-align: right;
+      @media(max-width:480px) {
+        width: 15%;
+      }
     }
   }
   .menu-container {
