@@ -24,9 +24,6 @@ nz-header.navbar {
     display: flex;
     height: 100%;
     margin: 0;
-    @media(min-width:981px) {
-      position: absolute;
-    }
     a {
       display: flex;
       img {
@@ -38,12 +35,13 @@ nz-header.navbar {
       }
     }
   }
-  @media(max-width:1440px){
+  @media(max-width:1440px) {
     padding-top: 0;
   }
-  @media(max-width:980px) {
+  @media(max-width:580px) {
     height: 80px;
     padding: 0 20px;
+  }
     .logo-container.navbar-brand {
       width: 25%;
       margin-right: 0;
@@ -52,16 +50,27 @@ nz-header.navbar {
         height: auto;
       }
     }
-    .button-container button.ant-btn {
-      font-size: 1em;
-      height: 60px;
-      padding: 0;
-      white-space: normal;
-      width: 95px;
-      @media(max-width:480px) {
-        font-size: .75em;
-        height: 50px;
-        width: 75px;
+    .button-container {
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+      button.ant-btn {
+        border-radius: 50px;
+        font-size: 1em;
+        height: 70px;
+        padding: 0;
+        white-space: normal;
+        width: 110px;
+        @media(min-width:981px) {
+          font-size: 1.25em;
+          height: 80px;
+          width: 145px;
+        }
+        @media(max-width:480px) {
+          font-size: .75em;
+          height: 50px;
+          width: 90px;
+        }
       }
     }
     .navbar-toggler {
@@ -71,14 +80,9 @@ nz-header.navbar {
         width: 15%;
       }
     }
-  }
   .menu-container {
     flex-grow: unset;
     justify-content: center;
-    @media(min-width:981px) {
-      position: absolute;
-      right: 50px;
-    }
     // min-width: 600px;
     @media(max-width:980px) {
       flex-grow: 1;
@@ -92,12 +96,6 @@ nz-header.navbar {
   }
 }
 
-.button-container {
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-}
-
 button {
   background: none;
   border-color: #b3ec9a;
@@ -107,8 +105,6 @@ button {
   font-family: Rubik, Arial, Helvetica, sans-serif;
   height: 40px;
 }
-
-
 
 .ant-menu {
   background: none;

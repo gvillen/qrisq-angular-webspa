@@ -1,7 +1,6 @@
 // Global banner styles that are not part of the banner component
 qrisq-banner {
   .ant-card-body {
-    max-height: 83vh;
     padding: 16% 8%;
     @media(max-width: 1439.5px){
       padding-left: 0;
@@ -42,11 +41,17 @@ qrisq-banner {
       font-size: 40px;
       margin-top: 30px;
     }
+    @media(max-width:600px){
+      font-size: 32px;
+    }
   }
   p {
     color: #fff;
     font-size: 28px;
     line-height: 1.5em!important;
+    @media(max-width:600px){
+      font-size: 18px;
+    }
   }
   .button-container {
     width: 100%;
