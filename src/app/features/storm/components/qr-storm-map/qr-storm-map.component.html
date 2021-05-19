@@ -2,7 +2,8 @@
   <agm-map
     [latitude]="userLattitude"
     [longitude]="userLongitude"
-    [zoom]="5"
+    [restriction]="restriction"
+    [zoom]="zoom"
     [mapTypeId]="'hybrid'"
     [disableDefaultUI]="true"
     (mapReady)="mapReady($event)"
@@ -27,28 +28,18 @@
         [style]="polygonsStyleFunc"
       ></agm-data-layer>
 
-      <ng-container *ngIf="stormDistancePath$ | async as stormDistancePath">
-        <agm-polyline strokeColor="#fff" strokeWeight="3" zIndex="40">
-          <agm-icon-sequence
-            [offset]="'50%'"
-            [path]="stormDistancePath"
-            [scale]="1"
-            [strokeWeight]="2"
-            [rotation]="-90"
-            [anchorY]="10"
-          ></agm-icon-sequence>
-          <agm-polyline-point
-            [latitude]="userLattitude"
-            [longitude]="userLongitude"
-          >
-          </agm-polyline-point>
-          <agm-polyline-point
-            [latitude]="stormLattitude"
-            [longitude]="stormLongitude"
-          >
-          </agm-polyline-point>
-        </agm-polyline>
-      </ng-container>
+      <agm-polyline strokeColor="#fff" strokeWeight="3" zIndex="40">
+        <agm-polyline-point
+          [latitude]="userLattitude"
+          [longitude]="userLongitude"
+        >
+        </agm-polyline-point>
+        <agm-polyline-point
+          [latitude]="stormLattitude"
+          [longitude]="stormLongitude"
+        >
+        </agm-polyline-point>
+      </agm-polyline>
     </ng-container>
 
     <ng-container *ngIf="mode === 'surge'">
@@ -66,18 +57,18 @@
     </ng-container>
 
     <div id="property-surge-risk">
-      <ng-container *ngIf="mode !== 'wind'">
+      <ng-container *ngIf="mode === 'summary' || mode === 'surge'">
         <img src="assets/images/property-surge-risk.png" />
       </ng-container>
     </div>
     <div id="legend-water-depth">
-      <ng-container *ngIf="mode !== 'wind'">
+      <ng-container *ngIf="mode === 'summary' || mode === 'surge'">
         <img src="assets/images/legend-water-depth.png" />
       </ng-container>
     </div>
 
     <div id="property-wind-risk">
-      <ng-container *ngIf="mode === 'wind'">
+      <ng-container *ngIf="mode === 'wind' || mode === 'vortex'">
         <img src="assets/images/property-wind-risk.png" />
       </ng-container>
     </div>
@@ -102,7 +93,40 @@
       <nz-radio-group [(ngModel)]="activeLayer">
         <label nz-radio nzValue="surge">Storm Surge</label>
         <label nz-radio nzValue="wind">Max Winds</label>
+        <label nz-radio nzValue="vortex">Wind Vortex </label>
       </nz-radio-group>
+    </div>
+
+    <div id="map-settings">
+      <div class="container">
+        <button
+          nz-button
+          nzType="text"
+          nzShape="circle"
+          nzSize="large"
+          nzGhost
+          (click)="onSettingsClick($event)"
+        >
+          <i nz-icon nzType="setting" nzTheme="outline"></i>
+        </button>
+      </div>
+      <nz-modal
+        [(nzVisible)]="isSettingsVisible"
+        nzTitle="The first Modal"
+        (nzOnCancel)="onSettingsCancel($event)"
+        (nzOnOk)="onSettingsSubmit($event)"
+      >
+        <ng-container *nzModalContent>
+          <form nz-form>
+            <nz-form-item>
+              <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label>
+              <nz-form-control [nzSpan]="14">
+                <input nz-input name="email" type="email" id="email" />
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </ng-container>
+      </nz-modal>
     </div>
   </agm-map>
 </div>

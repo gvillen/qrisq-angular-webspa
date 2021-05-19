@@ -1,6 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { StormData } from '../models/storm.models';
 
+/* -------------------------------------------------------------------------- */
+/*                              Storm Data Fetch                              */
+/* -------------------------------------------------------------------------- */
+
 export const actionStormDataFetchRequest = createAction(
   '[Storm] Storm Data Fetch Request',
   props<{ userId: number }>()

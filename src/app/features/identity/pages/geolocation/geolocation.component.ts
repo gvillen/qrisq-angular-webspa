@@ -21,7 +21,7 @@ import {
 import { SignUpState } from '../../store/identity.models';
 
 @Component({
-  selector: 'qrisq-register-geolocation-page',
+  selector: 'qr-register-geolocation-page',
   templateUrl: './geolocation.component.html',
   styleUrls: ['./geolocation.component.scss'],
 })

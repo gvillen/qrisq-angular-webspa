@@ -1,0 +1,123 @@
+<div class="main-container">
+  <!-- banner -->
+
+  <qr-banner [imageUrl]="'/assets/images/main-banner-admin.png'">
+    <div class="banner-content">
+      <h1>Q-risq Admin Page</h1>
+    </div>
+  </qr-banner>
+
+  <div class="section-main">
+    <!-- -------------------------------- title -------------------------------- -->
+
+    <div class="table-title-wrapper">
+      <div nz-row nzJustify="center" class="table-title-row">
+        <div nz-col>
+          <h3 class="table-title-text">
+            <span
+              ><img
+                class="title-title-arrow"
+                nz-image
+                height="25px"
+                nzSrc="/assets/images/icon-triangle-green.png"
+                alt=""
+            /></span>
+            Admin Panel
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- --------------------------- table-controls ---------------------------- -->
+    <div class="table-header-wrapper">
+      <div nz-row nzGutter="32" class="table-header-row" nzAlign="middle">
+        <!-- table-select -->
+        <div nz-col nzSpan="12">
+          <!-- table-select-row -->
+          <div nz-row nzAlign="middle">
+            <div nz-col nzSpan="8">
+              <h4 class="table-header-select-label">Table:</h4>
+            </div>
+            <div nz-col nzSpan="16">
+              <nz-select
+                class="table-header-select-control"
+                ngModel="selectedTable"
+                (ngModelChange)="onTableSelected($event)"
+              >
+                <nz-option nzValue="users" nzLabel="Users"></nz-option>
+                <nz-option nzValue="admin" nzLabel="Admin"></nz-option>
+              </nz-select>
+            </div>
+          </div>
+        </div>
+
+        <!-- table-record-count -->
+        <div nz-col nzSpan="12" class="table-record-count">
+          <!-- table-record-count-row -->
+          <div nz-row nzAlign="middle">
+            <div nz-col nzSpan="8">
+              <h4 class="table-header-record-count-label">Record Count</h4>
+            </div>
+            <div nz-col nzSpan="16">
+              <div class="table-header-record-count-text">
+                {{ tableRecordCount }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-data-wrapper">
+      <div nz-row *ngIf="selectedTable === 'admin'" class="admin-table-data">
+        <div nz-col nzSpan="24">
+          <nz-card class="table-data-admin-card" nzTitle="user_app">
+            <nz-table #adminUsersTable [nzData]="adminUsers">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Email</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Is Admin</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of adminUsersTable.data">
+                  <td>{{ data.id }}</td>
+                  <td>{{ data.email }}</td>
+                  <td>{{ data.firstName }}</td>
+                  <td>{{ data.lastName }}</td>
+                  <td>{{ data.isAdmin }}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+            <div class="admin-table-controls">
+              <button nz-button>Update</button>
+              <button nz-button>Delete</button>
+              <button nz-button>Insert</button>
+              <button nz-button>Search</button>
+            </div>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nz-divider></nz-divider>
+
+  <!-- footer -->
+  <div nz-row class="section-footer">
+    <div nz-col nzSpan="8" class="section-footer-ourservices">
+      <qr-our-services-card></qr-our-services-card>
+    </div>
+
+    <div nz-col nzSpan="8" class="section-footer-trackstorm">
+      <qr-track-storm-card></qr-track-storm-card>
+    </div>
+
+    <div nz-col nzSpan="8" class="section-footer-messageform">
+      <qr-contact-us-form></qr-contact-us-form>
+    </div>
+  </div>
+</div>

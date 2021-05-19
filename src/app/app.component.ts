@@ -4,7 +4,10 @@ import { createSelector, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { actionSignOut } from './features/identity/store/identity.actions';
-import { CredentialsState } from './features/identity/store/identity.models';
+import {
+  CredentialsState,
+  SignedUserState,
+} from './features/identity/store/identity.models';
 import {
   selectCredentials,
   selectSignedUser,
@@ -15,40 +18,39 @@ import {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
   title = 'Qrisq';
-  isUserLogin: boolean;
-  userFirstName: string;
-  subscription: Subscription;
-  credentials$: Observable<CredentialsState>;
+  signedUser: SignedUserState;
   credentials: CredentialsState;
+
+  public get isUserLogin(): boolean {
+    return this.signedUser !== null;
+  }
+
+  public get userFirstName(): string {
+    return this.signedUser !== null
+      ? this.signedUser.user.firstName
+      : 'not user';
+  }
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.subscription = this.store
+    this.store
       .select(selectSignedUser)
-      .subscribe((signedUser) => {
-        if (signedUser) {
-          this.isUserLogin = true;
-          this.userFirstName = signedUser.user.firstName;
-        } else {
-          this.isUserLogin = false;
-          this.userFirstName = '';
-        }
+      .subscribe((signedUser: SignedUserState) => {
+        this.signedUser = signedUser;
       });
 
     this.store
       .select(selectCredentials)
-      .subscribe((credentials) => (this.credentials = credentials));
+      .subscribe((credentials: CredentialsState) => {
+        this.credentials = credentials;
+      });
   }
 
   onLogout($event) {
     const refreshToken = this.credentials.refreshToken;
     this.store.dispatch(actionSignOut({ refreshToken }));
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

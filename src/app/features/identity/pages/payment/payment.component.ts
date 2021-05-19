@@ -22,11 +22,11 @@ import { actionProcessPaymentRequest } from '../../store/identity.actions';
 import { selectSignedUser } from '../../store/identity.selectors';
 
 @Component({
-  selector: 'qrisq-register-payment-page',
+  selector: 'qr-register-payment-page',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss'],
 })
-export class QrRegisterPaymentPageComponent implements OnInit {
+export class QrPaymentPageComponent implements OnInit {
   paymentMethod = 'card';
   paymentFailed = false;
 

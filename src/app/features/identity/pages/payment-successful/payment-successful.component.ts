@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import axios from 'axios';
-import { take } from 'rxjs/operators';
-import { NewUser } from '../../sign-up/schema/models';
-import { SignUpService } from '../../service/SignUpService.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'qrisq-payment-successful',
+  selector: 'qr-payment-successful-page',
   templateUrl: './payment-successful.component.html',
   styleUrls: ['./payment-successful.component.scss'],
 })
-export class RegisterPaymentSuccessfulPageComponent implements OnInit {
+export class QrPaymentSuccessfulPageComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {}

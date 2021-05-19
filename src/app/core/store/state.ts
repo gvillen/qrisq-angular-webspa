@@ -17,10 +17,6 @@ export function storageSyncReducer(reducer: ActionReducer<RootState>) {
     version: 1,
     features: [
       {
-        stateKey: 'router',
-        storageForFeature: window.sessionStorage,
-      },
-      {
         stateKey: 'identity',
       },
     ],

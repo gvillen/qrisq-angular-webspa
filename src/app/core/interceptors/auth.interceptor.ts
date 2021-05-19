@@ -36,11 +36,13 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   isProtected(requestUrl): boolean {
+    console.log(requestUrl);
     return this.protectedUrls.some((url) => requestUrl.includes(url));
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): any {
     if (this.isProtected(request.url)) {
+      console.log('interceptor');
       return this.store.select(selectCredentials).pipe(
         take(1),
         switchMap((credentials) => {

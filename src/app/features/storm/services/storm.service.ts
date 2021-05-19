@@ -1,10 +1,11 @@
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 
 import moment from 'moment';
 import pako from 'pako';
+import smooth from 'smooth-polyline';
 
 import { environment } from '@env';
 import { StormData } from '../models/storm.models';
@@ -110,6 +111,7 @@ export class QrStormService {
       })
       .pipe(
         take(1),
+        tap((response) => console.log(response.url)),
         switchMap((response) =>
           this.httpClient.get(
             'https://qrisq-angular-webspa.s3.us-east-2.amazonaws.com/surge-2020-al28-17-202010282100.zip',
@@ -128,8 +130,21 @@ export class QrStormService {
                 {
                   url,
                   encoding: 'ISO-8859-1',
+                  EPSG: 3826,
                 },
-                (data: Object) => {
+                (data: any) => {
+                  // console.log(data);
+                  // const features = data.features;
+                  // const smoothFeatures = features.map((feature) => {
+                  //   const result = smooth(
+                  //     smooth(feature.geometry.coordinates[0])
+                  //   );
+                  //   return {
+                  //     ...feature,
+                  //     geometry: { ...feature.geometry, coordinates: [result] },
+                  //   };
+                  // });
+                  // const geoJson = { ...data, features: smoothFeatures };
                   observer.next(data);
                   observer.complete();
                 }
