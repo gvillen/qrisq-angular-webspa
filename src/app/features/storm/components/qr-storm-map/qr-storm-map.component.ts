@@ -10,7 +10,7 @@ import { getESRISurgeLevelColor } from '../../common/utils';
 @Component({
   selector: 'qr-storm-map',
   templateUrl: './qr-storm-map.component.html',
-  styleUrls: ['./qr-storm-map.component.css'],
+  styleUrls: ['./qr-storm-map.component.scss'],
 })
 export class QrStormMapComponent implements OnInit {
   @Input() surgeGeoJSON: Object;

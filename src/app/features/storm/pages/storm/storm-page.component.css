@@ -9,26 +9,6 @@
   background-color: #fff;
 }
 
-/* qr-banner */
-
-qr-banner .banner-content {
-  padding-right: 50%;
-}
-
-qr-banner h1 {
-  color: #fff;
-  font-size: 4rem;
-  font-family: Oswald, Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-qr-banner p {
-  color: #fff;
-  font-size: 1.4rem;
-  font-family: Oswald, Arial, Helvetica, sans-serif;
-}
-
 /* page-content */
 
 .page-content {

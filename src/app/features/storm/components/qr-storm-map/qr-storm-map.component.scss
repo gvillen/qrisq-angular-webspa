@@ -5,8 +5,12 @@
 
 /* agm-map */
 agm-map {
-  width: 1024px;
   height: 800px;
+  width: 80vw;
+  @media(max-width: 580px) {
+    height: 600px;
+    width: 90vw;
+  }
 }
 
 #select-map-layer {
@@ -17,21 +21,30 @@ agm-map {
   margin: 20px;
   padding: 15px;
   text-align: left;
+  h1 {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 5px 0px 10px;
+  }
+  label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #fff;
+  }
+  @media(max-width: 580px) {
+    width: 140px;
+    height: 140px;
+    h1 {
+      font-size: .75rem;
+    }
+    label {
+      font-size: 0.6rem;;
+    }
+  }
 }
 
-#select-map-layer h1 {
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  margin: 5px 0px 10px;
-}
-
-#select-map-layer label {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #fff;
-}
 
 #select-map-layer [nz-icon] {
   font-size: 0.8rem;
@@ -56,16 +69,26 @@ agm-map {
   background-color: rgba(0, 0, 0, 0.7);
   margin: 10px;
   padding: 10px;
+  @media(max-width: 580px) {
+    img {
+      width: 120px
+    }
+  }
 }
 
 #legend-water-depth {
   background-color: rgba(0, 0, 0, 0.7);
   margin: 10px;
   width: 180px;
-}
-
-#legend-water-depth img {
-  margin-left: -3px;
+  img {
+    margin-left: -3px;
+  }
+  @media(max-width: 580px) {
+    width: 120px;
+    img {
+      margin-left: -30px;
+    }
+  }
 }
 
 #property-wind-risk {
