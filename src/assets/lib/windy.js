@@ -19,17 +19,15 @@
 //   var FRAME_RATE = 20;                      // desired milliseconds per frame
 
 var Windy = function( params ){
-
-  var vortexConfig = params.vortexConfig;
-
-  var VELOCITY_SCALE = vortexConfig.velocityScale;                      // scale for wind velocity (completely arbitrary--this value looks nice)
-  var INTENSITY_SCALE_STEP = vortexConfig.intensityScaleStep;           // step size of particle intensity color scale
-  var MAX_WIND_INTENSITY = vortexConfig.maxWindIntensity;               // wind velocity at which particle intensity is maximum (m/s)
-  var MAX_PARTICLE_AGE = vortexConfig.maxParticleAge;                   // max number of frames a particle is drawn before regeneration
-  var PARTICLE_LINE_WIDTH = vortexConfig.particleLineWidth;             // line width of a drawn particle
-  var PARTICLE_MULTIPLIER = vortexConfig.particleMultiplier;            // particle count scalar (completely arbitrary--this values looks nice: 1/30)
-  var PARTICLE_REDUCTION = vortexConfig.particleReduction;              // reduce particle count to this much of normal for mobile devices
-  var FRAME_RATE = vortexConfig.frameRate;                              // desired milliseconds per frame
+  
+  var VELOCITY_SCALE = params.vortexConfig.velocityScale;                      // scale for wind velocity (completely arbitrary--this value looks nice)
+  var INTENSITY_SCALE_STEP = params.vortexConfig.intensityScaleStep;           // step size of particle intensity color scale
+  var MAX_WIND_INTENSITY = params.vortexConfig.maxWindIntensity;               // wind velocity at which particle intensity is maximum (m/s)
+  var MAX_PARTICLE_AGE = params.vortexConfig.maxParticleAge;                   // max number of frames a particle is drawn before regeneration
+  var PARTICLE_LINE_WIDTH = params.vortexConfig.particleLineWidth;             // line width of a drawn particle
+  var PARTICLE_MULTIPLIER = 1 / params.vortexConfig.particleMultiplier;            // particle count scalar (completely arbitrary--this values looks nice: 1/30)
+  var PARTICLE_REDUCTION = params.vortexConfig.particleReduction;              // reduce particle count to this much of normal for mobile devices
+  var FRAME_RATE = params.vortexConfig.frameRate;                              // desired milliseconds per frame
   var BOUNDARY = 0.45;
 
   var NULL_WIND_VECTOR = [NaN, NaN, null];  // singleton for no wind in the form: [u, v, magnitude]
@@ -37,6 +35,17 @@ var Windy = function( params ){
 
   var τ = 2 * Math.PI;
   var H = Math.pow(10, -5.2);
+
+  var setVortexConfig = function(vortexConfig) {
+    VELOCITY_SCALE = vortexConfig.velocityScale;                      // scale for wind velocity (completely arbitrary--this value looks nice)
+    INTENSITY_SCALE_STEP = vortexConfig.intensityScaleStep;           // step size of particle intensity color scale
+    MAX_WIND_INTENSITY = vortexConfig.maxWindIntensity;               // wind velocity at which particle intensity is maximum (m/s)
+    MAX_PARTICLE_AGE = vortexConfig.maxParticleAge;                   // max number of frames a particle is drawn before regeneration
+    PARTICLE_LINE_WIDTH = vortexConfig.particleLineWidth;             // line width of a drawn particle
+    PARTICLE_MULTIPLIER = 1 / vortexConfig.particleMultiplier;            // particle count scalar (completely arbitrary--this values looks nice: 1/30)
+    PARTICLE_REDUCTION = vortexConfig.particleReduction;              // reduce particle count to this much of normal for mobile devices
+    FRAME_RATE = vortexConfig.frameRate;                              // desired milliseconds per frame
+  }
 
   // interpolation for vectors like wind (u,v,m)
   var bilinearInterpolateVector = function(x, y, g00, g10, g01, g11) {
@@ -487,7 +496,8 @@ var Windy = function( params ){
   var windy = {
     params: params,
     start: start,
-    stop: stop
+    stop: stop,
+    setVortexConfig: setVortexConfig
   };
 
   return windy;

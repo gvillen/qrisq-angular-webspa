@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
 import { CredentialsState, SignUpState } from '../store/identity.models';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,31 @@ export class QrIdentityService {
     private httpClient: HttpClient,
     private agmGeocoder: AgmGeocoder
   ) {}
+
+  validateAccessToken(accessToken: string): Observable<boolean> {
+    return new Observable<boolean>((observer) => {
+      this.httpClient
+        .get(environment.API_URL + '/auth/check-token', {
+          headers: {
+            'Content-type': 'application/json; charset=utf-8',
+            Authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        })
+        .pipe(
+          take(1),
+          catchError((error) => {
+            observer.next(false);
+            observer.complete();
+            return of(error);
+          })
+        )
+        .subscribe((response) => {
+          observer.next(true);
+          observer.complete();
+        });
+    });
+  }
 
   checkServiceArea(latitude: number, longitude: number) {
     return this.httpClient.post(

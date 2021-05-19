@@ -35,9 +35,20 @@ export class QrStormMapComponent implements OnInit {
   stormLattitude = 0;
   stormLongitude = 0;
   // tslint:disable-next-line: variable-name
-  _activeLayer = 'summary';
+  _activeLayer = 'surge';
   isSettingsVisible = false;
   windy = null;
+  boundsChangedLister = null;
+  vortexConfig = {
+    velocityScale: 0.02,
+    intensityScaleStep: 2,
+    maxWindIntensity: 100,
+    maxParticleAge: 10,
+    particleLineWidth: 0.15,
+    particleMultiplier: 30,
+    particleReduction: 0.8,
+    frameRate: 40,
+  };
 
   // tslint:disable-next-line: variable-name
   private _isTrackAndConeChecked: boolean = true;
@@ -90,8 +101,103 @@ export class QrStormMapComponent implements OnInit {
     this.stormLongitude = Number.parseFloat(sortedPoints[0].properties['LON']);
   }
 
+  onVelocityScaleAfterChange(velocityScale: number) {
+    this.vortexConfig = {
+      ...this.vortexConfig,
+      velocityScale: velocityScale,
+    };
+    this.updateVortexConfig();
+  }
+
+  onFrameRateAfterChange(frameRate: number) {
+    this.vortexConfig = {
+      ...this.vortexConfig,
+      frameRate,
+    };
+    this.updateVortexConfig();
+  }
+
+  onParticleReductionAfterChange(particleReduction: number) {
+    this.vortexConfig = {
+      ...this.vortexConfig,
+      particleReduction,
+    };
+    this.updateVortexConfig();
+  }
+
+  onParticleMultiplierAfterChange(particleMultiplier: number) {
+    this.vortexConfig = {
+      ...this.vortexConfig,
+      particleMultiplier,
+    };
+    this.updateVortexConfig();
+  }
+
+  onParticleLineWidthAfterChange(particleLineWidth: number) {
+    this.vortexConfig = {
+      ...this.vortexConfig,
+      particleLineWidth,
+    };
+    this.updateVortexConfig();
+  }
+
+  onMaxParticleAgeAfterChange(maxParticleAge: number) {
+    this.vortexConfig = {
+      ...this.vortexConfig,
+      maxParticleAge,
+    };
+    this.updateVortexConfig();
+  }
+
+  onMaxWindIntensityAfterChange(maxWindIntensity: number) {
+    this.vortexConfig = {
+      ...this.vortexConfig,
+      maxWindIntensity,
+    };
+    this.updateVortexConfig();
+  }
+
+  onIntensityScaleStepAfterChange(intensityScaleStep: number) {
+    this.vortexConfig = {
+      ...this.vortexConfig,
+      intensityScaleStep,
+    };
+    this.updateVortexConfig();
+  }
+
   onSettingsClick($event) {
     this.isSettingsVisible = true;
+  }
+
+  updateVortexConfig() {
+    // const vortexConfig = {
+    //   velocityScale: 0.08,
+    //   intensityScaleStep: 2,
+    //   maxWindIntensity: 10,
+    //   maxParticleAge: 50,
+    //   particleLineWidth: 0.15,
+    //   particleMultiplier: 1 / 30,
+    //   particleReduction: 0.8,
+    //   frameRate: 20,
+    // };
+
+    this.windy.setVortexConfig(this.vortexConfig);
+    this.windy.stop();
+    let bounds = this.map.getBounds();
+    let mapSizeX = this.map.getDiv().offsetWidth;
+    let mapSizeY = this.map.getDiv().offsetHeight;
+    this.windy.start(
+      [
+        [0, 0],
+        [mapSizeX, mapSizeY],
+      ],
+      mapSizeX,
+      mapSizeY,
+      [
+        [bounds.getSouthWest().lng(), bounds.getSouthWest().lat()],
+        [bounds.getNorthEast().lng(), bounds.getNorthEast().lat()],
+      ]
+    );
   }
 
   getUserLocationIcon(surgeRisk) {
@@ -233,7 +339,7 @@ export class QrStormMapComponent implements OnInit {
       title: 'Hello World!',
     });
 
-    marker.setMap(map);
+    // marker.setMap(map);
 
     let timer;
 
@@ -271,25 +377,20 @@ export class QrStormMapComponent implements OnInit {
     this.windy = Windy({
       canvas: this.canvasLayer.canvas,
       data: this.windData,
-      vortexConfig: {
-        velocityScale: 0.02,
-        intensityScaleStep: 2,
-        maxWindIntensity: 100,
-        maxParticleAge: 10,
-        particleLineWidth: 0.15,
-        particleMultiplier: 1 / 30,
-        particleReduction: 0.8,
-        frameRate: 20,
-      },
+      vortexConfig: this.vortexConfig,
     });
 
     //prepare context var
     let context = this.canvasLayer.canvas.getContext('2d');
 
-    google.maps.event.addListener(map, 'bounds_changed', () => {
-      this.windy.stop();
-      context.clearRect(0, 0, 3000, 3000);
-    });
+    this.boundsChangedLister = google.maps.event.addListener(
+      map,
+      'bounds_changed',
+      () => {
+        this.windy.stop();
+        context.clearRect(0, 0, 3000, 3000);
+      }
+    );
   }
 
   sortByForecastLongDate(fa, fb) {

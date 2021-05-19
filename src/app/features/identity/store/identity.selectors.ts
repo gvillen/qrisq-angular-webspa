@@ -28,8 +28,3 @@ export const selectSignedUser = createSelector(
   selectIdentityState,
   (state: IdentityState) => state.signedUser
 );
-
-export const selectIsAuthenticated = createSelector(
-  selectCredentials,
-  (state: CredentialsState) => state.isAuthenticated
-);

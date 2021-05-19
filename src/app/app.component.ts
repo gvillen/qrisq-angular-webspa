@@ -1,9 +1,13 @@
 // angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { createSelector, Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { actionSignOut } from './features/identity/store/identity.actions';
+import { iif, Observable, of, Subscription } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
+import { QrIdentityService } from './features/identity/services/identity.service';
+import {
+  actionAccessTokenRefreshed,
+  actionSignOut,
+} from './features/identity/store/identity.actions';
 import {
   CredentialsState,
   SignedUserState,
@@ -20,32 +24,77 @@ import {
 })
 export class AppComponent implements OnInit {
   title = 'Qrisq';
-  signedUser: SignedUserState;
   credentials: CredentialsState;
+  isUserLogin: boolean;
+  userFirstName: string;
 
-  public get isUserLogin(): boolean {
-    return this.signedUser !== null;
-  }
-
-  public get userFirstName(): string {
-    return this.signedUser !== null
-      ? this.signedUser.user.firstName
-      : 'not user';
-  }
-
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private identityService: QrIdentityService
+  ) {}
 
   ngOnInit(): void {
     this.store
-      .select(selectSignedUser)
-      .subscribe((signedUser: SignedUserState) => {
-        this.signedUser = signedUser;
-      });
-
-    this.store
       .select(selectCredentials)
       .subscribe((credentials: CredentialsState) => {
-        this.credentials = credentials;
+        if (credentials === null) {
+          this.isUserLogin = false;
+          this.userFirstName = '';
+          return;
+        }
+
+        this.store
+          .select(selectSignedUser)
+          .subscribe((signedUser: SignedUserState) => {
+            this.isUserLogin = true;
+            this.userFirstName = signedUser.user.firstName;
+          });
+
+        // validating credentials
+        // this.identityService
+        //   .validateAccessToken(credentials.accessToken)
+        //   .subscribe((isAccessTokenValid) => {
+        //     if (isAccessTokenValid) {
+        //       console.log('accessToken valid');
+        //       this.store
+        //         .select(selectSignedUser)
+        //         .subscribe((signedUser: SignedUserState) => {
+        //           this.isUserLogin = true;
+        //           this.userFirstName = signedUser.user.firstName;
+        //         });
+        //     } else {
+        //       console.log('accessToken not valid');
+        //       this.identityService
+        //         .refreshCredentials(credentials.refreshToken)
+        //         .pipe(
+        //           take(1),
+        //           catchError((error) => {
+        //             this.store.dispatch(
+        //               actionSignOut({ refreshToken: credentials.refreshToken })
+        //             );
+        //             this.isUserLogin = false;
+        //             this.userFirstName = '';
+        //             return of(error);
+        //           })
+        //         )
+        //         .subscribe((response) => {
+        //           console.log(response);
+        //           if (response) {
+        //             this.store.dispatch(
+        //               actionAccessTokenRefreshed({
+        //                 newAccessToken: response.access,
+        //               })
+        //             );
+        //             this.store
+        //               .select(selectSignedUser)
+        //               .subscribe((signedUser: SignedUserState) => {
+        //                 this.isUserLogin = true;
+        //                 this.userFirstName = signedUser.user.firstName;
+        //               });
+        //           }
+        //         });
+        //     }
+        //   });
       });
   }
 

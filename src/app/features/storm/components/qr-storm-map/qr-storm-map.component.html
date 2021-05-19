@@ -87,46 +87,121 @@
       <label
         nz-checkbox
         [(ngModel)]="isTrackAndConeChecked"
-        [nzDisabled]="activeLayer === 'wind'"
+        [nzDisabled]="activeLayer === 'wind' || activeLayer === 'vortex'"
         >Track and Cone</label
       >
       <nz-radio-group [(ngModel)]="activeLayer">
         <label nz-radio nzValue="surge">Storm Surge</label>
         <label nz-radio nzValue="wind">Max Winds</label>
-        <label nz-radio nzValue="vortex">Wind Vortex </label>
+        <label nz-radio nzValue="vortex">Wind Vortex</label>
       </nz-radio-group>
     </div>
 
     <div id="map-settings">
-      <div class="container">
+      <div
+        class="button"
+        *ngIf="activeLayer === 'vortex' && isSettingsVisible === false"
+      >
         <button
           nz-button
-          nzType="text"
+          nzType="primary"
           nzShape="circle"
           nzSize="large"
-          nzGhost
           (click)="onSettingsClick($event)"
         >
           <i nz-icon nzType="setting" nzTheme="outline"></i>
         </button>
       </div>
-      <nz-modal
-        [(nzVisible)]="isSettingsVisible"
-        nzTitle="The first Modal"
-        (nzOnCancel)="onSettingsCancel($event)"
-        (nzOnOk)="onSettingsSubmit($event)"
+
+      <div
+        class="form"
+        *ngIf="activeLayer === 'vortex' && isSettingsVisible === true"
       >
-        <ng-container *nzModalContent>
-          <form nz-form>
-            <nz-form-item>
-              <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label>
-              <nz-form-control [nzSpan]="14">
-                <input nz-input name="email" type="email" id="email" />
-              </nz-form-control>
-            </nz-form-item>
-          </form>
-        </ng-container>
-      </nz-modal>
+        <div class="form-item">
+          <h4>Velocity Scale</h4>
+          <nz-slider
+            [(ngModel)]="vortexConfig.velocityScale"
+            (nzOnAfterChange)="onVelocityScaleAfterChange($event)"
+            [nzMin]="0.01"
+            [nzMax]="0.05"
+            [nzStep]="0.01"
+          ></nz-slider>
+        </div>
+
+        <div class="form-item">
+          <h4>Intensity Scale Step</h4>
+          <nz-slider
+            [(ngModel)]="vortexConfig.intensityScaleStep"
+            (nzOnAfterChange)="onIntensityScaleStepAfterChange($event)"
+            [nzStep]="1"
+          ></nz-slider>
+        </div>
+
+        <div class="form-item">
+          <h4>Max Wind Intensity</h4>
+          <nz-slider
+            [(ngModel)]="vortexConfig.maxWindIntensity"
+            (nzOnAfterChange)="onMaxWindIntensityAfterChange($event)"
+            [nzStep]="1"
+          ></nz-slider>
+        </div>
+
+        <div class="form-item">
+          <h4>Max Particle Age</h4>
+          <nz-slider
+            [(ngModel)]="vortexConfig.maxParticleAge"
+            (nzOnAfterChange)="onMaxParticleAgeAfterChange($event)"
+            [nzStep]="1"
+          ></nz-slider>
+        </div>
+
+        <div class="form-item">
+          <h4>Particle Line Width</h4>
+          <nz-slider
+            [(ngModel)]="vortexConfig.particleLineWidth"
+            (nzOnAfterChange)="onParticleLineWidthAfterChange($event)"
+            [nzStep]="0.01"
+            [nzMin]="0.01"
+            [nzMax]="1"
+          ></nz-slider>
+        </div>
+
+        <div class="form-item">
+          <h4>Particle Multiplier 1/x</h4>
+          <nz-slider
+            [(ngModel)]="vortexConfig.particleMultiplier"
+            (nzOnAfterChange)="onParticleMultiplierAfterChange($event)"
+            [nzStep]="1"
+          ></nz-slider>
+        </div>
+
+        <div class="form-item">
+          <h4>Particle Reduction</h4>
+          <nz-slider
+            [(ngModel)]="vortexConfig.particleReduction"
+            (nzOnAfterChange)="onParticleReductionAfterChange($event)"
+            [nzStep]="0.1"
+          ></nz-slider>
+        </div>
+
+        <div class="form-item">
+          <h4>Frame Rate</h4>
+          <nz-slider
+            [(ngModel)]="vortexConfig.frameRate"
+            (nzOnAfterChange)="onFrameRateAfterChange($event)"
+            [nzStep]="1"
+          ></nz-slider>
+        </div>
+
+        <!-- //   velocityScale: 0.08,
+          //   intensityScaleStep: 2,
+          //   maxWindIntensity: 10,
+          //   maxParticleAge: 50,
+          //   particleLineWidth: 0.15,
+          //   particleMultiplier: 1 / 30,
+          //   particleReduction: 0.8,
+          //   frameRate: 20, -->
+      </div>
     </div>
   </agm-map>
 </div>

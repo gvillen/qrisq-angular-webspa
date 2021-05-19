@@ -38,6 +38,12 @@ export interface SignUpState {
   addressZip?: string;
 }
 
+export interface CredentialsState {
+  userId: number;
+  accessToken: string;
+  refreshToken: string;
+}
+
 //
 // IdentityStateSignIn
 //
@@ -48,13 +54,6 @@ export interface SignInState {
   succeeded: boolean;
   failed: boolean;
   error: HttpErrorResponse;
-}
-
-export interface CredentialsState {
-  userId: number;
-  accessToken: string;
-  refreshToken: string;
-  isAuthenticated: boolean;
 }
 
 export interface SignedUserState {

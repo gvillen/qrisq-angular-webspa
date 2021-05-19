@@ -21,12 +21,11 @@ export class QrAuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.store.select(selectCredentials).pipe(
-      take(1),
       map((credentials: CredentialsState) => {
         if (!credentials) {
           this.router.navigate(['/identity/login']);
         }
-        return credentials.isAuthenticated;
+        return true;
       })
     );
   }
