@@ -39,6 +39,8 @@
           [userLongitude]="stormData.longitude"
           [surgeRisk]="stormData.surgeRisk"
           [stormDistance]="stormData.stormDistance"
+          [restriction]="mapRestriction"
+          [zoom]="mapZoom"
           [mode]="mapMode"
           (modeChange)="onMapModeChange($event)"
           (mapLoaded)="onMapLoaded($event)"

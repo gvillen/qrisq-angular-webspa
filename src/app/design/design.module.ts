@@ -27,10 +27,17 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 import { CreditCardOutline } from '@ant-design/icons-angular/icons';
 import { InfoCircleOutline } from '@ant-design/icons-angular/icons';
-const icons: IconDefinition[] = [CreditCardOutline, InfoCircleOutline];
+import { SettingOutline } from '@ant-design/icons-angular/icons';
+const icons: IconDefinition[] = [
+  CreditCardOutline,
+  InfoCircleOutline,
+  SettingOutline,
+];
 
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
@@ -55,13 +62,15 @@ import { en_US } from 'ng-zorro-antd/i18n';
     NzToolTipModule,
     NzPopconfirmModule,
     NzPopoverModule,
-    NzModalModule,
     NzNotificationModule,
     NzSkeletonModule,
     NzCheckboxModule,
     NzSwitchModule,
     NzProgressModule,
     NzSpinModule,
+    NzModalModule,
+    NzSelectModule,
+    NzTableModule,
   ],
   imports: [NzIconModule.forRoot(icons)],
   providers: [{ provide: NZ_I18N, useValue: en_US }],

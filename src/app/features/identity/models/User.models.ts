@@ -1,14 +1,14 @@
 export interface User {
-  id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
+  id?: number;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
   hasPaid?: any;
-  phoneNumber: string;
-  geolocation: UserGeoLocation;
-  address: UserAddress;
-  subscription: UserSubscription;
-  isPreprocessed: boolean;
+  phoneNumber?: string;
+  geolocation?: UserGeoLocation;
+  address?: UserAddress;
+  subscription?: UserSubscription;
+  isPreprocessed?: boolean;
 }
 
 export interface UserSubscription {

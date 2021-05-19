@@ -11,6 +11,7 @@ import {
   actionGeocodeLocationRequest,
   actionGeocodeLocationRequestFailed,
   actionGeocodeLocationRequestSuccess,
+  actionProcessPaymentRequestSuccess,
   actionRegisterFormSubmit,
   actionRegisterStart,
   actionServiceAreaAvailable,
@@ -257,6 +258,17 @@ const reducer = createReducer(
   // Payment
   on(actionProcessPaymentRequest, (state, { paymentInformation }) => ({
     ...state,
+  })),
+
+  on(actionProcessPaymentRequestSuccess, (state) => ({
+    ...state,
+    signedUser: {
+      ...state.signedUser,
+      user: {
+        ...state.signedUser.user,
+        hasPaid: true,
+      },
+    },
   }))
 );
 

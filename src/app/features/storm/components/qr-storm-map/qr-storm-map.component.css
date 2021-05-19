@@ -33,6 +33,20 @@ agm-map {
   color: #fff;
 }
 
+#select-map-layer [nz-icon] {
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+}
+
+#select-map-layer [nz-icon] svg {
+  vertical-align: super;
+}
+
+.anticon,
+.anticon svg {
+  vertical-align: baseline;
+}
+
 .ant-checkbox-checked .ant-checkbox-inner {
   background-color: #b6da99;
   border-color: #b6da99;
@@ -60,8 +74,23 @@ agm-map {
   padding: 10px;
 }
 
-[nz-radio] {
-  display: block;
-  height: 32px;
-  line-height: 32px;
+#select-map-layer .ant-btn {
+  border: none;
+}
+
+#select-map-layer .ant-radio-wrapper {
+  line-height: 2;
+}
+
+#select-map-layer .ant-radio {
+  border: none;
+}
+
+.ant-btn-text:focus,
+.ant-btn-text:hover {
+  color: #40a9ff;
+}
+
+#map-settings .container {
+  padding: 14px;
 }

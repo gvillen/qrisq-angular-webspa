@@ -40,12 +40,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-// state
+// stateEE
 import { reducers, storageSyncReducer } from './core/store/state';
 import { QrStormEffects } from './features/storm/store/storm.effects';
 import { IdentityEffects } from './features/identity/store/identity.effects';
 import { QrIdentityModule } from './features/identity/identity.module';
-import { QrTrackStormCardComponent } from './shared/components/cards/track-storm/track-storm.component';
+import { QrAdminModule } from './features/admin/admin.module';
 
 registerLocaleData(en);
 
@@ -93,6 +93,7 @@ registerLocaleData(en);
     // features
     QrIdentityModule,
     QrStormModule,
+    QrAdminModule,
   ],
   bootstrap: [AppComponent],
   providers: [],

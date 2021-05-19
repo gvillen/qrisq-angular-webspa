@@ -1,0 +1,65 @@
+.section-main {
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.table-title-wrapper {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+}
+
+.table-title-row {
+  width: 400px;
+}
+
+.table-title-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.title-title-arrow {
+  margin-right: 3px;
+}
+
+.table-header-wrapper {
+  width: 100%;
+  padding: 5px 10%;
+}
+
+.table-header-row {
+  background-color: #d9d9d9;
+  padding: 12px;
+}
+
+.table-header-select-label,
+.table-header-record-count-label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0px;
+  padding: 0px;
+}
+
+.table-header-select-control {
+  width: 100%;
+}
+
+.table-header-record-count-text {
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.table-data-wrapper {
+  width: 100%;
+  padding: 20px 5%;
+}
+
+.table-data-admin-card {
+  background-color: #b6da99;
+}

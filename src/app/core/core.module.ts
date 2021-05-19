@@ -5,6 +5,7 @@ import { QrAuthGuard } from './guards/auth.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { QrNoAuthGuard } from './guards/no-auth.guard';
 import { QrPaymentGuard } from './guards/payment.guards';
+import { QrAdminGuard } from './guards/admin.guard';
 
 @NgModule({
   declarations: [],
@@ -19,6 +20,7 @@ import { QrPaymentGuard } from './guards/payment.guards';
       useClass: AuthInterceptor,
       multi: true,
     },
+    QrAdminGuard,
   ],
 })
 export class QrCoreModule {}

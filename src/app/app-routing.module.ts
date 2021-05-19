@@ -26,8 +26,11 @@ import { QrStormPageComponent } from './features/storm/pages/storm/storm-page.co
 // guard
 import { QrAuthGuard } from './core/guards/auth.guard';
 import { QrPaymentGuard } from './core/guards/payment.guards';
+import { QrAdminPanelPageComponent } from './features/admin/pages/admin-panel/admin-panel.component';
+import { QrAdminGuard } from './core/guards/admin.guard';
+import { QrNoAuthGuard } from './core/guards/no-auth.guard';
 
-const routes: Routes = [
+const routes = [
   /* ---------------------------------- home ---------------------------------- */
 
   { path: 'home', component: QrHomePageComponent },
@@ -69,6 +72,12 @@ const routes: Routes = [
   /* --------------------------------- sign-up -------------------------------- */
 
   {
+    path: 'identity/reset-password?token="lasdasd"',
+    redirectTo: 'identity/sign-up/check-service-area',
+    pathMatch: 'full',
+  },
+
+  {
     path: 'identity/sign-up',
     redirectTo: 'identity/sign-up/check-service-area',
     pathMatch: 'full',
@@ -105,14 +114,20 @@ const routes: Routes = [
     component: QrLoginPageComponent,
   },
 
+  /* ---------------------------------- admin --------------------------------- */
+
+  {
+    path: 'admin',
+    component: QrAdminPanelPageComponent,
+  },
+
   /* ---------------------------------- storm --------------------------------- */
 
   {
     path: 'storm',
     component: QrStormPageComponent,
-    canActivate: [QrAuthGuard],
+    canActivate: [QrAuthGuard, QrPaymentGuard],
   },
-
   /* ------------------------------------ - ----------------------------------- */
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },

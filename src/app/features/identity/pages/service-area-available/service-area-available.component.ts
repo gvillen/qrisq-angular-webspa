@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { actionRegisterStart } from '../../store/identity.actions';
 
-import { QrIdentityService } from './../../services/identity.service';
+import { QrIdentityService } from '../../services/identity.service';
 import { selectSignUp } from '../../store/identity.selectors';
 
 @Component({
