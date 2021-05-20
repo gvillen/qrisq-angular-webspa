@@ -6,6 +6,8 @@ import moment from 'moment';
 import { Observable } from 'rxjs';
 import hexRgb from 'hex-rgb';
 import { getESRISurgeLevelColor } from '../../common/utils';
+import { polygon } from '@turf/helpers';
+import centerOfMass from '@turf/center-of-mass';
 
 @Component({
   selector: 'qr-storm-map',
@@ -13,7 +15,7 @@ import { getESRISurgeLevelColor } from '../../common/utils';
   styleUrls: ['./qr-storm-map.component.scss'],
 })
 export class QrStormMapComponent implements OnInit {
-  @Input() surgeGeoJSON: Object;
+  @Input() surgeGeoJSON: any;
   @Input() lineGeoJSON: Object;
   @Input() pointsGeoJSON: any;
   @Input() polygonsGeoJSON: Object;
@@ -31,6 +33,7 @@ export class QrStormMapComponent implements OnInit {
 
   map: any;
   canvasLayer: any;
+  infowindow = new google.maps.InfoWindow();
 
   stormLattitude = 0;
   stormLongitude = 0;
@@ -75,6 +78,7 @@ export class QrStormMapComponent implements OnInit {
       } else {
         this.modeChange.emit('surge');
       }
+      this.map.data.s;
       this.canvasLayer.setMap(null);
     } else if (v === 'wind') {
       this.modeChange.emit('wind');
@@ -213,6 +217,24 @@ export class QrStormMapComponent implements OnInit {
     };
   }
 
+  onSurgeLayerClick(event) {
+    var feat = event.feature;
+    // const poly = polygon([feat.geometry.coordinates[0]]);
+    // const center = centerOfMass(polygon);
+    // console.log(center);
+    const maxft = Number(Number(feat.getProperty('maxft')).toFixed(2));
+    const eleavg = Number(Number(feat.getProperty('eleavg')).toFixed(2));
+    const elemax = Number(Number(feat.getProperty('elemax')).toFixed(2));
+    const elemin = Number(Number(feat.getProperty('elemin')).toFixed(2));
+    let html = `<b>Max Depth:</b> ${maxft} ft.<br />`;
+    html += `<b>Elev. Avg.:</b> ${eleavg}<br />`;
+    html += `<b>Elev. Max.:</b> ${elemax}<br />`;
+    html += `<b>Elev. Min.:</b> ${elemin}`;
+    this.infowindow.setContent(html);
+    this.infowindow.setPosition(event.latLng);
+    this.infowindow.open(this.map);
+  }
+
   lineStyleFunc(feature) {
     return {
       clickable: feature.getProperty('clickable'),
@@ -283,7 +305,7 @@ export class QrStormMapComponent implements OnInit {
       fillOpacity: 0.8,
       strokeColor: feature.getProperty('fill'),
       strokeOpacity: 0.8,
-      strokeWeight: 0.5,
+      strokeWeight: 0.6,
       title: feature.getProperty('title'),
       visible: feature.getProperty('visible'),
       zIndex: feature.getProperty('zIndex'),
@@ -297,20 +319,20 @@ export class QrStormMapComponent implements OnInit {
     let fillOpacity = 0;
     fillColor = getESRISurgeLevelColor(Number.parseFloat(maxft));
     return {
-      clickable: false,
       draggable: false,
       editable: false,
       fillColor: fillColor,
-      fillOpacity: 0.6,
+      fillOpacity: 0.7,
       strokeColor: fillColor,
-      strokeWeight: 1.5,
-      strokeOpacity: 0.6,
+      strokeWeight: 0.3,
+      strokeOpacity: 0.75,
     };
   }
 
   mapReady(map) {
     this.mapLoaded.emit(true);
     this.map = map;
+
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
       document.getElementById('Settings')
     );

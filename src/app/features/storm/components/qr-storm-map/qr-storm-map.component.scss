@@ -6,11 +6,8 @@
 /* agm-map */
 agm-map {
   height: 800px;
-  width: 80vw;
-  @media (max-width: 580px) {
-    height: 600px;
-    width: 90vw;
-  }
+  width: 920px;
+  max-width: 920px;
 }
 
 #select-map-layer {

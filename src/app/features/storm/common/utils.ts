@@ -8,103 +8,103 @@ function toCDT(utc: string): string {
 
 export function getESRISurgeLevelColor(depth: number) {
   if (depth < 1) {
-    return '#004343ff';
+    return '#004343';
   }
   if (depth < 1.5) {
-    return '#00fefeff';
+    return '#00fefe';
   }
   if (depth < 2) {
-    return '#00d0a2ff';
+    return '#00d0a2';
   }
   if (depth < 2.5) {
-    return '#00a245ff';
+    return '#00a245';
   }
   if (depth < 3) {
-    return '#ffff00ff';
+    return '#ffff00';
   }
   if (depth < 3.5) {
-    return '#ffe600ff';
+    return '#ffe600';
   }
   if (depth < 4) {
-    return '#ffd300ff';
+    return '#ffd300';
   }
   if (depth < 4.5) {
-    return '#ffbf00ff';
+    return '#ffbf00';
   }
   if (depth < 5) {
-    return '#ffab00ff';
+    return '#ffab00';
   }
   if (depth < 5.5) {
-    return '#ff9300ff';
+    return '#ff9300';
   }
   if (depth < 6) {
-    return '#ff7f00ff';
+    return '#ff7f00';
   }
   if (depth < 6.5) {
-    return '#ff6b00ff';
+    return '#ff6b00';
   }
   if (depth < 7) {
-    return '#ff5600ff';
+    return '#ff5600';
   }
   if (depth < 7.5) {
-    return '#ff3d00ff';
+    return '#ff3d00';
   }
   if (depth < 8) {
-    return '#ff2900ff';
+    return '#ff2900';
   }
   if (depth < 8.5) {
-    return '#ff1400ff';
+    return '#ff1400';
   }
   if (depth < 9) {
-    return '#ff0000ff';
+    return '#ff0000';
   }
   if (depth < 9.5) {
-    return '#e50000ff';
+    return '#e50000';
   }
   if (depth < 10) {
-    return '#d00000ff';
+    return '#d00000';
   }
   if (depth < 10.5) {
-    return '#bb0000ff';
+    return '#bb0000';
   }
   if (depth < 11) {
-    return '#a70000ff';
+    return '#a70000';
   }
   if (depth < 11.5) {
-    return '#8d0000ff';
+    return '#8d0000';
   }
   if (depth < 12) {
-    return '#820082ff';
+    return '#820082';
   }
   if (depth < 12.5) {
-    return '#8c098cff';
+    return '#8c098c';
   }
   if (depth < 13) {
-    return '#961296ff';
+    return '#961296';
   }
   if (depth < 13.5) {
-    return '#a31da3ff';
+    return '#a31da3';
   }
   if (depth < 14) {
-    return '#ad27adff';
+    return '#ad27ad';
   }
   if (depth < 14.5) {
-    return '#b730b7ff';
+    return '#b730b7';
   }
   if (depth < 15) {
-    return '#c139c1ff';
+    return '#c139c1';
   }
   if (depth < 15.5) {
-    return '#ce44ceff';
+    return '#ce44ce';
   }
   if (depth < 16) {
-    return '#d84dd8ff';
+    return '#d84dd8';
   }
   if (depth < 16.5) {
-    return '#e256e2ff';
+    return '#e256e2';
   }
   if (depth >= 16.5) {
-    return '#e256e2ff';
+    return '#e256e2';
   }
 }
 

@@ -12,6 +12,7 @@
       <agm-data-layer
         [geoJson]="surgeGeoJSON"
         [style]="surgeStyleFunc"
+        (layerClick)="onSurgeLayerClick($event)"
       ></agm-data-layer>
       <agm-data-layer
         [geoJson]="lineGeoJSON"
@@ -46,6 +47,7 @@
       <agm-data-layer
         [geoJson]="surgeGeoJSON"
         [style]="surgeStyleFunc"
+        (layerClick)="onSurgeLayerClick($event)"
       ></agm-data-layer>
     </ng-container>
 

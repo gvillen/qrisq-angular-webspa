@@ -133,8 +133,21 @@ export class QrStormService {
                   EPSG: 3826,
                 },
                 (data: any) => {
-                  // console.log(data);
+                  console.log(data);
                   // const features = data.features;
+                  // const roundedFeatures = features.map((feature) => {
+                  //   const result = feature.geometry.coordinates[0].map(
+                  //     (coordinate) => [
+                  //       Number(coordinate[0].toFixed(2)),
+                  //       Number(coordinate[1].toFixed(2)),
+                  //     ]
+                  //   );
+                  //   return {
+                  //     ...feature,
+                  //     geometry: { ...feature.geometry, coordinates: [result] },
+                  //   };
+                  // });
+                  // console.log(roundedFeatures);
                   // const smoothFeatures = features.map((feature) => {
                   //   const result = smooth(
                   //     smooth(feature.geometry.coordinates[0])
@@ -144,7 +157,7 @@ export class QrStormService {
                   //     geometry: { ...feature.geometry, coordinates: [result] },
                   //   };
                   // });
-                  // const geoJson = { ...data, features: smoothFeatures };
+                  // const geoJson = { ...data, features: roundedFeatures };
                   observer.next(data);
                   observer.complete();
                 }
