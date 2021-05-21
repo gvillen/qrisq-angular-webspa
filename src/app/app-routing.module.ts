@@ -29,6 +29,7 @@ import { QrPaymentGuard } from './core/guards/payment.guards';
 import { QrAdminPanelPageComponent } from './features/admin/pages/admin-panel/admin-panel.component';
 import { QrAdminGuard } from './core/guards/admin.guard';
 import { QrNoAuthGuard } from './core/guards/no-auth.guard';
+import { QrStormFreePageComponent } from './features/storm/pages/storm-free/storm-free.component';
 
 const routes = [
   /* ---------------------------------- home ---------------------------------- */
@@ -45,21 +46,13 @@ const routes = [
     path: 'storm-data/hindcast',
     component: QrHindcastPageComponent,
   },
-  {
-    path: 'storm-data/historical',
-    component: QrHistoricalPageComponent,
-  },
-  {
-    path: 'storm-data/faq',
-    component: QrFaqPageComponent,
-  },
+
+  /* -------------------------------- services -------------------------------- */
+
   {
     path: 'services/homeowners',
     component: QrHomeownersPageComponent,
   },
-
-  /* -------------------------------- services -------------------------------- */
-
   {
     path: 'services/government',
     component: QrGovernmentPageComponent,
@@ -127,6 +120,11 @@ const routes = [
     path: 'storm',
     component: QrStormPageComponent,
     canActivate: [QrAuthGuard, QrPaymentGuard],
+  },
+
+  {
+    path: 'storm-free',
+    component: QrStormFreePageComponent,
   },
   /* ------------------------------------ - ----------------------------------- */
 

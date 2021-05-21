@@ -6,8 +6,7 @@ import { StormData } from '../models/storm.models';
 /* -------------------------------------------------------------------------- */
 
 export const actionStormDataFetchRequest = createAction(
-  '[Storm] Storm Data Fetch Request',
-  props<{ userId: number }>()
+  '[Storm] Storm Data Fetch Request'
 );
 
 export const actionStormDataFetchRequestSuccess = createAction(

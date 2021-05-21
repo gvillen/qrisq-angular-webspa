@@ -16,10 +16,10 @@ import { StormData } from '../models/storm.models';
 export class QrStormService {
   constructor(private httpClient: HttpClient) {}
 
-  getStormData(userId: number): Observable<StormData> {
+  getStormData(): Observable<StormData> {
     return new Observable<StormData>((observer) => {
       forkJoin({
-        storm: this.getStormParameters(userId),
+        storm: this.getStormParameters(),
         surge: this.getSurgeParameters(),
         wind: this.getWindParameters(),
       }).subscribe((result) => {
@@ -80,7 +80,7 @@ export class QrStormService {
     });
   }
 
-  private getStormParameters(userId: number) {
+  private getStormParameters() {
     return this.httpClient.get<{
       latitude: string;
       longitude: string;
@@ -100,7 +100,6 @@ export class QrStormService {
       polygon_data: string;
     }>(environment.API_URL + '/storm-data', {
       headers: { 'Content-type': 'application/json; charset=utf-8' },
-      params: { userId: userId.toString() },
     });
   }
 

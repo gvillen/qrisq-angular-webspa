@@ -14,7 +14,7 @@ const reducer = createReducer(
   /* -------------------------------------------------------------------------- */
 
   // request
-  on(actionStormDataFetchRequest, (state, { userId }) => ({
+  on(actionStormDataFetchRequest, (state) => ({
     ...state,
     loading: true,
   })),

@@ -43,6 +43,8 @@ export class AppComponent implements OnInit {
           return;
         }
 
+        this.credentials = credentials;
+
         this.store
           .select(selectSignedUser)
           .subscribe((signedUser: SignedUserState) => {

@@ -28,6 +28,7 @@ export class QrStormMapComponent implements OnInit {
   @Input() mode: string;
   @Input() zoom: number;
   @Input() restriction: google.maps.MapRestriction;
+  @Input() freeMode: boolean;
   @Output() modeChange = new EventEmitter<string>();
   @Output() mapLoaded = new EventEmitter<boolean>();
 
@@ -43,15 +44,24 @@ export class QrStormMapComponent implements OnInit {
   windy = null;
   boundsChangedLister = null;
   vortexConfig = {
-    velocityScale: 0.02,
-    intensityScaleStep: 2,
-    maxWindIntensity: 100,
-    maxParticleAge: 10,
-    particleLineWidth: 0.15,
+    velocityScale: 0.01,
+    intensityScaleStep: 30,
+    maxWindIntensity: 50,
+    maxParticleAge: 0,
+    particleLineWidth: 0.5,
     particleMultiplier: 30,
-    particleReduction: 0.8,
-    frameRate: 40,
+    particleReduction: 50,
+    frameRate: 30,
   };
+
+  //   Velocity Scale: 0
+  // Intensity Scale Step: 30
+  // Max Wind Intensity: 50
+  // Max Particle Age: 0
+  // Particle Line Width: .5
+  // Particle Multiplier 1/x: 30
+  // Particle Reduction: 50
+  // Frame Rate: 30
 
   // tslint:disable-next-line: variable-name
   private _isTrackAndConeChecked: boolean = true;
@@ -352,14 +362,18 @@ export class QrStormMapComponent implements OnInit {
       document.getElementById('map-settings')
     );
 
-    const b = new google.maps.LatLngBounds();
-    b.extend(new google.maps.LatLng(this.userLattitude, this.userLongitude));
-    b.extend(new google.maps.LatLng(this.stormLattitude, this.stormLongitude));
+    if (!this.freeMode) {
+      const b = new google.maps.LatLngBounds();
+      b.extend(new google.maps.LatLng(this.userLattitude, this.userLongitude));
+      b.extend(
+        new google.maps.LatLng(this.stormLattitude, this.stormLongitude)
+      );
 
-    const marker = new google.maps.Marker({
-      position: b.getCenter(),
-      title: 'Hello World!',
-    });
+      const marker = new google.maps.Marker({
+        position: b.getCenter(),
+        title: 'Hello World!',
+      });
+    }
 
     // marker.setMap(map);
 

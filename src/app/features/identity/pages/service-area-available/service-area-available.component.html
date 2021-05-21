@@ -2,8 +2,8 @@
   <nz-card class="banner">
     <div class="inner-container">
       <h2>Success!</h2>
-      <ng-container *ngIf="windOnly$ | async as windOnly">
-        <div *ngIf="windOnly; then thenBlock; else elseBlock"></div>
+      <ng-container *ngIf="signUp$ | async as signUp">
+        <div *ngIf="signUp.windOnly; then thenBlock; else elseBlock"></div>
         <ng-template #thenBlock
           ><p>
             We can provide hurricane wind information for the address you
@@ -28,7 +28,7 @@
         <div nz-col *ngFor="let subscriptionPlan of subscriptionPlans">
           <div class="price-section">
             <h3>${{ subscriptionPlan.price }}</h3>
-            <h4>{{ subscriptionPlan.name }}</h4>
+            <h4>{{ subscriptionPlan.name }}*</h4>
           </div>
           <button
             nz-button

@@ -13,6 +13,7 @@ import { QrStormDataComponent } from './components/qr-storm-data/qr-storm-data.c
 import { QrCoreModule } from '@app/core/core.module';
 import { QrDesignModule } from '@app/design/design.module';
 import { QrSharedModule } from '@app/shared/shared.module';
+import { QrStormFreePageComponent } from './pages/storm-free/storm-free.component';
 
 // pages
 // components
@@ -21,6 +22,7 @@ import { QrSharedModule } from '@app/shared/shared.module';
 @NgModule({
   declarations: [
     QrStormPageComponent,
+    QrStormFreePageComponent,
     QrStormMapComponent,
     QrStormDataComponent,
   ],
@@ -39,6 +41,6 @@ import { QrSharedModule } from '@app/shared/shared.module';
     }),
   ],
   providers: [QrStormService, GoogleMapsAPIWrapper],
-  exports: [QrStormPageComponent],
+  exports: [QrStormPageComponent, QrStormFreePageComponent],
 })
 export class QrStormModule {}

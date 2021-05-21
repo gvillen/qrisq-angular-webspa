@@ -1,24 +1,35 @@
+.page-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 92%;
+  margin: auto;
+  padding-bottom: 5%;
+}
 
 .section-content-1 {
+  width: 100%;
   margin-bottom: 30px;
 }
 
-.section-content-1 .col-1 .container {
+.section-content-1 .nzcol-1 .container {
   display: flex;
   flex-direction: column;
 }
 
-.section-content-1 .col-1 .container .text-wrapper {
+.section-content-1 .nzcol-1 .container .text-wrapper {
   display: flex;
   padding-top: 20px;
 }
 
-.section-content-1 .col-1 .container .text-wrapper p {
+.section-content-1 .nzcol-1 .container .text-wrapper p {
   font-size: 1.2rem;
   line-height: 1.4em;
 }
 
-.section-content-1 .col-1 .container .text-wrapper img {
+.section-content-1 .nzcol-1 .container .text-wrapper img {
   max-width: 100%;
   height: auto;
   max-height: 30px;
@@ -27,32 +38,32 @@
   margin-right: 10px;
 }
 
-.section-content-1 .col-1 .container .text-wrapper .image-container {
+.section-content-1 .nzcol-1 .container .text-wrapper .image-container {
   margin-left: 20px;
 }
 
-.section-content-1 .col-1 .container .form-wrapper {
+.section-content-1 .nzcol-1 .container .form-wrapper {
   padding: 0px 20px;
 }
 
-.section-content-1 .col-1 .container .form-wrapper .form {
+.section-content-1 .nzcol-1 .container .form-wrapper .form {
   background-color: #ebebeb;
 }
 
-.section-content-1 .col-1 .container .form-wrapper .form input {
+.section-content-1 .nzcol-1 .container .form-wrapper .form input {
   margin-bottom: 10px;
   height: 50px;
 }
 
-.section-content-1 .col-1 .container .form-wrapper .form button {
+.section-content-1 .nzcol-1 .container .form-wrapper .form button {
   height: 50px;
 }
 
-.section-content-1 .col-2 {
+.section-content-1 .nzcol-2 {
   padding: 20px 0px;
 }
 
-.section-content-1 .col-2 .legend-wrapper {
+.section-content-1 .nzcol-2 .legend-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,15 +73,15 @@
   font-weight: bold;
 }
 
-.section-content-1 .col-2 .legend-wrapper .text-blue {
+.section-content-1 .nzcol-2 .legend-wrapper .text-blue {
   color: #0050b3;
 }
 
-.section-content-1 .col-2 .legend-wrapper .text-red {
+.section-content-1 .nzcol-2 .legend-wrapper .text-red {
   color: #cf1322;
 }
 
-.section-content-1 .col-2 .map-wrapper img {
+.section-content-1 .nzcol-2 .map-wrapper img {
   max-width: 100%;
   height: auto;
   margin-top: auto;

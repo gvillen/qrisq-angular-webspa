@@ -36,7 +36,11 @@ export class QrHeaderComponent implements OnInit {
   }
 
   openStormViewer() {
-    this.router.navigate(['/storm']);
+    if (this.isUserLogin) {
+      this.router.navigate(['/storm']);
+    } else {
+      this.router.navigate(['/storm-free']);
+    }
   }
 
   onLogout($event) {

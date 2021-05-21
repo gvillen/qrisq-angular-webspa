@@ -1,7 +1,5 @@
 <div>
   <agm-map
-    [latitude]="userLattitude"
-    [longitude]="userLongitude"
     [restriction]="restriction"
     [zoom]="zoom"
     [mapTypeId]="'hybrid'"
@@ -29,18 +27,20 @@
         [style]="polygonsStyleFunc"
       ></agm-data-layer>
 
-      <agm-polyline strokeColor="#fff" strokeWeight="3" zIndex="40">
-        <agm-polyline-point
-          [latitude]="userLattitude"
-          [longitude]="userLongitude"
-        >
-        </agm-polyline-point>
-        <agm-polyline-point
-          [latitude]="stormLattitude"
-          [longitude]="stormLongitude"
-        >
-        </agm-polyline-point>
-      </agm-polyline>
+      <ng-container *ngIf="!freeMode">
+        <agm-polyline strokeColor="#fff" strokeWeight="3" zIndex="40">
+          <agm-polyline-point
+            [latitude]="userLattitude"
+            [longitude]="userLongitude"
+          >
+          </agm-polyline-point>
+          <agm-polyline-point
+            [latitude]="stormLattitude"
+            [longitude]="stormLongitude"
+          >
+          </agm-polyline-point>
+        </agm-polyline>
+      </ng-container>
     </ng-container>
 
     <ng-container *ngIf="mode === 'surge'">
@@ -74,13 +74,15 @@
         <img src="assets/images/property-wind-risk.png" />
       </ng-container>
     </div>
-
-    <agm-marker
-      [latitude]="userLattitude"
-      [longitude]="userLongitude"
-      [iconUrl]="levels[surgeRisk].iconUrl"
-    >
-    </agm-marker>
+    <!-- 
+    <ng-container *ngIf="!freeMode">
+      <agm-marker
+        [latitude]="userLattitude"
+        [longitude]="userLongitude"
+        [iconUrl]="levels[surgeRisk].iconUrl"
+      >
+      </agm-marker>
+    </ng-container> -->
 
     <!-- [iconUrl]="getUserLocationIcon(surgeRisk)" -->
 
@@ -99,7 +101,7 @@
       </nz-radio-group>
     </div>
 
-    <div id="map-settings">
+    <div id="map-settings" *ngIf="false">
       <div
         class="button"
         *ngIf="activeLayer === 'vortex' && isSettingsVisible === false"

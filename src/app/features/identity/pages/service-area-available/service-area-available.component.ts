@@ -19,7 +19,7 @@ export class QrServiceAreaAvailablePageComponent implements OnInit {
     private store: Store
   ) {}
 
-  windOnly$ = this.store.select(selectSignUp);
+  signUp$ = this.store.select(selectSignUp);
   subscriptionPlans$ = this.identityService.fetchSubscriptionPlans();
 
   ngOnInit(): void {}
