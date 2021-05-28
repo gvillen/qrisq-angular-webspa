@@ -3,7 +3,9 @@
     <div class="inner-container">
       <h2>Success!</h2>
       <ng-container *ngIf="signUp$ | async as signUp">
-        <div *ngIf="signUp.windOnly; then thenBlock; else elseBlock"></div>
+        <div
+          *ngIf="signUp.windServiceOnly; then thenBlock; else elseBlock"
+        ></div>
         <ng-template #thenBlock
           ><p>
             We can provide hurricane wind information for the address you

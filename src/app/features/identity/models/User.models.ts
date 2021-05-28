@@ -9,6 +9,7 @@ export interface User {
   address?: UserAddress;
   subscription?: UserSubscription;
   isPreprocessed?: boolean;
+  addressUpdated?: number;
 }
 
 export interface UserSubscription {

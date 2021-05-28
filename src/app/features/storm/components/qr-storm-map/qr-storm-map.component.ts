@@ -29,7 +29,9 @@ export class QrStormMapComponent implements OnInit {
   @Input() zoom: number;
   @Input() restriction: google.maps.MapRestriction;
   @Input() freeMode: boolean;
+  @Input() userDataAvailable: boolean;
   @Output() modeChange = new EventEmitter<string>();
+  @Output() trackAndConeChanged = new EventEmitter<boolean>();
   @Output() mapLoaded = new EventEmitter<boolean>();
 
   map: any;
@@ -47,7 +49,7 @@ export class QrStormMapComponent implements OnInit {
     velocityScale: 0.01,
     intensityScaleStep: 30,
     maxWindIntensity: 50,
-    maxParticleAge: 0,
+    maxParticleAge: 4,
     particleLineWidth: 0.5,
     particleMultiplier: 30,
     particleReduction: 50,
@@ -64,17 +66,13 @@ export class QrStormMapComponent implements OnInit {
   // Frame Rate: 30
 
   // tslint:disable-next-line: variable-name
-  private _isTrackAndConeChecked: boolean = true;
+  private _isTrackAndConeChecked = true;
 
   public get isTrackAndConeChecked(): boolean {
     return this._isTrackAndConeChecked;
   }
   public set isTrackAndConeChecked(value: boolean) {
-    if (value) {
-      this.modeChange.emit('summary');
-    } else {
-      this.modeChange.emit('surge');
-    }
+    this.trackAndConeChanged.emit(value);
     this._isTrackAndConeChecked = value;
   }
 
@@ -83,18 +81,14 @@ export class QrStormMapComponent implements OnInit {
   }
   public set activeLayer(v: string) {
     if (v === 'surge') {
-      if (this.isTrackAndConeChecked) {
-        this.modeChange.emit('summary');
-      } else {
-        this.modeChange.emit('surge');
-      }
-      this.map.data.s;
+      this.modeChange.emit('surge');
       this.canvasLayer.setMap(null);
     } else if (v === 'wind') {
       this.modeChange.emit('wind');
       this.canvasLayer.setMap(null);
     } else {
       this.modeChange.emit('vortex');
+      this.isTrackAndConeChecked = false;
       this.canvasLayer.setMap(this.map);
     }
     this._activeLayer = v;
@@ -111,8 +105,9 @@ export class QrStormMapComponent implements OnInit {
   ngOnInit() {
     const points: Array<any> = this.pointsGeoJSON.features;
     const sortedPoints = points.slice().sort(this.sortByForecastLongDate);
-    this.stormLattitude = Number.parseFloat(sortedPoints[0].properties['LAT']);
-    this.stormLongitude = Number.parseFloat(sortedPoints[0].properties['LON']);
+    console.log(points);
+    this.stormLattitude = points[0].geometry.coordinates[1];
+    this.stormLongitude = points[0].geometry.coordinates[0];
   }
 
   onVelocityScaleAfterChange(velocityScale: number) {
@@ -326,9 +321,9 @@ export class QrStormMapComponent implements OnInit {
   surgeStyleFunc(feature) {
     const maxft = feature.getProperty('maxft');
     let fillColor = '#fff';
-    let fillOpacity = 0;
     fillColor = getESRISurgeLevelColor(Number.parseFloat(maxft));
     return {
+      clickable: false,
       draggable: false,
       editable: false,
       fillColor: fillColor,
@@ -342,6 +337,8 @@ export class QrStormMapComponent implements OnInit {
   mapReady(map) {
     this.mapLoaded.emit(true);
     this.map = map;
+
+    this.map.setMapTypeId(google.maps.MapTypeId.HYBRID);
 
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(
       document.getElementById('Settings')
@@ -363,16 +360,27 @@ export class QrStormMapComponent implements OnInit {
     );
 
     if (!this.freeMode) {
-      const b = new google.maps.LatLngBounds();
-      b.extend(new google.maps.LatLng(this.userLattitude, this.userLongitude));
-      b.extend(
-        new google.maps.LatLng(this.stormLattitude, this.stormLongitude)
-      );
-
-      const marker = new google.maps.Marker({
-        position: b.getCenter(),
-        title: 'Hello World!',
-      });
+      if (this.userDataAvailable) {
+        const b = new google.maps.LatLngBounds();
+        b.extend(
+          new google.maps.LatLng(this.userLattitude, this.userLongitude)
+        );
+        b.extend(
+          new google.maps.LatLng(this.stormLattitude, this.stormLongitude)
+        );
+        console.log('center', b.getCenter());
+        console.log('lat', b.getCenter().lat());
+        console.log('lng', b.getCenter().lng());
+        var label = new ELabel({
+          latlng: new google.maps.LatLng(
+            b.getCenter().lat(),
+            b.getCenter().lng()
+          ),
+          label: this.stormDistance.toString() + ' Miles',
+          classname: 'distance-label',
+        });
+        label.setMap(map);
+      }
     }
 
     // marker.setMap(map);

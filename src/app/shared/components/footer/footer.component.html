@@ -1,8 +1,77 @@
 <nz-footer>
   <div class="menu-container">
-    <a nz-button nzType="link">Storm Data</a>
-    <a nz-button nzType="link">Account</a>
-    <a nz-button nzType="link">Services</a>
+    <!-- Storm Data -->
+    <a
+      class="menu-item"
+      nz-button
+      nzType="link"
+      nz-tooltip
+      [nzTooltipTitle]="stormDataSubMenuTemplate"      
+      >Storm Data</a
+    >
+    <ng-template #stormDataSubMenuTemplate>
+      <ul nz-menu nzMode="vertical" nzSelectable="false">
+        <li nz-menu-item>
+          <a
+            class="menu-item"
+            nz-button
+            nzType="link"
+            [routerLink]="['storm-data', 'forecast']"
+            >Forecast</a
+          >
+        </li>
+        <li nz-menu-item>
+          <a
+            class="menu-item"
+            nz-button
+            nzType="link"
+            [routerLink]="['storm-data', 'hindcast']"
+            >Hindcast</a
+          >
+        </li>
+      </ul>
+    </ng-template>
+
+    <!-- services -->
+    <a
+      class="menu-item"
+      nz-button
+      nzType="link"
+      nz-tooltip
+      [nzTooltipTitle]="servicesSubMenuTemplate"
+      >Services</a
+    >
+    <ng-template #servicesSubMenuTemplate>
+      <ul nz-menu nzMode="vertical" nzSelectable="false">
+        <li nz-menu-item>
+          <a
+            class="menu-item"
+            nz-button
+            nzType="link"
+            [routerLink]="['services', 'homeowners']"
+            >Homeowners</a
+          >
+        </li>
+        <li nz-menu-item>
+          <a
+            class="menu-item"
+            nz-button
+            nzType="link"
+            [routerLink]="['services', 'government']"
+            >Government</a
+          >
+        </li>
+        <li nz-menu-item>
+          <a
+            class="menu-item"
+            nz-button
+            nzType="link"
+            [routerLink]="['services', 'insurance']"
+            >Insurance</a
+          >
+        </li>
+      </ul>
+    </ng-template>
   </div>
   <div class="logo-container">
     <a [routerLink]="['home']">
@@ -14,5 +83,7 @@
       />
     </a>
   </div>
-  <div class="contact-container"><a nz-button nzType="link">Contact Us</a></div>
+  <div class="contact-container">
+    <a nz-button nzType="link" [routerLink]="['contact-us']">Contact Us</a>
+  </div>
 </nz-footer>

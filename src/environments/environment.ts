@@ -1,7 +1,7 @@
 export const environment = {
-  production: false,
+  production: true,
   staging: false,
-  API_URL: 'http://3.210.78.109/api',
+  API_URL: 'https://api.qrisq.com',
 
   MOCK_URL: 'http://a3c75f1b-83f6-493d-af0a-bf999772bf54.mock.pstmn.io',
 

@@ -35,22 +35,23 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store
-      .select(selectCredentials)
-      .subscribe((credentials: CredentialsState) => {
-        if (credentials === null) {
+      .select(selectSignedUser)
+      .subscribe((signedUser: SignedUserState) => {
+        if (signedUser) {
+          this.isUserLogin = true;
+          this.userFirstName = signedUser.user.firstName;
+        } else {
           this.isUserLogin = false;
           this.userFirstName = '';
-          return;
         }
+      });
 
-        this.credentials = credentials;
-
-        this.store
-          .select(selectSignedUser)
-          .subscribe((signedUser: SignedUserState) => {
-            this.isUserLogin = true;
-            this.userFirstName = signedUser.user.firstName;
-          });
+    this.store
+      .select(selectCredentials)
+      .subscribe((credentials: CredentialsState) => {
+        if (credentials) {
+          this.credentials = credentials;
+        }
 
         // validating credentials
         // this.identityService

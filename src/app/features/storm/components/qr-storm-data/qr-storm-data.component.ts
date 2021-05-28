@@ -17,6 +17,8 @@ export class QrStormDataComponent implements OnInit {
   @Input() landfallDate: Date;
   @Input() landfallLocation: string;
   @Input() stormDistance: number;
+  @Input() userDataAvailable: boolean;
+  @Input() isTrackAndConeChecked: boolean;
 
   public get windLevels() {
     return WindRiskLevels;
@@ -28,10 +30,7 @@ export class QrStormDataComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.windLevels);
-    console.log(this.surgeLevels);
-  }
+  ngOnInit() {}
 
   toCDT(date) {
     return TimeUtils.toCDT(date);

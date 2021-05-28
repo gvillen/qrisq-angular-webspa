@@ -13,8 +13,9 @@ import { selectStormData } from '../../store/storm.selectors';
   styleUrls: ['./storm-free.component.scss'],
 })
 export class QrStormFreePageComponent implements OnInit {
-  mapMode = 'summary';
+  mapMode = 'surge';
   loadingMap = true;
+  isTrackAndConeChecked = true;
   mapZoom = 4;
   mapRestriction: google.maps.MapRestriction = {
     latLngBounds: {
@@ -31,11 +32,15 @@ export class QrStormFreePageComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.store.dispatch(actionStormDataFetchRequest());
+    this.store.dispatch(actionStormDataFetchRequest({ freeMode: true }));
   }
 
   onMapModeChange(mode) {
     this.mapMode = mode;
+  }
+
+  onTrackAndConeChanged(trackAndCone) {
+    this.isTrackAndConeChecked = trackAndCone;
   }
 
   onMapLoaded($event) {

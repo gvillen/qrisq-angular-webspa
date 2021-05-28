@@ -8,6 +8,7 @@ import { createAction, props } from '@ngrx/store';
 import { GeocodedAddress } from '../models/Geocoding.models';
 import { HttpSignInResponse } from '../models/HttpSignInResponse.models';
 import { PaymentInformation } from '../models/Payment.models';
+import { UpdateGeolocationRequestParameters } from '../models/UpdateGeolocation.models';
 import { SignUpState } from './identity.models';
 
 /* -------------------------------------------------------------------------- */
@@ -218,6 +219,29 @@ export const actionProcessPaymentRequestSuccess = createAction(
 // failed
 export const actionProcessPaymentRequestFailed = createAction(
   '[Identity] Process Payment Request Failed',
+  props<{ error: HttpErrorResponse }>()
+);
+
+/* -------------------------------------------------------------------------- */
+/*                             Update Geolocation                             */
+/* -------------------------------------------------------------------------- */
+// request
+export const actionUpdateGeolocationRequest = createAction(
+  '[Identity] Update Geolocation Request',
+  props<{
+    updateGeolocationRequestParameters: UpdateGeolocationRequestParameters;
+  }>()
+);
+
+// success
+export const actionUpdateGeolocationRequestSuccess = createAction(
+  '[Identity] Update Geolocation Request Success',
+  props<{ newAddress: UpdateGeolocationRequestParameters }>()
+);
+
+// failed
+export const actionUpdateGeolocationRequestFailed = createAction(
+  '[Identity] Update Geolocation Request Failed',
   props<{ error: HttpErrorResponse }>()
 );
 

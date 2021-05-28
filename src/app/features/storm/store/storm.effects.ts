@@ -25,7 +25,7 @@ export class QrStormEffects {
     this.actions$.pipe(
       ofType(actionStormDataFetchRequest),
       switchMap((action) =>
-        this.stormService.getStormData().pipe(
+        this.stormService.getStormData(action.freeMode).pipe(
           take(1),
           map((stormData) =>
             actionStormDataFetchRequestSuccess({

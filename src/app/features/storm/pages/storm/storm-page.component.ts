@@ -23,7 +23,8 @@ import { selectIdentityState } from '../../../identity/store/identity.selectors'
   styleUrls: ['./storm-page.component.css'],
 })
 export class QrStormPageComponent implements OnInit {
-  mapMode = 'summary';
+  mapMode = 'surge';
+  isTrackAndConeChecked = true;
   loadingMap = true;
   mapZoom = 4;
   mapRestriction: google.maps.MapRestriction = {
@@ -37,20 +38,33 @@ export class QrStormPageComponent implements OnInit {
   };
 
   stormData$: Observable<StormData> = this.store.select(selectStormData);
+  userGeolocation$: Observable<{
+    lattitude: number;
+    longitude: number;
+    address: string;
+  }> = this.store.select(selectSignedUser).pipe(
+    map((signedUser) => ({
+      lattitude: signedUser.user.geolocation.lattitude,
+      longitude: signedUser.user.geolocation.longitude,
+      address: signedUser.user.address.displayText,
+    }))
+  );
 
   constructor(private store: Store) {}
 
   ngOnInit() {
+    this.store.dispatch(actionStormDataFetchRequest({ freeMode: false }));
     this.store
-      .select(selectSignedUser)
-      .pipe(take(1))
-      .subscribe((signedUser) =>
-        this.store.dispatch(actionStormDataFetchRequest())
-      );
+      .select(selectStormData)
+      .subscribe((stormData) => console.log('stormData', stormData));
   }
 
   onMapModeChange(mode) {
     this.mapMode = mode;
+  }
+
+  onTrackAndConeChanged(trackAndCone) {
+    this.isTrackAndConeChecked = trackAndCone;
   }
 
   onMapLoaded($event) {

@@ -24,7 +24,9 @@
           [zoom]="mapZoom"
           [mode]="mapMode"
           [freeMode]="true"
+          [userDataAvailable]="false"
           (modeChange)="onMapModeChange($event)"
+          (trackAndConeChanged)="onTrackAndConeChanged($event)"
           (mapLoaded)="onMapLoaded($event)"
         >
         </qr-storm-map>

@@ -8,7 +8,7 @@
     </h3>
   </div>
 
-  <div class="user-address">
+  <div class="user-address" *ngIf="userDataAvailable">
     <h4>
       Expected at {{ userAddress }}
       <span class="icon-level">
@@ -23,7 +23,7 @@
     </h4>
   </div>
 
-  <div class="risk-header">
+  <div *ngIf="userDataAvailable" class="risk-header">
     <ng-container
       *ngIf="mode === 'wind'; then windRiskHeader; else surgeRiskHeader"
     ></ng-container>
@@ -58,10 +58,12 @@
     <h4>~{{ advisoryDate }}</h4>
   </div>
 
-  <ng-container *ngIf="mode === 'summary'">
-    <div class="landfall-expected">
-      <h2>Landfall Expected ~{{ toCDT(landfallDate) }}</h2>
-      <h4>Near {{ landfallLocation }}</h4>
-    </div>
+  <ng-container *ngIf="userDataAvailable">
+    <ng-container *ngIf="isTrackAndConeChecked">
+      <div class="landfall-expected">
+        <h2>Landfall Expected ~{{ toCDT(landfallDate) }}</h2>
+        <h4>Near {{ landfallLocation }}</h4>
+      </div>
+    </ng-container>
   </ng-container>
 </div>

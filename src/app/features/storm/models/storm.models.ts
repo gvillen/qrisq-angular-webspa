@@ -18,6 +18,7 @@ export interface StormData {
   surgeGeoJSON: Object;
   windGeoJSON: Object;
   windGrib2JSON: Object;
+  userDataAvailable: boolean;
 }
 
 export interface StormParameters {
@@ -39,6 +40,7 @@ export interface StormParameters {
   storm_distance: string;
   maxflood_datetime: string;
   maxwind_datetime: string;
+  had_data: boolean;
 }
 
 export enum WindRiskLevelId {

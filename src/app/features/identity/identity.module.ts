@@ -42,6 +42,8 @@ import { QrPaymentService } from './services/payment.service';
 import { QrGeolocationAddressComponent } from './components/geolocation-address/geolocation-address.component';
 import { QrPaymentFormCardComponent } from './components/payment-form-credit-card/payment-form-credit-card.component';
 import { QrPaymentFormPaypalComponent } from './components/payment-form-paypal/payment-form-paypal.component';
+import { QrGeolocationService } from './services/geolocation.service';
+import { QrContactInformationPageComponent } from './pages/contact-information/contact-information.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { QrPaymentFormPaypalComponent } from './components/payment-form-paypal/p
     QrRegisterPageComponent,
     QrServiceAreaAvailablePageComponent,
     QrServiceAreaUnavailablePageComponent,
+    QrContactInformationPageComponent,
 
     // components
     QrGeolocationAddressComponent,
@@ -94,6 +97,7 @@ import { QrPaymentFormPaypalComponent } from './components/payment-form-paypal/p
     QrIdentityService,
     QrGeocodingService,
     QrPaymentService,
+    QrGeolocationService,
     QrCheckServiceAreaComponentStore,
   ],
   exports: [
@@ -106,6 +110,7 @@ import { QrPaymentFormPaypalComponent } from './components/payment-form-paypal/p
     QrServiceAreaAvailablePageComponent,
     QrServiceAreaAvailablePageComponent,
     QrServiceAreaUnavailablePageComponent,
+    QrContactInformationPageComponent,
   ],
 })
 export class QrIdentityModule {}

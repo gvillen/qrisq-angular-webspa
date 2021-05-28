@@ -19,21 +19,18 @@ export class QrPaymentGuard implements CanActivate {
   constructor(private store: Store, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    this.store
-      .select(selectSignedUser)
-      .pipe(
-        take(1),
-        map((signedUser) => signedUser.user.hasPaid)
-      )
-      .subscribe((hasPaid) => {
-        if (!hasPaid) {
-          this.router.navigate(['identity/sign-up/payment']);
-          return false;
-        } else {
-          return true;
+    return this.store.select(selectSignedUser).pipe(
+      map((signedUser) => {
+        if (!signedUser) {
+          return this.router.parseUrl('identity/login');
         }
-      });
 
-    return true;
+        if (!signedUser.user.hasPaid) {
+          console.log('not paid');
+          return this.router.parseUrl('identity/sign-up/payment');
+        }
+        return true;
+      })
+    );
   }
 }

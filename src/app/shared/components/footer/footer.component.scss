@@ -11,7 +11,7 @@ nz-footer {
     justify-content: center;
   }
 
-  .menu-container > a {
+  .menu-container .menu-item {
     color: #fff;
     text-align: left;
     font-family: Rubik, Arial, Helvetica, sans-serif;
@@ -22,10 +22,12 @@ nz-footer {
     text-align: left;
     font-family: Rubik, Arial, Helvetica, sans-serif;
   }
-  @media(max-width: 480px) {
+  @media (max-width: 480px) {
     flex-direction: column;
     max-height: none;
-    .menu-container, .logo-container, .contact-container {
+    .menu-container,
+    .logo-container,
+    .contact-container {
       text-align: center;
       width: 100%;
       > a {
@@ -44,10 +46,23 @@ nz-footer {
   }
 }
 
-
+.menu-item {
+  padding: 0;
+}
 
 .logo-container {
 }
-@media(max-width: 480px) {
+@media (max-width: 480px) {
+}
 
+.ant-menu {
+  background: none;
+  border: none;
+  color: #fff;
+}
+
+.ant-menu-item {
+  a {
+    color: #fff;
+  }
 }

@@ -18,9 +18,18 @@ import { QrFooterComponent } from './components/footer/footer.component';
 import { QrTrackStormCardComponent } from './components/cards/track-storm/track-storm.component';
 import { QrContactUsFormComponent } from './components/forms/contact-us/contact-us.component';
 import { QrOurServicesCardComponent } from './components/cards/our-services/our-services.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  imports: [CommonModule, NgbModule, QrDesignModule, RouterModule],
+  imports: [
+    CommonModule,
+    NgbModule,
+    QrDesignModule,
+    RouterModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   declarations: [
     QrBannerComponent,
     QrContentComponent,

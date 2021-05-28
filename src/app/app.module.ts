@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 import en from '@angular/common/locales/en';
+
+// bootstrap
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // google maps
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
@@ -16,6 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { QrCoreModule } from '@core/core.module';
 import { QrDesignModule } from '@app/design/design.module';
 import { QrSharedModule } from '@shared/shared.module';
+import { QrIdentityModule } from './features/identity/identity.module';
+import { QrAdminModule } from './features/admin/admin.module';
 
 // features
 import { QrStormModule } from './features/storm/storm.module';
@@ -33,6 +38,7 @@ import { QrGovernmentPageComponent } from './pages/services/government-page/gove
 import { QrInsurancePageComponent } from './pages/services/insurance-page/insurance-page.component';
 import { QrHindcastPageComponent } from './pages/storm-data/hindcast-page/hindcast-page.component';
 import { QrHomePageComponent } from './pages/home/home-page.component';
+import { QrContactUsPageComponent } from './features/contact-us/pages/contact-us/contact-us.component';
 
 // store
 import { StoreModule } from '@ngrx/store';
@@ -44,8 +50,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, storageSyncReducer } from './core/store/state';
 import { QrStormEffects } from './features/storm/store/storm.effects';
 import { IdentityEffects } from './features/identity/store/identity.effects';
-import { QrIdentityModule } from './features/identity/identity.module';
-import { QrAdminModule } from './features/admin/admin.module';
+import { QrContactUsService } from './features/contact-us/services/contact-us.service';
+import { QrContactUsModule } from './features/contact-us/contact-us.module';
 
 registerLocaleData(en);
 
@@ -94,6 +100,7 @@ registerLocaleData(en);
     QrIdentityModule,
     QrStormModule,
     QrAdminModule,
+    QrContactUsModule,
   ],
   bootstrap: [AppComponent],
   providers: [],

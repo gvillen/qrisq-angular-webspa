@@ -13,45 +13,50 @@
 
   <div class="page-content">
     <div class="storm-section">
-      <ng-container *ngIf="stormData$ | async as stormData">
-        <qr-storm-data
-          [stormName]="stormData.stormName"
-          [userAddress]="stormData.address"
-          [userAddress]="stormData.address"
-          [surgeRisk]="stormData.surgeRisk"
-          [windRisk]="stormData.windRisk"
-          [advisoryDate]="stormData.advisoryDate"
-          [landfallDate]="stormData.landfallDate"
-          [landfallLocation]="stormData.landfallLocation"
-          [stormDistance]="stormData.stormDistance"
-          [mode]="mapMode"
-        >
-        </qr-storm-data>
+      <ng-container *ngIf="userGeolocation$ | async as userGeolocation">
+        <ng-container *ngIf="stormData$ | async as stormData">
+          <qr-storm-data
+            [userAddress]="userGeolocation.address"
+            [stormName]="stormData.stormName"
+            [surgeRisk]="stormData.surgeRisk"
+            [windRisk]="stormData.windRisk"
+            [advisoryDate]="stormData.advisoryDate"
+            [landfallDate]="stormData.landfallDate"
+            [landfallLocation]="stormData.landfallLocation"
+            [stormDistance]="stormData.stormDistance"
+            [mode]="mapMode"
+            [isTrackAndConeChecked]="isTrackAndConeChecked"
+            [userDataAvailable]="stormData.userDataAvailable"
+          >
+          </qr-storm-data>
 
-        <qr-storm-map
-          [surgeGeoJSON]="stormData.surgeGeoJSON"
-          [lineGeoJSON]="stormData.lineGeoJSON"
-          [pointsGeoJSON]="stormData.pointsGeoJSON"
-          [polygonsGeoJSON]="stormData.polygonsGeoJSON"
-          [windGeoJSON]="stormData.windGeoJSON"
-          [windData]="stormData.windGrib2JSON"
-          [userLattitude]="stormData.lattitude"
-          [userLongitude]="stormData.longitude"
-          [surgeRisk]="stormData.surgeRisk"
-          [stormDistance]="stormData.stormDistance"
-          [restriction]="mapRestriction"
-          [zoom]="mapZoom"
-          [mode]="mapMode"
-          [freeMode]="false"
-          (modeChange)="onMapModeChange($event)"
-          (mapLoaded)="onMapLoaded($event)"
-        >
-        </qr-storm-map>
+          <qr-storm-map
+            [userLattitude]="userGeolocation.lattitude"
+            [userLongitude]="userGeolocation.longitude"
+            [surgeGeoJSON]="stormData.surgeGeoJSON"
+            [lineGeoJSON]="stormData.lineGeoJSON"
+            [pointsGeoJSON]="stormData.pointsGeoJSON"
+            [polygonsGeoJSON]="stormData.polygonsGeoJSON"
+            [windGeoJSON]="stormData.windGeoJSON"
+            [windData]="stormData.windGrib2JSON"
+            [surgeRisk]="stormData.surgeRisk"
+            [stormDistance]="stormData.stormDistance"
+            [restriction]="mapRestriction"
+            [zoom]="mapZoom"
+            [mode]="mapMode"
+            [freeMode]="false"
+            [userDataAvailable]="stormData.userDataAvailable"
+            (modeChange)="onMapModeChange($event)"
+            (trackAndConeChanged)="onTrackAndConeChanged($event)"
+            (mapLoaded)="onMapLoaded($event)"
+          >
+          </qr-storm-map>
 
-        <div class="next-forecast-container">
-          <h4>Next Forecast Available</h4>
-          <p>{{ stormData.nextAdvisoryDate }}</p>
-        </div>
+          <div class="next-forecast-container">
+            <h4>Next Forecast Available</h4>
+            <p>{{ stormData.nextAdvisoryDate }}</p>
+          </div>
+        </ng-container>
       </ng-container>
 
       <ng-container *ngIf="loadingMap">

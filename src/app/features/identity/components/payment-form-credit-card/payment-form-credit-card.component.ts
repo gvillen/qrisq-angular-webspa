@@ -1,5 +1,5 @@
 // angular
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -21,6 +21,8 @@ import { PaymentInformation } from '../../models/Payment.models';
 export class QrPaymentFormCardComponent implements OnInit {
   validateForm!: FormGroup;
 
+  @Input() amount: number;
+  @Input() subscriptionPlanId: number;
   @Output() submitPayment = new EventEmitter();
 
   constructor(private fb: FormBuilder) {}
@@ -58,8 +60,8 @@ export class QrPaymentFormCardComponent implements OnInit {
         city: this.validateForm.get('city').value,
         state: this.validateForm.get('state').value,
         zipCode: this.validateForm.get('zipPostalCode').value,
-        amount: 0,
-        subscriptionPlanId: 0,
+        amount: this.amount,
+        subscriptionPlanId: this.subscriptionPlanId,
       };
       paymentInformation.cardNumber = paymentInformation.cardNumber.replace(
         /\s/g,

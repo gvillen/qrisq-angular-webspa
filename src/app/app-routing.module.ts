@@ -30,6 +30,10 @@ import { QrAdminPanelPageComponent } from './features/admin/pages/admin-panel/ad
 import { QrAdminGuard } from './core/guards/admin.guard';
 import { QrNoAuthGuard } from './core/guards/no-auth.guard';
 import { QrStormFreePageComponent } from './features/storm/pages/storm-free/storm-free.component';
+import { QrServiceAreaUnavailablePageComponent } from './features/identity/pages/service-area-unavailable/service-area-unavailable.component';
+import { QrContactUsPageComponent } from './features/contact-us/pages/contact-us/contact-us.component';
+import { QrGeolocationGuard } from './core/guards/geolocation.guard';
+import { QrContactInformationPageComponent } from './features/identity/pages/contact-information/contact-information.component';
 
 const routes = [
   /* ---------------------------------- home ---------------------------------- */
@@ -84,6 +88,10 @@ const routes = [
     component: QrServiceAreaAvailablePageComponent,
   },
   {
+    path: 'identity/sign-up/service-area-unavailable',
+    component: QrServiceAreaUnavailablePageComponent,
+  },
+  {
     path: 'identity/sign-up/register',
     component: QrRegisterPageComponent,
   },
@@ -119,13 +127,27 @@ const routes = [
   {
     path: 'storm',
     component: QrStormPageComponent,
-    canActivate: [QrAuthGuard, QrPaymentGuard],
+    canActivate: [QrAuthGuard, QrPaymentGuard, QrGeolocationGuard],
   },
 
   {
     path: 'storm-free',
     component: QrStormFreePageComponent,
   },
+
+  /* ------------------------------- contact-us ------------------------------- */
+  {
+    path: 'contact-us',
+    component: QrContactUsPageComponent,
+  },
+
+  /* --------------------------- contact-information -------------------------- */
+  {
+    path: 'identity/contact-information',
+    component: QrContactInformationPageComponent,
+    canActivate: [QrAuthGuard],
+  },
+
   /* ------------------------------------ - ----------------------------------- */
 
   { path: '', redirectTo: 'home', pathMatch: 'full' },

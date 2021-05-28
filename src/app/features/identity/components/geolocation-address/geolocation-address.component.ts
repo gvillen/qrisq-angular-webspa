@@ -42,6 +42,7 @@ export class QrGeolocationAddressComponent implements OnChanges {
   renderStreetView() {
     if (isPlatformBrowser(this.platformId)) {
       this.mapsAPILoader.load().then(() => {
+        // const center = { lat: +this.latitude, lng: +this.longitude };
         const center = { lat: +this.latitude, lng: +this.longitude };
         const map = new window['google'].maps.Map(
           this.streetviewMap.nativeElement

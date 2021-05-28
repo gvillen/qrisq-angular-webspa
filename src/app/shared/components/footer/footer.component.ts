@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'qr-footer',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
 })
 export class QrFooterComponent implements OnInit {
-  constructor() {}
+  @Input() isAuthenticated: boolean;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 }

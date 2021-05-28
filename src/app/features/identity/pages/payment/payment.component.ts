@@ -51,7 +51,6 @@ export class QrPaymentPageComponent implements OnInit {
   }
 
   onCreditCardPaymentSubmit(paymentInformation: PaymentInformation) {
-    paymentInformation.subscriptionPlanId = this.signedUser.user.subscription.id;
     this.store.dispatch(actionProcessPaymentRequest({ paymentInformation }));
   }
 

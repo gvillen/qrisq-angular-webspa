@@ -6,7 +6,8 @@ import { StormData } from '../models/storm.models';
 /* -------------------------------------------------------------------------- */
 
 export const actionStormDataFetchRequest = createAction(
-  '[Storm] Storm Data Fetch Request'
+  '[Storm] Storm Data Fetch Request',
+  props<{ freeMode: boolean }>()
 );
 
 export const actionStormDataFetchRequestSuccess = createAction(

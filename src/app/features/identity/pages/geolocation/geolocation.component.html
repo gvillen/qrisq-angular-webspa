@@ -16,109 +16,124 @@
     <div nz-row class="section-content-1">
       <!-- col-1 -->
 
-      <div nz-col class="col-1" nzSpan="24">
+      <div nz-col class="column-1" nzSpan="24">
         <div class="img-wrapper">
           <img nz-image nzSrc="/assets/images/icon-triangle-green.png" alt="" />
           <p>
             Drag the red pin so it sits on the roof of your service address.
           </p>
         </div>
-        <div class="attempts-wrapper">
-          <p>
-            Pin move {{ pinMoveAttempts }} of 5
 
-            <button
-              nz-button
-              nzType="text"
-              nz-popover
-              [(nzPopoverVisible)]="infoPopoverVisible"
-              nzPopoverTrigger="click"
-              [nzPopoverContent]="contentTemplate"
-            >
-              <i nz-icon [nzType]="'info-circle'"></i>
-            </button>
-            <ng-template #contentTemplate>
-              <div class="info-wrapper">
-                <h1>Pin Drag Limit</h1>
-                <p>
-                  Q-risq limits users to 5 pin-drag attempts. <br />
-                  After 5 pin drags, the system contacts <br />
-                  Q-risq for further assistance.
-                </p>
-                <button
-                  nz-button
-                  nzDanger
-                  nzType="primary"
-                  (click)="onInfoPopoverClose($event)"
-                >
-                  Okay
-                </button>
-              </div>
-            </ng-template>
-          </p>
+        <ng-container
+          *ngIf="$pinDragAttemptsCounter | async as pinDragAttemptsCounter"
+        >
+          <div class="attempts-wrapper">
+            <p>
+              Pin move {{ pinMoveAttempts }} of 5
 
-          <nz-modal
-            [(nzVisible)]="pinAttemptsModalVisible"
-            [nzClosable]="false"
-            [nzFooter]="null"
-          >
-            <ng-container *nzModalContent>
-              <div class="pinAttemptsModalVisibleWrapper">
-                <h1 class="modal-title">Having Trouble?</h1>
-                <p class="modal-content">
-                  You have moved the location pin more than 5 times. An error
-                  report has been sent to Q-risq. For inmediate assistance,
-                  call: 1-800-987-4568 or email: info@qrisq.com
-                </p>
-              </div>
-            </ng-container>
-          </nz-modal>
-        </div>
-
-        <div class="address-wrapper">
-          <p>
-            {{ formattedAddress }}
-          </p>
-        </div>
-        <div class="map-wrapper">
-          <div nz-row nzGutter="24">
-            <div nz-col nzSpan="12">
-              <agm-map
-                [latitude]="lat"
-                [longitude]="lng"
-                [zoom]="zoom"
-                [mapTypeId]="'satellite'"
+              <button
+                nz-button
+                nzType="text"
+                nz-popover
+                [(nzPopoverVisible)]="infoPopoverVisible"
+                nzPopoverTrigger="click"
+                [nzPopoverContent]="contentTemplate"
               >
-                <agm-marker
+                <i nz-icon [nzType]="'info-circle'"></i>
+              </button>
+              <ng-template #contentTemplate>
+                <div class="info-wrapper">
+                  <h1>Pin Drag Limit</h1>
+                  <p>
+                    Q-risq limits users to 5 pin-drag attempts. <br />
+                    After 5 pin drags, the system contacts <br />
+                    Q-risq for further assistance.
+                  </p>
+                  <button
+                    nz-button
+                    nzDanger
+                    nzType="primary"
+                    (click)="onInfoPopoverClose($event)"
+                  >
+                    Okay
+                  </button>
+                </div>
+              </ng-template>
+            </p>
+
+            <nz-modal
+              [(nzVisible)]="pinAttemptsModalVisible"
+              [nzClosable]="false"
+              [nzFooter]="null"
+            >
+              <ng-container *nzModalContent>
+                <div class="pinAttemptsModalVisibleWrapper">
+                  <h1 class="modal-title">Having Trouble?</h1>
+                  <p class="modal-content">
+                    You have moved the location pin more than 5 times. An error
+                    report has been sent to Q-risq. For inmediate assistance,
+                    call: 1-800-987-4568 or email: info@qrisq.com
+                  </p>
+                  <button
+                    nz-button
+                    nzGhost
+                    nzSize="large"
+                    (click)="onGoHomeClick($event)"
+                    class="modal-button"
+                  >
+                    Go Home
+                  </button>
+                </div>
+              </ng-container>
+            </nz-modal>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="signedUser">
+          <div class="address-wrapper">
+            <p>
+              {{ formattedAddress }}
+            </p>
+          </div>
+          <div class="map-wrapper">
+            <div nz-row nzGutter="24">
+              <div nz-col nzSpan="12">
+                <agm-map
                   [latitude]="lat"
                   [longitude]="lng"
-                  [markerDraggable]="true"
-                  (dragEnd)="onDragEnd($event)"
-                  #mapMarker
-                ></agm-marker>
-              </agm-map>
-            </div>
-            <div nz-col nzSpan="12">
-              <qr-geolocation-address [latitude]="lat" [longitude]="lng">
-              </qr-geolocation-address>
+                  [zoom]="zoom"
+                  (mapReady)="mapReady($event)"
+                >
+                  <agm-marker
+                    [latitude]="lat"
+                    [longitude]="lng"
+                    [markerDraggable]="true"
+                    (dragEnd)="onDragEnd($event)"
+                    #mapMarker
+                  ></agm-marker>
+                </agm-map>
+              </div>
+              <div nz-col nzSpan="12">
+                <qr-geolocation-address [latitude]="lat" [longitude]="lng">
+                </qr-geolocation-address>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="submit-wrapper">
-          <p>
-            By clicking the "submit" button below, you verify that the pin is
-            placed accurately on your service address.
-          </p>
-          <button
-            nz-button
-            nzType="primary"
-            nzDanger
-            nzSize="large"
-            (click)="onSubmit($event)"
-          >
-            Submit
-          </button>
-        </div>
+          <div class="submit-wrapper">
+            <p>
+              By clicking the "submit" button below, you verify that the pin is
+              placed accurately on your service address.
+            </p>
+            <button
+              nz-button
+              nzType="primary"
+              nzDanger
+              nzSize="large"
+              (click)="onSubmit($event)"
+            >
+              Submit
+            </button>
+          </div>
+        </ng-container>
       </div>
     </div>
 

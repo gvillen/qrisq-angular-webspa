@@ -16,10 +16,10 @@ import { StormData } from '../models/storm.models';
 export class QrStormService {
   constructor(private httpClient: HttpClient) {}
 
-  getStormData(): Observable<StormData> {
+  getStormData(freeMode: boolean): Observable<StormData> {
     return new Observable<StormData>((observer) => {
       forkJoin({
-        storm: this.getStormParameters(),
+        storm: this.getStormParameters(freeMode),
         surge: this.getSurgeParameters(),
         wind: this.getWindParameters(),
       }).subscribe((result) => {
@@ -38,6 +38,7 @@ export class QrStormService {
           stormDistance: Number.parseFloat(result.storm.storm_distance),
           stormName: result.storm.storm_name,
           windRisk: result.storm.windrisk,
+          userDataAvailable: result.storm.has_data,
           lineGeoJSON: JSON.parse(result.storm.line_data),
           pointsGeoJSON: JSON.parse(result.storm.points_data),
           polygonsGeoJSON: JSON.parse(result.storm.polygon_data),
@@ -80,7 +81,7 @@ export class QrStormService {
     });
   }
 
-  private getStormParameters() {
+  private getStormParameters(freeMode: boolean) {
     return this.httpClient.get<{
       latitude: string;
       longitude: string;
@@ -98,8 +99,10 @@ export class QrStormService {
       line_data: string;
       points_data: string;
       polygon_data: string;
-    }>(environment.API_URL + '/storm-data', {
+      has_data: boolean;
+    }>(environment.API_URL + (freeMode ? '/storm-data/free' : '/storm-data'), {
       headers: { 'Content-type': 'application/json; charset=utf-8' },
+      withCredentials: true,
     });
   }
 

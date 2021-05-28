@@ -6,6 +6,7 @@ import { environment } from '@env';
 import { CredentialsState, SignUpState } from '../store/identity.models';
 import { Observable, of } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
+import { ContactInformation } from '../models/ContactInformation';
 
 @Injectable({
   providedIn: 'root',
@@ -128,6 +129,22 @@ export class QrIdentityService {
     return this.httpClient.post(
       environment.API_URL + '/auth/logout',
       { refresh: refreshToken },
+      {
+        headers: { 'Content-type': 'application/json; charset=utf-8' },
+      }
+    );
+  }
+
+  getContactInformation() {
+    return this.httpClient.get(environment.API_URL + '/auth/account-profile', {
+      headers: { 'Content-type': 'application/json; charset=utf-8' },
+    });
+  }
+
+  updateContactInformation(contactInformation: ContactInformation) {
+    return this.httpClient.post(
+      environment.API_URL + '/auth/account-profile',
+      contactInformation,
       {
         headers: { 'Content-type': 'application/json; charset=utf-8' },
       }

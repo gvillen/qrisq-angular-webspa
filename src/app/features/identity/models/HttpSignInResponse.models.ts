@@ -37,6 +37,7 @@ export interface Profile {
   state: string;
   zip_code: string;
   is_preprocessed: boolean;
+  address_updated: number;
 }
 
 export interface Address {

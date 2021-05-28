@@ -2,16 +2,10 @@
   <agm-map
     [restriction]="restriction"
     [zoom]="zoom"
-    [mapTypeId]="'hybrid'"
     [disableDefaultUI]="true"
     (mapReady)="mapReady($event)"
   >
-    <ng-container *ngIf="mode === 'summary'">
-      <agm-data-layer
-        [geoJson]="surgeGeoJSON"
-        [style]="surgeStyleFunc"
-        (layerClick)="onSurgeLayerClick($event)"
-      ></agm-data-layer>
+    <ng-container *ngIf="isTrackAndConeChecked">
       <agm-data-layer
         [geoJson]="lineGeoJSON"
         [style]="lineStyleFunc"
@@ -27,8 +21,8 @@
         [style]="polygonsStyleFunc"
       ></agm-data-layer>
 
-      <ng-container *ngIf="!freeMode">
-        <agm-polyline strokeColor="#fff" strokeWeight="3" zIndex="40">
+      <ng-container *ngIf="freeMode === false">
+        <agm-polyline strokeColor="#fff" [strokeWeight]="3" [zIndex]="40">
           <agm-polyline-point
             [latitude]="userLattitude"
             [longitude]="userLongitude"
@@ -47,7 +41,6 @@
       <agm-data-layer
         [geoJson]="surgeGeoJSON"
         [style]="surgeStyleFunc"
-        (layerClick)="onSurgeLayerClick($event)"
       ></agm-data-layer>
     </ng-container>
 
@@ -58,31 +51,33 @@
       ></agm-data-layer>
     </ng-container>
 
-    <div id="property-surge-risk">
-      <ng-container *ngIf="mode === 'summary' || mode === 'surge'">
+    <ng-container *ngIf="mode === 'surge'">
+      <div id="property-surge-risk">
         <img src="assets/images/property-surge-risk.png" />
-      </ng-container>
-    </div>
-    <div id="legend-water-depth">
-      <ng-container *ngIf="mode === 'summary' || mode === 'surge'">
+      </div>
+    </ng-container>
+    <ng-container *ngIf="mode === 'surge'">
+      <div id="legend-water-depth">
         <img src="assets/images/legend-water-depth.png" />
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
 
-    <div id="property-wind-risk">
-      <ng-container *ngIf="mode === 'wind' || mode === 'vortex'">
+    <ng-container *ngIf="mode === 'wind' || mode === 'vortex'">
+      <div id="property-wind-risk">
         <img src="assets/images/property-wind-risk.png" />
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="freeMode === false">
+      <ng-container *ngIf="userDataAvailable">
+        <agm-marker
+          [latitude]="userLattitude"
+          [longitude]="userLongitude"
+          [iconUrl]="levels[surgeRisk].iconUrl"
+        >
+        </agm-marker>
       </ng-container>
-    </div>
-    <!-- 
-    <ng-container *ngIf="!freeMode">
-      <agm-marker
-        [latitude]="userLattitude"
-        [longitude]="userLongitude"
-        [iconUrl]="levels[surgeRisk].iconUrl"
-      >
-      </agm-marker>
-    </ng-container> -->
+    </ng-container>
 
     <!-- [iconUrl]="getUserLocationIcon(surgeRisk)" -->
 
@@ -91,7 +86,7 @@
       <label
         nz-checkbox
         [(ngModel)]="isTrackAndConeChecked"
-        [nzDisabled]="activeLayer === 'wind' || activeLayer === 'vortex'"
+        [nzDisabled]="activeLayer === 'vortex'"
         >Track and Cone</label
       >
       <nz-radio-group [(ngModel)]="activeLayer">
@@ -100,7 +95,7 @@
         <label nz-radio nzValue="vortex">Wind Vortex</label>
       </nz-radio-group>
     </div>
-
+    <!-- 
     <div id="map-settings" *ngIf="false">
       <div
         class="button"
@@ -196,16 +191,8 @@
             [nzStep]="1"
           ></nz-slider>
         </div>
-
-        <!-- //   velocityScale: 0.08,
-          //   intensityScaleStep: 2,
-          //   maxWindIntensity: 10,
-          //   maxParticleAge: 50,
-          //   particleLineWidth: 0.15,
-          //   particleMultiplier: 1 / 30,
-          //   particleReduction: 0.8,
-          //   frameRate: 20, -->
       </div>
     </div>
+     -->
   </agm-map>
 </div>

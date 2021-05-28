@@ -28,7 +28,11 @@ import {
 import { IdentityState } from './identity.models';
 
 import { initialState } from './identity.state';
-import { actionProcessPaymentRequest } from './identity.actions';
+import {
+  actionProcessPaymentRequest,
+  actionUpdateGeolocationRequest,
+  actionUpdateGeolocationRequestSuccess,
+} from './identity.actions';
 
 const reducer = createReducer(
   initialState,
@@ -43,7 +47,7 @@ const reducer = createReducer(
   })),
   on(actionServiceAreaAvailable, (state, { onlyWind }) => ({
     ...state,
-    signUp: { ...state.signUp, onlyWind },
+    signUp: { ...state.signUp, windServiceOnly: onlyWind },
     loading: false,
   })),
   on(actionServiceAreaUnavailable, (state) => ({
@@ -158,6 +162,7 @@ const reducer = createReducer(
         },
         phoneNumber: response.user.profile.phone_number,
         isPreprocessed: response.user.profile.is_preprocessed,
+        addressUpdated: response.user.profile.address_updated,
         subscription: {
           id: response.user.subscription.plan.id,
           name: response.user.subscription.plan.name,
@@ -267,6 +272,28 @@ const reducer = createReducer(
       user: {
         ...state.signedUser.user,
         hasPaid: true,
+      },
+    },
+  })),
+
+  on(actionUpdateGeolocationRequestSuccess, (state, { newAddress }) => ({
+    ...state,
+    signedUser: {
+      ...state.signedUser,
+      user: {
+        ...state.signedUser.user,
+        address: {
+          city: newAddress.city,
+          state: newAddress.state,
+          streetNumber: newAddress.street_number,
+          zipCode: newAddress.zip_code,
+          displayText: newAddress.address.displayText,
+        },
+        geolocation: {
+          lattitude: newAddress.address.lat,
+          longitude: newAddress.address.lng,
+        },
+        addressUpdated: 1,
       },
     },
   }))

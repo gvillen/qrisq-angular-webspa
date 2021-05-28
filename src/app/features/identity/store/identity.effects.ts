@@ -1,3 +1,4 @@
+import { QrGeolocationService } from './../services/geolocation.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -31,6 +32,9 @@ import {
   actionSignInRequest,
   actionSignInSuccess,
   actionSignOut,
+  actionUpdateGeolocationRequest,
+  actionUpdateGeolocationRequestFailed,
+  actionUpdateGeolocationRequestSuccess,
   actionVerifyEmailRequest,
   actionVerifyEmailRequestFailed,
   actionVerifyEmailRequestSuccess,
@@ -118,9 +122,11 @@ export class IdentityEffects {
       this.actions$.pipe(
         ofType(actionServiceAreaUnavailable),
         tap((action) =>
-          this.router.navigate(['sign-up', 'service-area-unavailable'], {
-            relativeTo: this.route,
-          })
+          this.router.navigate([
+            'identity',
+            'sign-up',
+            'service-area-unavailable',
+          ])
         )
       ),
     { dispatch: false }
@@ -361,7 +367,7 @@ export class IdentityEffects {
       this.actions$.pipe(
         ofType(actionSignInSuccess),
         map((action) => {
-          this.notification.create('success', 'Bienvenido', '', {
+          this.notification.create('success', 'Welcome', '', {
             nzPlacement: 'bottomRight',
           });
           if (action.redirect) {
@@ -463,6 +469,74 @@ export class IdentityEffects {
     { dispatch: false }
   );
 
+  /* -------------------------------------------------------------------------- */
+  /*                             Update Geolocation                             */
+  /* -------------------------------------------------------------------------- */
+
+  // request
+  effectUpdateGeolocationRequest = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actionUpdateGeolocationRequest),
+      switchMap((action) =>
+        this.geolocationService
+          .updateGeolocation(action.updateGeolocationRequestParameters)
+          .pipe(
+            take(1),
+            map((response: HttpResponse<any>) => {
+              return actionUpdateGeolocationRequestSuccess({
+                newAddress: action.updateGeolocationRequestParameters,
+              });
+            }),
+            catchError((error) => {
+              this.notification.create('error', 'Error', error, {
+                nzPlacement: 'bottomRight',
+              });
+              return of(actionUpdateGeolocationRequestFailed(error));
+            })
+          )
+      )
+    )
+  );
+
+  // success
+  effectUpdateGeolocationRequestSuccess = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionUpdateGeolocationRequestSuccess),
+        map((action) => {
+          this.router.navigate(['storm']);
+          this.notification.create(
+            'success',
+            'Geolocation Update',
+            'User geolocation has been updated successfully.',
+            {
+              nzPlacement: 'bottomRight',
+            }
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
+  // success
+  effectUpdateGeolocationRequestFailed = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(actionUpdateGeolocationRequestFailed),
+        map((action) => {
+          this.notification.create(
+            'error',
+            'Geolocation Update Error',
+            'User geolocation could not be updated.',
+            {
+              nzPlacement: 'bottomRight',
+            }
+          );
+        })
+      ),
+    { dispatch: false }
+  );
+
   constructor(
     private actions$: Actions,
     private identityService: QrIdentityService,
@@ -470,6 +544,7 @@ export class IdentityEffects {
     private route: ActivatedRoute,
     private store: Store,
     private notification: NzNotificationService,
-    private paymentService: QrPaymentService
+    private paymentService: QrPaymentService,
+    private geolocationService: QrGeolocationService
   ) {}
 }

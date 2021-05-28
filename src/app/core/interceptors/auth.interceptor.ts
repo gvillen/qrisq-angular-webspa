@@ -18,7 +18,14 @@ import {
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  protectedUrls = ['/process-transaction'];
+  protectedUrls = [
+    '/process-transaction',
+    '/pin-drag-address',
+    '/pin-drag-attempt',
+    '/request-address-change',
+    '/storm-data',
+    '/auth/account-profile',
+  ];
 
   constructor(
     private store: Store,
@@ -27,15 +34,22 @@ export class AuthInterceptor implements HttpInterceptor {
   ) {}
 
   addTokenToHeader(request: HttpRequest<any>, token): HttpRequest<any> {
-    return request.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
+    return request.clone({
+      withCredentials: true,
+      setHeaders: { Authorization: `Bearer ${token}` },
+    });
   }
 
-  isProtected(requestUrl): boolean {
+  isProtected(requestUrl: string): boolean {
     console.log(requestUrl);
     return this.protectedUrls.some((url) => requestUrl.includes(url));
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): any {
+    if (request.url === '/storm-data/free') {
+      return next.handle(request.clone({ url: '/storm-data' }));
+    }
+
     if (this.isProtected(request.url)) {
       console.log('interceptor');
       return this.store.select(selectCredentials).pipe(

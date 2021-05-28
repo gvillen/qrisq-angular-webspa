@@ -1,8 +1,10 @@
 <div class="main-container">
-  <nz-card class="banner">
-    <h2>Payment Method</h2>
-    <p>Please enter your payment information below.</p>
-  </nz-card>
+  <qr-banner [imageUrl]="'/assets/images/main-banner-geolocation.png'">
+    <div class="banner-content">
+      <h1>Payment Method</h1>
+      <p>Please enter your payment information below.</p>
+    </div>
+  </qr-banner>
 
   <div class="form-section">
     <h3>Select payment method</h3>
@@ -129,13 +131,17 @@
 
     <div nz-row nzJustify="center">
       <div nz-col>
-        <qr-payment-form-credit-card
-          *ngIf="paymentMethod == 'card'"
-          (submitPayment)="onCreditCardPaymentSubmit($event)"
-        ></qr-payment-form-credit-card>
-        <qr-payment-form-paypal *ngIf="paymentMethod == 'paypal'"
-          ><ngx-paypal [config]="payPalConfig"></ngx-paypal
-        ></qr-payment-form-paypal>
+        <ng-container *ngIf="signedUser">
+          <qr-payment-form-credit-card
+            *ngIf="paymentMethod == 'card'"
+            [amount]="signedUser.user.subscription.price"
+            [subscriptionPlanId]="signedUser.user.subscription.id"
+            (submitPayment)="onCreditCardPaymentSubmit($event)"
+          ></qr-payment-form-credit-card>
+          <qr-payment-form-paypal *ngIf="paymentMethod == 'paypal'"
+            ><ngx-paypal [config]="payPalConfig"></ngx-paypal
+          ></qr-payment-form-paypal>
+        </ng-container>
       </div>
     </div>
 

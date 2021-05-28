@@ -7,6 +7,9 @@ import { actionRegisterStart } from '../../store/identity.actions';
 
 import { QrIdentityService } from '../../services/identity.service';
 import { selectSignUp } from '../../store/identity.selectors';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { SubscriptionPlan } from '../../models/SubscriptionPlan.model';
 
 @Component({
   selector: 'qr-service-area-available-page',
@@ -20,7 +23,10 @@ export class QrServiceAreaAvailablePageComponent implements OnInit {
   ) {}
 
   signUp$ = this.store.select(selectSignUp);
-  subscriptionPlans$ = this.identityService.fetchSubscriptionPlans();
+  subscriptionPlans$ = this.identityService.fetchSubscriptionPlans().pipe(
+    take(1),
+    map((subscriptionPlans: SubscriptionPlan[]) => subscriptionPlans)
+  );
 
   ngOnInit(): void {}
 

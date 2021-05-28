@@ -23,7 +23,7 @@ export class QrPaymentService {
         state: paymentInformation.state,
         zip_code: paymentInformation.zipCode,
         amount: paymentInformation.amount,
-        subscription_plan_id: 1,
+        subscription_plan_id: paymentInformation.subscriptionPlanId,
       },
       {
         headers: { 'Content-type': 'application/json; charset=utf-8' },

@@ -19,22 +19,22 @@ nz-header.navbar {
     margin: 0;
     width: 25%;
     min-width: 110px;
-    @media(min-width: 581px) {
+    @media (min-width: 581px) {
       min-width: 188px;
     }
     a {
       display: flex;
       img {
-      height: auto;
-      margin: auto 0;
-      max-height: 65%;
-      vertical-align: middle;
-      -webkit-transition: all 0.4s ease-in-out;
-      transition: all 0.4s ease-in-out;
+        height: auto;
+        margin: auto 0;
+        max-height: 65%;
+        vertical-align: middle;
+        -webkit-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
       }
     }
   }
-  @media(max-width:580px) {
+  @media (max-width: 580px) {
     height: 80px;
     padding: 0 20px;
   }
@@ -49,13 +49,13 @@ nz-header.navbar {
       padding: 0;
       white-space: normal;
       width: 110px;
-      @media(min-width:981px) {
+      @media (min-width: 981px) {
         font-size: 1.25em;
-        height: 80px;
-        width: 145px;
+        height: 70px;
+        width: 200px;
       }
-      @media(max-width:580px) {
-        font-size: .75em;
+      @media (max-width: 580px) {
+        font-size: 0.75em;
         height: 50px;
         width: 90px;
       }
@@ -64,7 +64,7 @@ nz-header.navbar {
   .navbar-toggler {
     width: 25%;
     text-align: right;
-    @media(max-width:480px) {
+    @media (max-width: 480px) {
       width: 15%;
     }
   }
@@ -72,9 +72,10 @@ nz-header.navbar {
     flex-grow: unset;
     justify-content: center;
     // min-width: 600px;
-    @media(max-width:980px) {
+    @media (max-width: 980px) {
       flex-grow: 1;
-      &.show, &.collapsing {
+      &.show,
+      &.collapsing {
         background-color: white;
         ul {
           color: black;
@@ -90,20 +91,19 @@ nz-header.navbar {
     background: rgba(0, 0, 0, 0.5);
     transition: all 0.4s ease-in-out;
     .logo-container.navbar-brand {
-      @media(min-width: 581px) {
+      @media (min-width: 581px) {
         padding: 0;
         a img {
           max-height: 90%;
         }
       }
-
     }
     .button-container button.ant-btn {
       font-size: 1em;
       height: 70px;
       width: 110px;
-      @media(max-width:580px) {
-        font-size: .75em;
+      @media (max-width: 580px) {
+        font-size: 0.75em;
         height: 50px;
         width: 90px;
       }
@@ -131,7 +131,7 @@ button {
 .ant-menu-submenu {
   // min-width: 150px;
   text-align: center;
-  margin: 0 20px 0 0!important;
+  margin: 0 20px 0 0 !important;
   &:last-of-type {
     margin-right: 0;
   }

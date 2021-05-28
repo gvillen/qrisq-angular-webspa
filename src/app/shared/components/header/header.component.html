@@ -1,4 +1,4 @@
-<nz-header class="navbar navbar-expand-lg" (scroll)="onWindowScroll($event);">
+<nz-header class="navbar navbar-expand-lg" (scroll)="onWindowScroll($event)">
   <div class="logo-container navbar-brand">
     <a [routerLink]="['home']">
       <img src="/assets/images/qrisq-logo-3d.png" alt="Qrisq" />
@@ -31,27 +31,41 @@
     <i nz-icon nzType="down"></i>
   </ng-template>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation" (click)="isMenuCollapsed = !isMenuCollapsed">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarToggler"
+    aria-controls="navbarToggler"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    (click)="isMenuCollapsed = !isMenuCollapsed"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div [ngbCollapse]="isMenuCollapsed" class="menu-container collapse navbar-collapse" id="navbarToggler" role="navigation">
+  <div
+    [ngbCollapse]="isMenuCollapsed"
+    class="menu-container collapse navbar-collapse"
+    id="navbarToggler"
+    role="navigation"
+  >
     <ul class="navbar-nav" nz-menu nzMode="horizontal">
       <li nz-submenu [nzTitle]="submenuTitleStormDataTpl">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['storm-data/forecast']" (click)="isMenuCollapsed = true">Forecast</a>
+            <a
+              [routerLink]="['storm-data/forecast']"
+              (click)="isMenuCollapsed = true"
+              >Forecast</a
+            >
           </li>
 
           <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['storm-data/hindcast']" (click)="isMenuCollapsed = true">Hindcast</a>
-          </li>
-
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['storm-data/historical']" (click)="isMenuCollapsed = true">Historical</a>
-          </li>
-
-          <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['storm-data/faq']" (click)="isMenuCollapsed = true">FAQ</a>
+            <a
+              [routerLink]="['storm-data/hindcast']"
+              (click)="isMenuCollapsed = true"
+              >Hindcast</a
+            >
           </li>
         </ul>
       </li>
@@ -59,15 +73,27 @@
       <li nz-submenu [nzTitle]="submenuTitleServicesTpl">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['services/homeowners']" (click)="isMenuCollapsed = true">Homeowners</a>
+            <a
+              [routerLink]="['services/homeowners']"
+              (click)="isMenuCollapsed = true"
+              >Homeowners</a
+            >
           </li>
 
           <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['services/government']" (click)="isMenuCollapsed = true">Government</a>
+            <a
+              [routerLink]="['services/government']"
+              (click)="isMenuCollapsed = true"
+              >Government</a
+            >
           </li>
 
           <li nz-menu-item nzMatchRouter>
-            <a [routerLink]="['services/insurance']" (click)="isMenuCollapsed = true">Insurance</a>
+            <a
+              [routerLink]="['services/insurance']"
+              (click)="isMenuCollapsed = true"
+              >Insurance</a
+            >
           </li>
         </ul>
       </li>
@@ -77,15 +103,25 @@
         ><li nz-submenu [nzTitle]="submenuTitleLoginTpl">
           <ul>
             <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['identity/login']" (click)="isMenuCollapsed = true">Account Login</a>
+              <a
+                [routerLink]="['identity/login']"
+                (click)="isMenuCollapsed = true"
+                >Account Login</a
+              >
             </li>
 
             <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['identity/sign-up']" (click)="isMenuCollapsed = true">Register</a>
+              <a
+                [routerLink]="['identity/sign-up']"
+                (click)="isMenuCollapsed = true"
+                >Register</a
+              >
             </li>
 
             <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['contact-us']" (click)="isMenuCollapsed = true">Contact Us</a>
+              <a [routerLink]="['contact-us']" (click)="isMenuCollapsed = true"
+                >Contact Us</a
+              >
             </li>
           </ul>
         </li></ng-template
@@ -94,25 +130,39 @@
         ><li nz-submenu [nzTitle]="submenuTitleUserTpl">
           <ul>
             <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['hurricane-viewer/wind-risk']" (click)="isMenuCollapsed = true">Billing Info</a>
-            </li>
-
-            <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['hurricane-viewer/wind-risk']" (click)="isMenuCollapsed = true">Contact Information</a
+              <a
+                [routerLink]="['hurricane-viewer/wind-risk']"
+                (click)="isMenuCollapsed = true"
+                >Billing Info</a
               >
             </li>
 
             <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['hurricane-viewer/wind-risk']" (click)="isMenuCollapsed = true">Contact Us</a>
+              <a
+                [routerLink]="['identity/contact-information']"
+                (click)="isMenuCollapsed = true"
+                >Contact Information</a
+              >
             </li>
 
             <li nz-menu-item nzMatchRouter>
-              <a [routerLink]="['hurricane-viewer/wind-risk']" (click)="isMenuCollapsed = true">Cancel Subscription</a
+              <a [routerLink]="['contact-us']" (click)="isMenuCollapsed = true"
+                >Contact Us</a
+              >
+            </li>
+
+            <li nz-menu-item nzMatchRouter>
+              <a
+                [routerLink]="['hurricane-viewer/wind-risk']"
+                (click)="isMenuCollapsed = true"
+                >Cancel Subscription</a
               >
             </li>
 
             <li nz-menu-item>
-              <a (click)="onLogout($event)" (click)="isMenuCollapsed = true">Logout</a>
+              <a (click)="onLogout($event)" (click)="isMenuCollapsed = true"
+                >Logout</a
+              >
             </li>
           </ul>
         </li></ng-template
